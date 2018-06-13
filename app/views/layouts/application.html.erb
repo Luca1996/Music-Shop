@@ -25,12 +25,14 @@
             </div>
           </nav>
         </li>
-        <li><a href="#">Login</a></li>
+        <li><%= link_to "Login", new_user_session_path() %></li>
         <li><a href="#">Signup</a></li>
+        <li><%= link_to "Logout", application_logout_path() %></li>
       </ul>
     </div>
   </nav>
-        
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
 </html>
