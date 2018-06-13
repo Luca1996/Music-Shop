@@ -1,2 +1,18 @@
 @import 'materialize';
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
+
+nav {
+    height: 80px;
+    line-height: 80px;
+}
+
+nav .brand-logo {
+    margin-left: 20px;
+    font-size: 60px;
+}
+
+nav form {
+    margin-left: 280px;
+    width: 300px;
+}
+
