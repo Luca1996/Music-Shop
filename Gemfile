@@ -7,6 +7,7 @@ ruby '2.5.1'
 gem 'materialize-sass'
 gem 'devise'
 gem 'haml'
+gem 'jquery-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'

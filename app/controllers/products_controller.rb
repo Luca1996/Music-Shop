@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-    
+    before_action :authenticate_user!, except: [:index,:show]
     def new
-        # @product = Product.new
+        @product = Product.new
     end
     
     def edit
@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
     end
     
     def index
-        # @products = Products.all()
+        @products = Product.all
     end
 
     def show
@@ -17,13 +17,13 @@ class ProductsController < ApplicationController
     end
     
     def create
-        #@product = Product.create(product_params)
+        @product = Product.new(product_params)
         # to add all relations
-        #if @product.save
-        #   redirect_to root_path
-        # else
-            # render 'new'
-        # end
+        if @product.save!
+          redirect_to root_path
+        else
+            render 'new'
+        end
     end
     
     def destroy
@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
     
     private 
         def product_params
-            #params.require()            
+            params.require(:title).permit(:brand,:model)            
         end
         
 end

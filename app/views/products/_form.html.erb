@@ -1,0 +1,52 @@
+<div class="row">
+    <%= form_for @product ,:class => "col s12" do |f| %>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :title , :class => "active" %>
+            <%= f.text_field :title %>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :brand , :class => "active" %>
+            <%= f.text_field :brand %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :model , :class => "active" %>
+            <%= f.text_field :model %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :price , :class => "active" %>
+            <%= f.number_field :price , :step => "0.01" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :quantity , :class => "active" %>
+            <%= f.number_field :quantity %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :weight , :class => "active" %>
+            <%= f.number_field :weight %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <%= f.label :description , :class => "active" %>
+            <%= f.text_area :description, :class => "materialize-textarea" %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+            <%= f.submit "Add Product", :class => "btn waves-effect waves-light" %>
+        </div>
+    </div>
+    <% end %>
+  </div>

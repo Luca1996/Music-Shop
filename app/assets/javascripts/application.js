@@ -15,3 +15,5 @@
 //= require turbolinks
 //= require_tree .
 //= require materialize        
+//= require jquery
+//= require materialize-sprockets

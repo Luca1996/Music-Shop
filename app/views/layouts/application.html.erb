@@ -10,11 +10,15 @@
   <body>
    <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
+      <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <% if user_signed_in? %>
+          <li><%= link_to  "Add Product", new_product_path(),:class => "waves-effect waves-light btn" %></li>
+          <li><%= link_to "Logout", application_logout_path() %></li>
+        <% else %>
         <li><%= link_to "Login", new_user_session_path() %></li>
-        <li><a href="#">Signup</a></li>
-        <li><%= link_to "Logout", application_logout_path() %></li>
+        <% end %>
+        
       </ul>
       <form>
           <div class="input-field">
