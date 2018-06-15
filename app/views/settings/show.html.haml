@@ -1,0 +1,42 @@
+%h2 
+	Profile Settings
+%p#email
+	%h4
+		Email corrente:
+	%br
+	= @user.email
+	%br
+
+%p#avatar
+	%h3
+		Avatar:
+	%br
+	%p#avatar
+		-if @user.avatar != nil
+			= image_tag(url_for(@user.avatar), :alt => "avatar")
+	%p
+		Change avatar:
+	= form_for @user, url: settings_change_avatar_path do |form|
+		= form.file_field :avatar
+		= form.submit
+	%p
+		Change password:
+	=form_for @user, url:settings_change_password_path do |form|
+		.field
+			= form.label :curr_pass
+			%br
+			= form.password_field :curr_pass 
+			%br
+		.field
+			= form.label :password
+			%br
+			= form.password_field :password
+			%br
+		.field
+			= form.label :confirm
+			%br
+			= form.password_field :confirm
+			%br
+		.actions
+			= form.submit "Change password"
+

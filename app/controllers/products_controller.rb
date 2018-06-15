@@ -42,6 +42,7 @@ class ProductsController < ApplicationController
     
     
     private 
+        # we don't let the user set himself as admin obviously
         def product_params
             params.require(:product).permit(:title,:brand,:model,:price,:quantity,:weight,:description)           
         end
