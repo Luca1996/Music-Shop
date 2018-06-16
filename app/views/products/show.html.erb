@@ -1,6 +1,20 @@
-<h3> <%= @product.title %> </h3>
-Brand: <%= @product.brand %> <br>
-Model: <%= @product.model %> <br>
-Price: <%= @product.price %> <br>   
-Weight: <%= @product.weight %> <br>
-Description: <%= @product.description %> <br>
+<%= link_to products_path do %>
+    <i class="material-icons">arrow_back</i> Back
+  </div>
+<% end %>
+<div class="show-card-height col s12 m7">
+    <h2 class="header"><%= @product.title %></h2>
+    <div class="card horizontal">
+      <div class="card-image">
+        <img src="https://images.musicstore.de/images/1600/ibanez-grg170dx-black-night_1_GIT0005533-001.jpg">
+      </div>
+      <div class="card-stacked">
+        <div class="show-card card-content">
+          <p><%= @product.description %></p>
+        </div>
+        <div class="show-card-btn card-action">
+          <a href="#">Buy</a>
+        </div>
+      </div>
+    </div>
+  </div>
