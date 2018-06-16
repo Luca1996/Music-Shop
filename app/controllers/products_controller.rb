@@ -18,11 +18,15 @@ class ProductsController < ApplicationController
     
     def create
         @product = Product.new(product_params)
+        #@product.imagess.purge if @product.imagess.attached?
+        #@product.imagess.attach(params[:product][:imagess])
+        
         # to add all relations
         if @product.save!
           redirect_to root_path
         else
             render 'new'
+            flash.keep[:notice] = "Error in creating new product"
         end
     end
     
@@ -42,9 +46,8 @@ class ProductsController < ApplicationController
     
     
     private 
-        # we don't let the user set himself as admin obviously
         def product_params
-            params.require(:product).permit(:title,:brand,:model,:price,:quantity,:weight,:description)           
+            params.require(:product).permit(:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description,imagess: [])           
         end
         
 end

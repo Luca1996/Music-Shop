@@ -5,14 +5,15 @@
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image">
-          <img src="https://images.musicstore.de/images/1600/ibanez-grg170dx-black-night_1_GIT0005533-001.jpg">
+            <%= prod.id %>
+            <%= prod.imagess[0]==nil %>
+            <%= image_tag url_for(prod.imagess[0]), :alt => "product_image" %>
         </div>
         <div class="card-content">
-          <p>I am a very simple card. I am good at containing small bits of information.
-          I am convenient because I require little markup to use effectively.</p>
+          <p><%= prod.description %></p>
         </div>
         <div class="card-action">
-          <a href="#">This is a link</a>
+          <%= link_to "Details", prod %>
         </div>
       </div>
     </div>
