@@ -6,7 +6,7 @@
     <h2 class="header"><%= @product.title %></h2>
     <div class="card horizontal">
       <div class="card-image">
-        <img src="https://images.musicstore.de/images/1600/ibanez-grg170dx-black-night_1_GIT0005533-001.jpg">
+        <%= image_tag "data:image/jpeg;base64,#{@product.image}", :class => 'product-image' %>
       </div>
       <div class="card-stacked">
         <div class="show-card card-content">
