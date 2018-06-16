@@ -5,9 +5,7 @@
     <div class="col s6 m3 l2">
       <div class="card">
         <div class="card-image">
-            <%= prod.id %>
-            <%= prod.imagess[0]==nil %>
-            <%= image_tag url_for(prod.imagess[0]), :alt => "product_image" %>
+          <%= image_tag "data:image/jpeg;base64,#{prod.image}"%>
         </div>
         <div class="card-content">
           <p><%= prod.description %></p>
