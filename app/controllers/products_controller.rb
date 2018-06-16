@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
     before_action :authenticate_user!, except: [:index,:show]
+    # to allow delete request
+    skip_before_action :verify_authenticity_token, :only => [:destroy]
+
     def new
         @product = Product.new
     end
@@ -19,6 +22,7 @@ class ProductsController < ApplicationController
     def create
         @product = Product.new(product_params)
         compress_image
+        @product.user = current_user
         # to add all relations
         if @product.save!
           redirect_to product_path(@product)

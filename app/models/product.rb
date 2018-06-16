@@ -8,8 +8,7 @@ class Product < ApplicationRecord
 	validates :length, format: {with: /\A[0-9]{0,4}/, message: "Insert valid length" }
 	validates :depth, format: {with: /\A[0-9]{0,4}/, message: "Insert valid depth" }
 
-	# pictures related to the product, in Active Storage
-	has_many_attached :imagess
-
+	# associations
+	belongs_to :user
 
 end
