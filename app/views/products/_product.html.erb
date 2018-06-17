@@ -16,7 +16,9 @@
         </div>
         <div class="header"><%= product.user.email %> </div>
         <div class="show-card-btn card-action">
+          <%- if current_user != product.user then %>
           <a href="#">Buy</a>
+          <%- end %>
           <%- if current_user == product.user then %>
             <%= link_to "Remove", product_path(product), method: :delete %>
           <%-end %>
