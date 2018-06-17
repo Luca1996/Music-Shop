@@ -12,12 +12,12 @@
 		Avatar:
 	%br
 	%p#avatar
-		-if @user.avatar != nil
-			= image_tag(url_for(@user.avatar), :alt => "avatar")
+		-if @user.image != nil
+			= image_tag "data:image/jpeg;base64,#{@user.image}"
 	%p
 		Change avatar:
 	= form_for @user, url: settings_change_avatar_path do |form|
-		= form.file_field :avatar
+		= form.file_field :image
 		= form.submit
 	%p
 		Change password:
@@ -39,4 +39,10 @@
 			%br
 		.actions
 			= form.submit "Change password"
+
+%p
+	Products:
+%br
+	- @user.products.each do |prod|	
+		= prod.title
 
