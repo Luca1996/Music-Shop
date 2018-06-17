@@ -7,8 +7,10 @@ class SettingsController < ApplicationController
 	end
 
 	def change_avatar
-		user = current_user
-		user.avatar.attach(params[:user][:avatar])
+		@user = current_user
+		@user.update(pass_params)
+		compress_image
+		@user.save!
 		redirect_to settings_show_path
 	end
 
@@ -27,7 +29,14 @@ class SettingsController < ApplicationController
 
 	private
 		def pass_params
-			params.require(:user).permit(:curr_pass, :password, :confirm)
+			params.require(:user).permit(:curr_pass, :password, :confirm,:image)
 		end
+
+		def compress_image
+            if !params[:user][:image].nil?
+                b64 = Base64.encode64(params[:user][:image].read)
+                @user.image = b64
+            end
+        end
 
 end

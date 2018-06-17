@@ -21,9 +21,8 @@ class ProductsController < ApplicationController
     
     def create
         @product = Product.new(product_params)
-        compress_image
         @product.user = current_user
-        # to add all relations
+        compress_image
         if @product.save!
           redirect_to product_path(@product)
         else
@@ -34,17 +33,26 @@ class ProductsController < ApplicationController
     
     def destroy
         @product = Product.find(params[:id])  
-        @product.destroy
-        redirect_to products_path
+        if @product.user == current_user || current_user.admin?
+            @product.destroy
+            redirect_to products_path
+        else
+            flash.keep[:notice] = "You can't delete this item"
+        end
     end
 
 
     def update
         @product = Product.find(params[:id])        
-        @product.update(product_params)
-        compress_image
-        @product.save
-        redirect_to products_path()
+        if @product.user == current_user || current_user.admin?
+            @product.update(product_params)
+            compress_image
+            @product.save
+            redirect_to products_path()
+        else 
+            redirect_to products_path
+            flash.keep[:notice] = "You can't modify the item"
+        end
     end
     
     

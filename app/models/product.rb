@@ -7,6 +7,7 @@ class Product < ApplicationRecord
 	validates :height, format: {with: /\A[0-9]{0,4}/, message: "Insert valid height" }
 	validates :length, format: {with: /\A[0-9]{0,4}/, message: "Insert valid length" }
 	validates :depth, format: {with: /\A[0-9]{0,4}/, message: "Insert valid depth" }
+	validates :image, presence: true
 
 	# associations
 	belongs_to :user
