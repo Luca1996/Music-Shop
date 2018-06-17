@@ -45,4 +45,6 @@
 %br
 	- @user.products.each do |prod|	
 		= prod.title
+		= link_to "Modify" , edit_product_path(prod)
+		= link_to "Delete", product_path(prod), method: :delete, data: {confirm: "Are you sure?"}
 
