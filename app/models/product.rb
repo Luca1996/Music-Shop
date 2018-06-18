@@ -11,5 +11,6 @@ class Product < ApplicationRecord
 
 	# associations
 	belongs_to :user
+	belongs_to :instrum, polymorphic: true
 
 end

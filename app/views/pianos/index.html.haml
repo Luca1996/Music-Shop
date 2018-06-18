@@ -1,0 +1,8 @@
+%h3
+	Pianos
+.row
+	-@pianos.each do |pi| 
+
+		.col.s6.m3.l2
+			= render(pi.product)
+			= render(pi)

@@ -19,11 +19,11 @@
           <%- if current_user != product.user then %>
           <a href="#">Buy</a>
           <%- end %>
-          <%- if current_user == product.user || current_user.admin? then %>
+          <%- if current_user == product.user || (current_user != nil && current_user.admin? ) then %>
             <%= link_to "Remove", product_path(product), method: :delete %>
-            <%= link_to  "Modify", edit_product_path(product) %>
           <%-end %>
         </div>
       </div>
     </div>
   </div>
+  

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'products#index'
-  resources :products 
+  resources :products, only: [:index, :show, :destroy]
+  resources :pianos
+  resources :others
   get 'application/logout'
   get 'settings/show'
   patch 'settings/change_avatar'

@@ -3,14 +3,19 @@ class ProductsController < ApplicationController
     # to allow delete request
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
+# The methods commented are no loger needed, since we create, modify
+# and destroy the products only through the specific instruments actions
+
+=begin
     def new
         @product = Product.new
     end
-    
+   
     def edit
         @product = Product.find(params[:id])    
     end
-    
+=end    
+
     def index
         @products = Product.all
     end
@@ -18,7 +23,8 @@ class ProductsController < ApplicationController
     def show
         @product = Product.find(params[:id])        
     end
-    
+
+=begin    
     def create
         @product = Product.new(product_params)
         @product.user = current_user
@@ -30,10 +36,12 @@ class ProductsController < ApplicationController
             flash.keep[:notice] = "Error in creating new product"
         end
     end
+=end
     
     def destroy
         @product = Product.find(params[:id])  
         if @product.user == current_user || current_user.admin?
+            @product.instrum.destroy
             @product.destroy
             redirect_to products_path
         else
@@ -41,7 +49,7 @@ class ProductsController < ApplicationController
         end
     end
 
-
+=begin
     def update
         @product = Product.find(params[:id])        
         if @product.user == current_user || current_user.admin?
@@ -68,4 +76,6 @@ class ProductsController < ApplicationController
                 @product.image = b64
             end
         end
+=end
+
 end

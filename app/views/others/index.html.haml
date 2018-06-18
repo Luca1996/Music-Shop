@@ -1,0 +1,8 @@
+%h3
+	Other instruments
+.row
+	-@others.each do |oth| 
+
+		.col.s6.m3.l2
+			= render(oth.product)
+			= render(oth)

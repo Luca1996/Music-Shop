@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  tipo: MyString
+  color: MyString
+  material: MyString
+  n_keys: 1
+
+two:
+  tipo: MyString
+  color: MyString
+  material: MyString
+  n_keys: 1
