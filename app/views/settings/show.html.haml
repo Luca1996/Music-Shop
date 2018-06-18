@@ -1,8 +1,6 @@
 %h2 
 	Profile Settings
 
-= link_to "Sell piano", new_piano_path 
-= link_to "Sell generic instrument", new_other_path
 
 %p#email
 	%h4
@@ -44,19 +42,4 @@
 		.actions
 			= form.submit "Change password"
 
-%p
-	Products:
-%br
-	- @user.products.each do |prod|	
-
-		-if prod.instrum.instance_of?(Piano)
-			= prod.title
-			= link_to "Modify" , edit_piano_path(prod.instrum)
-			= link_to "Delete", piano_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
-		-if prod.instrum.instance_of?(Other)
-			= prod.title
-			= link_to "Modify" , edit_other_path(prod.instrum)
-			= link_to "Delete", other_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
 
