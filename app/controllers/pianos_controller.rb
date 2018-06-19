@@ -16,6 +16,18 @@ class PianosController < ApplicationController
 		@piano = Piano.find(params[:id])
 	end
 
+	def update
+		@piano = Piano.find(params[:id])
+		compress_image
+		if @piano.update(piano_update_params)			
+			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano updated successfully"
+		else
+			redirect_to activities_index_path
+			flash.keep[:notice] = "Can't update the piano"
+		end
+	end
+
 	def show 
 		@piano = Piano.find(params[:id])
 	end
@@ -46,6 +58,10 @@ class PianosController < ApplicationController
 	private 
 		def piano_params
 			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+		end
+
+		def piano_update_params
+			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
 	    def compress_image

@@ -12,6 +12,18 @@ class OthersController < ApplicationController
 		@other = Other.find(params[:id])
 	end
 
+	def update
+		@other = Other.find(params[:id])
+		compress_image
+		if @other.update(other_update_params)			
+			redirect_to other_path(@other)
+			flash.keep[:notice] = "Instrument updated successfully"
+		else
+			redirect_to activities_index_path
+			flash.keep[:notice] = "Can't update the instrument"
+		end
+	end
+
 	def show 
 		@other = Other.find(params[:id])
 	end
@@ -21,7 +33,7 @@ class OthersController < ApplicationController
 	end
 
 	def create
-		@other = Other.new(piano_params)
+		@other = Other.new(other_params)
 		@other.product.user = current_user
 		compress_image
 		if @other.save!
@@ -44,8 +56,12 @@ class OthersController < ApplicationController
 	end
 
 	private 
-		def piano_params
+		def other_params
 			params.require(:other).permit(:tipo, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+		end
+
+		def other_update_params
+			params.require(:other).permit(:tipo, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
 	    def compress_image
