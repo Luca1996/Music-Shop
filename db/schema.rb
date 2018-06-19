@@ -10,19 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_06_18_190329) do
+=======
+ActiveRecord::Schema.define(version: 2018_06_18_182411) do
+>>>>>>> product_associations
 
-  create_table "others", force: :cascade do |t|
-    t.string "tipo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pianos", force: :cascade do |t|
-    t.string "tipo"
+  create_table "guitar_and_basses", force: :cascade do |t|
+    t.string "hand"
     t.string "color"
     t.string "material"
+<<<<<<< HEAD
     t.string "n_keys"
+=======
+    t.integer "chords"
+    t.boolean "digital"
+>>>>>>> product_associations
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
