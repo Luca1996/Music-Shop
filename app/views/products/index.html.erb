@@ -1,25 +1,16 @@
 <h3>Instruments</h3>
 <div class="row">
   <% @products.each do |prod| %>
-
     <div class="col s6 m3 l2">
-      <div class="card">
-        <div class="card-image">
+      <div class="card medium">
+        <div class="index-card-image card-image">
           <%= image_tag "data:image/jpeg;base64,#{prod.image}"%>
         </div>
         <div class="card-content">
           <p><%= prod.description %></p>
         </div>
         <div class="card-action">
-        <% if prod.instrum.instance_of?(Piano) %>
-          <%= link_to  "Details", piano_path(prod.instrum) %>
-        <% elsif prod.instrum.instance_of?(Guitar) %>
-          <%= link_to  "Details", guitar_path(prod.instrum) %>
-        <% elsif prod.instrum.instance_of?(Drum) %>
-          <%= link_to  "Details", drum_path(prod.instrum) %>
-        <% elsif prod.instrum.instance_of?(Other) %>
-          <%= link_to  "Details", other_path(prod.instrum) %>
-        <% end %>
+          <%= link_to  "Details", product_path(prod) %>
         </div>
       </div>
     </div>

@@ -1,29 +1,9 @@
 <!--# partial from product, every time we render @product this will be showed inline. So this can be rendered also in another view as a part of it -->
-
-<%= link_to products_path do %>
-    <i class="material-icons">arrow_back</i> Back
-  </div>
-<% end %>
-<div class="show-card-height col s12 m7">
-    <h2 class="header"><%= @drum.product.title %></h2>
-    <div class="card horizontal">
-      <div class="card-image">
-        <%= image_tag "data:image/jpeg;base64,#{@drum.product.image}", :class => 'product-image' %>
-      </div>
-      <div class="card-stacked">
-        <div class="show-card card-content">
-          <p><%= @drum.product.description %></p>
-        </div>
-        <div class="header"><%= @drum.product.user.email %> </div>
-        <div class="show-card-btn card-action">
-          <%- if current_user != @drum.product.user then %>
-          <a href="#">Buy</a>
-          <%- end %>
-          <%- if current_user == @drum.product.user || (current_user != nil && current_user.admin? ) then %>
-            <%= link_to "Remove", drum_path(@drum), method: :delete %>
-          <%-end %>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="show-card-height.col.s12.m7">
+  <h2> Details </h2>
+    <%= drum.pedals %><br>
+    <%= drum.color %><br>
+    <%= drum.cymbals %><br>
+    <%= drum.toms %><br>
+</div>
   

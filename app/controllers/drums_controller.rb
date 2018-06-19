@@ -28,7 +28,7 @@ class DrumsController < ApplicationController
 			redirect_to drum_path(@drum)
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new piano"
+			flash.keep[:notice] = "Error in creating new drum"
 		end
 	end
 
@@ -43,11 +43,30 @@ class DrumsController < ApplicationController
 		end
 	end
 
+	def update
+		@drum = Drum.find(params[:id])
+		if @drum.product.user == current_user || current_user.admin?
+			@drum.update(drum_update_params)
+			compress_image
+			@drum.save
+			redirect_to drum_path(@drum)
+			flash.keep[:notice] = "drum update successfully"
+		else
+			redirect_to activities_index_path()
+			flash.keep[:notice] = "You can't update this"
+		end
+		
+	end
+
 	private 
 		def drum_params
 			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
 		end
 
+		def drum_update_params
+			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
+		end
+		
 	    def compress_image
             if !params[:drum][:product_attributes][:image].nil?
                 b64 = Base64.encode64(params[:drum][:product_attributes][:image].read)
