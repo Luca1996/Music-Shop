@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show, :destroy]
   resources :pianos
   resources :others
+  resources :guitars
   get 'application/logout'
   get 'settings/show'
   patch 'settings/change_avatar'
