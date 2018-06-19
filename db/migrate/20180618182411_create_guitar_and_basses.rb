@@ -1,6 +1,6 @@
-class CreateGuitarAndBasses < ActiveRecord::Migration[5.2]
+class CreateGuitares < ActiveRecord::Migration[5.2]
   def change
-    create_table :guitar_and_basses do |t|
+    create_table :guitares do |t|
       t.string :hand
       t.string :color
       t.string :material

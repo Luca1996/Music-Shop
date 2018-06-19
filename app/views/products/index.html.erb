@@ -11,7 +11,13 @@
           <p><%= prod.description %></p>
         </div>
         <div class="card-action">
-          <%= link_to "Details", prod %>
+        <% if prod.instrum.instance_of?(Piano) %>
+          <%= link_to  "Details", piano_path(prod.instrum) %>
+        <% elsif prod.instrum.instance_of?(Guitar) %>
+          <%= link_to  "Details", guitar_path(prod.instrum) %>
+        <% elsif prod.instrum.instance_of?(Other) %>
+          <%= link_to  "Details", other_path(prod.instrum) %>
+        <% end %>
         </div>
       </div>
     </div>

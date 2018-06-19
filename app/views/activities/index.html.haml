@@ -7,6 +7,8 @@
 %br 
 = link_to "Sell generic instrument", new_other_path
 %br
+= link_to "Sell guitar", new_guitar_path
+%br
 
 
 %h4
@@ -24,3 +26,7 @@
 			= link_to "Modify" , edit_other_path(prod.instrum)
 			= link_to "Delete", other_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
 			%br
+		-if prod.instrum.instance_of?(Guitar)
+			= prod.title
+			= link_to "Modify" , edit_guitar_path(prod.instrum)
+			= link_to "Delete", guitar_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}

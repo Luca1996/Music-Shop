@@ -1,0 +1,19 @@
+<h3>Guitars</h3>
+<div class="row">
+  <% @guitars.each do |g| %>
+
+    <div class="col s6 m3 l2">
+      <div class="card">
+        <div class="card-image">
+          <%= image_tag "data:image/jpeg;base64,#{g.product.image}"%>
+        </div>
+        <div class="card-content">
+          <p><%= g.product.description %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to "Details", guitar_path(g) %>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GuitarAndBassControllerTest < ActionDispatch::IntegrationTest
+class GuitarControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end
