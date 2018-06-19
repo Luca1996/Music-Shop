@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_065808) do
+ActiveRecord::Schema.define(version: 2018_06_19_074730) do
+
+  create_table "drums", force: :cascade do |t|
+    t.integer "pedals"
+    t.string "color"
+    t.integer "cymbals"
+    t.integer "toms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "guitars", force: :cascade do |t|
     t.string "hand"
