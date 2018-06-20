@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "guitars", force: :cascade do |t|
+  create_table "guitar_and_basses", force: :cascade do |t|
     t.string "hand"
     t.string "color"
     t.string "material"
