@@ -1,5 +1,5 @@
 <div class="row">
-	<%= form_for @drum, :class => "col s12" do |f| %>
+	<%= form_for @headphone, :class => "col s12" do |f| %>
 		<%=f.fields_for :product do |prod| %>
 		<div class="row">
 			<div class="input-field col s6">		
@@ -76,15 +76,15 @@
 
 		<div class="row">
 			<div class="col s6">
-				<%=f.label :wireless, :class => "active" %>
 				<%=f.check_box :wireless %>
+				<%=f.label :wireless, :class => "active" %>
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col s6">
+				<%= f.check_box :bluetooth %>
 				<%= f.label :bluetooth, :class => "active" %>
-				<%= f.checkbox :bluetooth %>
 			</div>
 		</div>
 		<div class="row">
@@ -102,7 +102,7 @@
         <div class="row">
 			<div class="input-field col s6">
 				<%= f.label :type, :class => "active" %>
-				<%= f.text_field :type %>
+				<%= f.text_field :h_type %>
 			</div>
 		</div>
 		<div class="row">

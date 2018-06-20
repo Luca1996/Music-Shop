@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_074730) do
+ActiveRecord::Schema.define(version: 2018_06_19_160549) do
 
   create_table "drums", force: :cascade do |t|
     t.integer "pedals"
@@ -27,6 +27,16 @@ ActiveRecord::Schema.define(version: 2018_06_19_074730) do
     t.string "material"
     t.integer "chords"
     t.boolean "digital"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "headphones", force: :cascade do |t|
+    t.boolean "wireless"
+    t.boolean "bluetooth"
+    t.float "cable_length"
+    t.integer "impedence"
+    t.string "h_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

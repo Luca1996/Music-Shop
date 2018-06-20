@@ -17,3 +17,11 @@
 //= require materialize        
 //= require jquery
 //= require materialize-sprockets
+//= require jquery_ujs
+
+$(document).on('turbolinks:load', function() {
+    $('.button-collapse').sideNav();
+  });
+      
+
+

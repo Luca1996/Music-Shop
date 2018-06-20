@@ -4,8 +4,8 @@ class CreateHeadphones < ActiveRecord::Migration[5.2]
       t.boolean :wireless
       t.boolean :bluetooth
       t.float :cable_length
-      t.float :impedence
-      t.string :type
+      t.integer :impedence
+      t.string :h_type
       t.timestamps
     end
   end

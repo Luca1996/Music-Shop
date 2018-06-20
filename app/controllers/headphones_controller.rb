@@ -60,11 +60,11 @@ class HeadphonesController < ApplicationController
 	
 	private 
 		def headphone_params
-			params.require(:headphone).permit(:wireless,:bluetooth,:cacle_length,:impedence,:type, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+			params.require(:headphone).permit(:wireless,:bluetooth,:cacle_length,:impedence,:h_type, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
 		end
 		
 		def headphone_update_params
-			params.require(:headphone).permit(:wireless,:bluetooth,:cacle_length,:impedence,:type, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
+			params.require(:headphone).permit(:wireless,:bluetooth,:cacle_length,:impedence,:h_type, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
 	    def compress_image
