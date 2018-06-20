@@ -21,5 +21,7 @@
 
 
 $(document).on('turbolinks:load', function() {
-    $('.button-collapse').sideNav();
+    $('.button-collapse').sideNav({
+      closeOnClick: true
+    });
   });
