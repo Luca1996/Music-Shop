@@ -24,12 +24,15 @@ class PianosController < ApplicationController
 			flash.keep[:notice] = "Piano updated successfully"
 		else
 			redirect_to activities_index_path
-			flash.keep[:notice] = "Can't update the piano"
+			flash.keep[:alert] = "Can't update the piano"
 		end
 	end
 
 	def show 
-		@piano = Piano.find(params[:id])
+		@piano = Piano.find_by_id(params[:id])
+		if @piano == nil then
+			 redirect_to products_path, notice: "The piano selected doesn't bellong to the list"
+		end
 	end
 
 	def create
@@ -38,9 +41,10 @@ class PianosController < ApplicationController
 		compress_image
 		if @piano.save!
 			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano added successfully"
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new piano"
+			flash.keep[:alert] = "Error in creating new piano"
 		end
 	end
 
@@ -50,8 +54,9 @@ class PianosController < ApplicationController
 			@piano.product.destroy
 			@piano.destroy
 			redirect_to products_path
+			flash.keep[:notice] = "Piano removed from the list"
 		else
-			flash.keep[:notice] = "You can't delete this item"
+			flash.keep[:alert] = "You can't delete this item"
 		end
 	end
 

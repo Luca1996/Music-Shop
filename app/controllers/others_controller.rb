@@ -20,12 +20,15 @@ class OthersController < ApplicationController
 			flash.keep[:notice] = "Instrument updated successfully"
 		else
 			redirect_to activities_index_path
-			flash.keep[:notice] = "Can't update the instrument"
+			flash.keep[:alert] = "Can't update the instrument"
 		end
 	end
 
 	def show 
-		@other = Other.find(params[:id])
+		@other = Other.find_by_id(params[:id])
+		if @other == nil then
+			redirect_to products_path, notice: "The instrument selected doesn't belong to the list"
+		end
 	end
 
 	def index
@@ -38,9 +41,10 @@ class OthersController < ApplicationController
 		compress_image
 		if @other.save!
 			redirect_to other_path(@other)
+			flash.keep[:notice] = "Instrument added successfully"
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new generic instrument"
+			flash.keep[:alert] = "Error in creating new generic instrument"
 		end
 	end
 
@@ -50,8 +54,9 @@ class OthersController < ApplicationController
 			@other.product.destroy
 			@other.destroy
 			redirect_to products_path
+			flash.keep[:notice] = "Instrument removed from the list"
 		else
-			flash.keep[:notice] = "You can't delete this item"
+			flash.keep[:alert] = "You can't delete this item"
 		end
 	end
 
@@ -65,9 +70,9 @@ class OthersController < ApplicationController
 		end
 
 	    def compress_image
-            if !params[:piano][:product_attributes][:image].nil?
-                b64 = Base64.encode64(params[:piano][:product_attributes][:image].read)
-                @piano.product.image = b64
+            if !params[:other][:product_attributes][:image].nil?
+                b64 = Base64.encode64(params[:other][:product_attributes][:image].read)
+                @other.product.image = b64
             end
         end
 

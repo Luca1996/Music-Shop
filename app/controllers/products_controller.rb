@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :authenticate_user!, except: [:index,:show]
+    before_action :authenticate_user!, except: [:index,:show, :grid]
     # to allow delete request
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
@@ -20,8 +20,14 @@ class ProductsController < ApplicationController
         @products = Product.all
     end
 
+    def grid
+    end
+
     def show
-        @product = Product.find(params[:id])        
+        @product = Product.find_by_id(params[:id])   
+        if @product == nil then
+            redirect_to products_path, notice: "The product selected doesn't belong to the list"
+        end     
     end
 
 =begin    

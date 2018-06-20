@@ -16,6 +16,18 @@ nav form {
     width: 300px;
 }
 
+.notice {
+	color: green;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.alert {
+	color: red;
+	font-weight: bold;
+	font-size: 150%;
+}
+
 
 
 @import 'products';
