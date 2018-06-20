@@ -21,5 +21,18 @@ nav form {
     margin-left: 10px;
     margin-right: 10px;
 }
+.notice {
+	color: green;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+.alert {
+	color: red;
+	font-weight: bold;
+	font-size: 150%;
+}
+
+
 
 @import 'products';

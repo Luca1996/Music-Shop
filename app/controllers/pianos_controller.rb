@@ -16,8 +16,23 @@ class PianosController < ApplicationController
 		@piano = Piano.find(params[:id])
 	end
 
-	def show 
+	def update
 		@piano = Piano.find(params[:id])
+		compress_image
+		if @piano.update(piano_update_params)			
+			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano updated successfully"
+		else
+			redirect_to activities_index_path
+			flash.keep[:alert] = "Can't update the piano"
+		end
+	end
+
+	def show 
+		@piano = Piano.find_by_id(params[:id])
+		if @piano == nil then
+			 redirect_to products_path, notice: "The piano selected doesn't bellong to the list"
+		end
 	end
 
 	def create
@@ -26,9 +41,10 @@ class PianosController < ApplicationController
 		compress_image
 		if @piano.save!
 			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano added successfully"
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new piano"
+			flash.keep[:alert] = "Error in creating new piano"
 		end
 	end
 
@@ -38,8 +54,9 @@ class PianosController < ApplicationController
 			@piano.product.destroy
 			@piano.destroy
 			redirect_to products_path
+			flash.keep[:notice] = "Piano removed from the list"
 		else
-			flash.keep[:notice] = "You can't delete this item"
+			flash.keep[:alert] = "You can't delete this item"
 		end
 	end
 
@@ -64,6 +81,10 @@ class PianosController < ApplicationController
 			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
 		end
 		
+		def piano_update_params
+			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
+		end
+
 		def piano_update_params
 			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end

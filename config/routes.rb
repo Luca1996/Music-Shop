@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'products#index'
+  get 'products/grid'
   resources :products, only: [:index, :show, :destroy]
   resources :pianos
   resources :others
