@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GuitarControllerTest < ActionDispatch::IntegrationTest
+class HeadphoneTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

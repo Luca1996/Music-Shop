@@ -60,9 +60,29 @@ class PianosController < ApplicationController
 		end
 	end
 
+	def update
+		@piano = Piano.find(params[:id])
+		if @piano.product.user == current_user || current_user.admin?
+			@piano.update(piano_update_params)
+			compress_image
+			@piano.save
+			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano update successfully"
+		else
+			redirect_to activities_index_path()
+			flash.keep[:notice] = "You can't update this"
+		end
+		
+	end
+	
+
 	private 
 		def piano_params
 			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+		end
+		
+		def piano_update_params
+			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
 		def piano_update_params

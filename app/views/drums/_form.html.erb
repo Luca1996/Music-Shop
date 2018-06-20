@@ -1,5 +1,5 @@
 <div class="row">
-	<%= form_for @piano, :class => "col s12" do |f| %>
+	<%= form_for @drum, :class => "col s12" do |f| %>
 		<%=f.fields_for :product do |prod| %>
 		<div class="row">
 			<div class="input-field col s6">		
@@ -76,8 +76,8 @@
 
 		<div class="row">
 			<div class="input-field col s6">
-				<%=f.label :tipo, :class => "active" %>
-				<%=f.text_field :tipo %>
+				<%=f.label :pedals, :class => "active" %>
+				<%=f.number_field :pedals %>
 			</div>
 		</div>
 
@@ -89,19 +89,19 @@
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<%= f.label :material, :class => "active" %>
-				<%= f.text_field :material %>
+				<%= f.label :cymbals, :class => "active" %>
+				<%= f.number_field :cymbals %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s6">
-				<%= f.label :n_keys, :class => "active" %>
-				<%= f.number_field :n_keys %>
+				<%= f.label :toms, :class => "active" %>
+				<%= f.number_field :toms %>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field col s12">
-				<%= f.submit "Sell piano", :class => "btn waves-effect waves-light" %>
+				<%= f.submit "Sell drum", :class => "btn waves-effect waves-light" %>
 			</div>
 		</div>
 		<% end %>

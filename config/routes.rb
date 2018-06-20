@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :pianos
   resources :others
   resources :guitars
+  resources :drums
+  resources :headphones
   get 'application/logout'
   get 'settings/show'
   patch 'settings/change_avatar'
