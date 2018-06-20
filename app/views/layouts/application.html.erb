@@ -12,6 +12,7 @@
     <div class="nav-wrapper">
       <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li> <%= link_to "Categories", products_grid_path %> </li>
         <% if user_signed_in? %>
           <li> <%= link_to  "Settings", settings_show_path() %>
           <li> <%= link_to "My Activities", activities_index_path() %></li>
