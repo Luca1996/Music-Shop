@@ -1,0 +1,108 @@
+<div class="row">
+	<%= form_for @piano, :class => "col s12" do |f| %>
+		<%=f.fields_for :product do |prod| %>
+		<div class="row">
+			<div class="input-field col s6">		
+				<%= prod.label :title, :class => "active" %>
+				<%= prod.text_field :title %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<%= prod.label :brand, :class => "active" %>
+				<%= prod.text_field :brand %>
+			</div>
+		</div>
+		<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :model , :class => "active" %>
+            	<%= prod.text_field :model %>
+        	</div>
+      	</div>
+      	<div class="file-field input-field col s12 m8">
+        <div class="btn">
+          <span>File</span>
+            <%= prod.file_field :image %>
+        </div>
+        <div class="file-path-wrapper">
+          	<input class="file-path validate" type="text">
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :price , :class => "active" %>
+            	<%= prod.number_field :price , :step => "0.01" %>
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :quantity , :class => "active" %>
+            	<%= prod.number_field :quantity %>
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :weight , :class => "active" %>
+            	<%= prod.number_field :weight %>
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :height , :class => "active" %>
+            	<%= prod.number_field :height %>
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :length , :class => "active" %>
+            	<%= prod.number_field :length %>
+        	</div>
+      	</div>
+      	<div class="row">
+        	<div class="input-field col s6">
+            	<%= prod.label :depth , :class => "active" %>
+            	<%= prod.number_field :depth %>
+        	</div>
+      	</div> 
+      	<div class="input-field col s12">
+            <%= prod.label :description , :class => "active" %>
+            <%= prod.text_area :description, :class => "materialize-textarea" %>
+      	</div>
+      <% end %>
+		
+		
+
+
+
+		<div class="row">
+			<div class="input-field col s6">
+				<%=f.label :tipo, :class => "active" %>
+				<%=f.text_field :tipo %>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="input-field col s6">
+				<%= f.label :color, :class => "active" %>
+				<%= f.text_field :color %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<%= f.label :material, :class => "active" %>
+				<%= f.text_field :material %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s6">
+				<%= f.label :n_keys, :class => "active" %>
+				<%= f.number_field :n_keys %>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field col s12">
+				<%= f.submit "Sell piano", :class => "btn waves-effect waves-light" %>
+			</div>
+		</div>
+		<% end %>
+	</div>

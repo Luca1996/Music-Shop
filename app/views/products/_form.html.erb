@@ -19,6 +19,15 @@
             <%= f.text_field :model %>
         </div>
       </div>
+      <div class="file-field input-field col s12 m8">
+        <div class="btn">
+          <span>File</span>
+            <%= f.file_field :image %>
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text">
+        </div>
+      </div>
       <div class="row">
         <div class="input-field col s6">
             <%= f.label :price , :class => "active" %>
@@ -38,10 +47,26 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-field col s12">
+        <div class="input-field col s6">
+            <%= f.label :height , :class => "active" %>
+            <%= f.number_field :height %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :length , :class => "active" %>
+            <%= f.number_field :length %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s6">
+            <%= f.label :depth , :class => "active" %>
+            <%= f.number_field :depth %>
+        </div>
+      </div> 
+      <div class="input-field col s12">
             <%= f.label :description , :class => "active" %>
             <%= f.text_area :description, :class => "materialize-textarea" %>
-        </div>
       </div>
       <div class="row">
         <div class="input-field col s12">

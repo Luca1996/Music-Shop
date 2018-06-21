@@ -6,29 +6,46 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
-   <nav>
-    <div class="nav-wrapper">
-      <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <% if user_signed_in? %>
-          <li><%= link_to  "Add Product", new_product_path(),:class => "waves-effect waves-light btn" %></li>
-          <li><%= link_to "Logout", application_logout_path() %></li>
-        <% else %>
-        <li><%= link_to "Login", new_user_session_path() %></li>
-        <% end %>
-        
-      </ul>
-      <form>
-          <div class="input-field">
-              <input id="search" type="search" required>
-                  <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                  <i class="material-icons">close</i>
-          </div>
-       </form>
-    </div>
-  </nav>
+  <body>  
+  <div class="navbar-fixed">
+    <nav>
+      <div class="nav-wrapper">
+        <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
+        <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li> <%= link_to "Categories", products_grid_path %> </li>
+          <% if user_signed_in? %>
+            <li> <%= link_to  "Settings", settings_show_path() %>
+            <li> <%= link_to "My Activities", activities_index_path() %></li>
+            <li><%= link_to "Logout", application_logout_path() %></li>
+          <% else %>
+          <li><%= link_to "Login", new_user_session_path() %></li>
+          <% end %>
+          
+        </ul>
+        <form>
+            <div class="input-field">
+                <input id="search" type="search" required>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+            </div>
+        </form>
+      </div>
+    </nav>
+  </div>
+  <ul class="side-nav" id="mobile-demo">
+   <li><%= link_to  "Guitars", guitars_path %></li>
+   <li><%= link_to  "Pianos", pianos_path %></li>
+   <li><%= link_to  "Drums", drums_path %></li>
+   <li><%= link_to  "Headphones", headphones_path %></li>
+   <li><%= link_to  "Others", others_path %></li>
+   <li>
+      <form class="range" action="#">
+      <p class="range-field">
+      <input type="range" id="myRange" min="0" max="99999" />
+      </p>
+  </form>
+  </ul>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
     <%= yield %>

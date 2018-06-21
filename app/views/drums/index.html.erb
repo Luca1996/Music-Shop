@@ -1,0 +1,19 @@
+<h3>Drums</h3>
+<div class="row">
+  <% @drums.each do |d| %>
+
+    <div class="col s6 m3 l2">
+      <div class="card">
+        <div class="card-image">
+          <%= image_tag "data:image/jpeg;base64,#{d.product.image}"%>
+        </div>
+        <div class="card-content">
+          <p><%= d.product.description %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to "Details", drum_path(d) %>
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>

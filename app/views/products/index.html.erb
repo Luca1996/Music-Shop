@@ -1,3 +1,19 @@
-<% @products.each do |p| %>
-    <p> <%= p.description %></p>
-<% end %>
+<h3>Instruments</h3>
+<div class="row">
+  <% @products.each do |prod| %>
+    <div class="col s6 m3 l2">
+      <div class="card medium">
+        <div class="index-card-image card-image">
+          <%= image_tag "data:image/jpeg;base64,#{prod.image}"%>
+        </div>
+        <div class="card-content">
+          <p><%= prod.description %></p>
+        </div>
+        <div class="card-action">
+          <%= link_to  "Details", product_path(prod) %>
+          <%= prod.price %>  €
+        </div>
+      </div>
+    </div>
+  <% end %> 
+</div>
