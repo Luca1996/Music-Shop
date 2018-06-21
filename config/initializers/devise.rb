@@ -232,6 +232,7 @@ Devise.setup do |config|
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
   # config.scoped_views = false
+  config.scoped_views = true;
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).
@@ -259,7 +260,7 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
-  config.omniauth :twitter, 'FIRvnX8W52KT7OCFTOIo8PKaA', 'lWbVQrYcIha0LlSyC6XWML3sgGhZ7oY8bYac9wSV9A9LvR8pGs'
+  config.omniauth :github, 'Iv1.3a0ccd1c9208c73f', 'e6870555aadcbdc444ce59c58615807065323690', scope: 'email', fields: 'email,name'
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
