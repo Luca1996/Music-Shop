@@ -23,13 +23,9 @@
           <% end %>
           
         </ul>
-        <form>
-            <div class="input-field">
-                <input id="search" type="search" required>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-            </div>
-        </form>
+          <%= form_tag(products_path, method: :get) do %>
+            <%= text_field_tag :term, params[:term] %>
+          <% end %>
       </div>
     </nav>
   </div>
@@ -40,11 +36,10 @@
    <li><%= link_to  "Headphones", headphones_path %></li>
    <li><%= link_to  "Others", others_path %></li>
    <li>
-      <form class="range" action="#">
-      <p class="range-field">
-      <input type="range" id="myRange" min="0" max="99999" />
-      </p>
-  </form>
+      <%= form_tag(products_path, method: :get) do %>
+        <%= text_field_tag :s_price, params[:s_price] %>
+        <%= submit_tag 'Search', name: nil %>
+    <% end %>
   </ul>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>

@@ -17,7 +17,13 @@ class ProductsController < ApplicationController
 =end    
 
     def index
-        @products = Product.all
+        if params[:term]
+            @products = Product.where('title LIKE?', "%#{params[:term]}%")
+        elsif params[:s_price]
+            @products = Product.where('price <= ?', params[:s_price])
+        else
+            @products = Product.all
+        end
     end
 
     def grid
@@ -83,5 +89,10 @@ class ProductsController < ApplicationController
             end
         end
 =end
+        private 
+        
+            def products_params
+                params.require(:product).permit(title,:brand,:model,:price,:quantity,:weight,:description,:image,:term,:s_price)
+            end
 
 end
