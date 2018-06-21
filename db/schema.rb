@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_20_184527) do
+ActiveRecord::Schema.define(version: 2018_06_19_160549) do
 
   create_table "drums", force: :cascade do |t|
     t.integer "pedals"

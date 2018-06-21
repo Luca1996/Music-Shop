@@ -13,6 +13,13 @@ class PianosController < ApplicationController
 	end
 
 	def edit
+		require 'net/http'
+        require 'json'
+        
+        url = 'http://api.walmartlabs.com/v1/search?query='+ @piano.product.title + '&format=json&apiKey=qf2a4tqhq4qdncvqrrkpvzt8'
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        @res = JSON.parse(response)
 		@piano = Piano.find(params[:id])
 	end
 

@@ -14,6 +14,12 @@ class DrumsController < ApplicationController
 
 	def edit
 		@drum = Drum.find(params[:id])
+		
+        url = 'http://api.walmartlabs.com/v1/search?query='+ @drum.product.title + '&format=json&apiKey=qf2a4tqhq4qdncvqrrkpvzt8'
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        @res = JSON.parse(response)
+		
 	end
 
 	def show 
