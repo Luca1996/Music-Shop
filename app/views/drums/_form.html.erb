@@ -32,7 +32,7 @@
         	<div class="input-field col s6">
             	<%= prod.label :price , :class => "active" %>
             	<%= prod.number_field :price , :step => "0.01" %>
-				<% if !@res.nil? %>
+				<% if !@res["items"].nil? %>
 					<p> Price on walmart: <%= @res["items"][0]["salePrice"] %></p>
 				<% elsif !@drum.product.title.nil? %>
 					<p> No item on walmart </p>
