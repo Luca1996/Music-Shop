@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.string "tipo"
     t.string "color"
     t.string "material"
-    t.integer "n_keys"
+    t.string "n_keys"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,8 +71,6 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.integer "depth"
     t.string "image"
     t.integer "user_id"
-    t.integer "type_id"
-    t.string "type_name"
     t.string "instrum_type"
     t.integer "instrum_id"
     t.index ["instrum_type", "instrum_id"], name: "index_products_on_instrum_type_and_instrum_id"
@@ -93,9 +91,9 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
+    t.string "image"
     t.string "provider"
     t.string "uid"
-    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
