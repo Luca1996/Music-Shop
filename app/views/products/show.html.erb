@@ -2,3 +2,18 @@
 	 and the partial _instrum associated -->
 <%= render(@product) %>
 <%= render(@product.instrum) %>
+
+<%= render  "comments/form" %>
+
+<h2> Comments </h2>
+<% if !@product.comments.nil? %>
+	<% @product.comments.each  do |comm| %>
+		<%= render(comm) %>
+		<% if comm.user == current_user %>
+			<%= link_to  "Edit", edit_product_comment_path(@product,comm) %>
+		<% end %>
+		<% if comm.user == current_user || current_user.try(:admin?)  %>
+			<%= link_to  "Delete", product_comment_path(@product,comm),method: :delete, data: {confirm: "Are you sure?"} %>
+		<% end %>
+	<% end %>
+<% end %>
