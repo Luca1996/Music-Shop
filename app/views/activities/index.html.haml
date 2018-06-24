@@ -19,26 +19,31 @@
 	- @products.each do |prod|	
 
 		-if prod.instrum.instance_of?(Piano)
-			= prod.title
-			= link_to "Modify" , edit_piano_path(prod.instrum)
-			= link_to "Delete", piano_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+			%div{ :id => prod.title }
+				= prod.title
+				= link_to "Modify" , edit_piano_path(prod.instrum)
+				= link_to "Delete", piano_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
 			%br
 		-if prod.instrum.instance_of?(Other)
-			= prod.title
-			= link_to "Modify" , edit_other_path(prod.instrum)
-			= link_to "Delete", other_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+			%div{ :id => prod.title }
+				= prod.title
+				= link_to "Modify" , edit_other_path(prod.instrum)
+				= link_to "Delete", other_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
 			%br
 		-if prod.instrum.instance_of?(Guitar)
-			= prod.title
-			= link_to "Modify" , edit_guitar_path(prod.instrum)
-			= link_to "Delete", guitar_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+			%div{ :id => prod.title }
+				= prod.title
+				= link_to "Modify" , edit_guitar_path(prod.instrum)
+				= link_to "Delete", guitar_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
 			%br
 		-if prod.instrum.instance_of?(Drum)
-			= prod.title
-			= link_to "Modify" , edit_drum_path(prod.instrum)
-			= link_to "Delete", drum_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+			%div{ :id => prod.title }
+				= prod.title
+				= link_to "Modify" , edit_drum_path(prod.instrum)
+				= link_to "Delete", drum_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
 			%br
 		-if prod.instrum.instance_of?(Headphone)
-			= prod.title
-			= link_to "Modify" , edit_headphone_path(prod.instrum)
-			= link_to "Delete", headphone_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+			%div{ :id => prod.title }
+				= prod.title
+				= link_to "Modify" , edit_headphone_path(prod.instrum)
+				= link_to "Delete", headphone_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}

@@ -10,6 +10,14 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth-github'
 
+group :test, :development do
+  gem 'cucumber-rails'
+  gem 'cucumber-rails-training-wheels'  # contains some pre-fabbed step definitions
+  gem 'database_cleaner'  # to clean Cucumber's test database between runs
+  #gem 'capybara', '>=2.15', '<4.0'
+  gem 'launchy' # debbuging aim for user stories
+end
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.0'
 # Use sqlite3 as the database for Active Record
