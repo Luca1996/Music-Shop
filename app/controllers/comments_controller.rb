@@ -16,6 +16,7 @@ class CommentsController < ApplicationController
             flash.keep[:notice] = "Created new Comment"
         else
             flash.keep[:alert] = "Something wrong in creating a comment"
+            redirect_to product_path(@product)
         end
     end
 
