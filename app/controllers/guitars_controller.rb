@@ -2,21 +2,21 @@ class GuitarsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
+	
+	def index
+		@guitars = Guitar.all
+	end
+	
+	def show 
+		@guitar = Guitar.find(params[:id])
+	end
 
 	def new
 		@guitar = Guitar.new
 		@guitar.build_product
 	end
 
-	def index
-		@guitars = Guitar.all
-	end
-
 	def edit
-		@guitar = Guitar.find(params[:id])
-	end
-
-	def show 
 		@guitar = Guitar.find(params[:id])
 	end
 
@@ -26,20 +26,10 @@ class GuitarsController < ApplicationController
 		compress_image
 		if @guitar.save!
 			redirect_to guitar_path(@guitar)
+			flash.keep[:notice] = "Guitar created successfully"
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new guitar"
-		end
-	end
-
-	def destroy
-		@guitar = Guitar.find(params[:id])
-		if @guitar.product.user == current_user || current_user.admin?
-			@guitar.product.destroy
-			@guitar.destroy
-			redirect_to products_path
-		else
-			flash.keep[:notice] = "You can't delete this item"
+			flash.keep[:alert] = "Error in creating new guitar"
 		end
 	end
 
@@ -50,10 +40,22 @@ class GuitarsController < ApplicationController
 			compress_image
 			@guitar.save
 			redirect_to guitar_path(@guitar)
-			flash.keep[:notice] = "guitar update successfully"
+			flash.keep[:notice] = "Guitar update successfully"
 		else
 			redirect_to activities_index_path()
-			flash.keep[:notice] = "You can't update this"
+			flash.keep[:alert] = "You can't update the guitar"
+		end
+	end
+	
+	def destroy
+		@guitar = Guitar.find(params[:id])
+		if @guitar.product.user == current_user || current_user.admin?
+			@guitar.product.destroy
+			@guitar.destroy
+			redirect_to products_path
+			flash.keep[:notice] = "Guitar deleted successfully"
+		else
+			flash.keep[:alert] = "You can't delete this guitar"
 		end
 	end
 

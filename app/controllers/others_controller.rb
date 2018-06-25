@@ -3,27 +3,10 @@ class OthersController < ApplicationController
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
 
-	def new
-		@other = Other.new
-		@other.build_product
+	def index
+		@others = Other.all
 	end
-
-	def edit
-		@other = Other.find(params[:id])
-	end
-
-	def update
-		@other = Other.find(params[:id])
-		compress_image
-		if @other.update(other_update_params)			
-			redirect_to other_path(@other)
-			flash.keep[:notice] = "Instrument updated successfully"
-		else
-			redirect_to activities_index_path
-			flash.keep[:alert] = "Can't update the instrument"
-		end
-	end
-
+	
 	def show 
 		@other = Other.find_by_id(params[:id])
 		if @other == nil then
@@ -31,8 +14,13 @@ class OthersController < ApplicationController
 		end
 	end
 
-	def index
-		@others = Other.all
+	def new
+		@other = Other.new
+		@other.build_product
+	end
+
+	def edit
+		@other = Other.find(params[:id])
 	end
 
 	def create
@@ -44,8 +32,22 @@ class OthersController < ApplicationController
 			flash.keep[:notice] = "Instrument added successfully"
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new generic instrument"
+			flash.keep[:alert] = "Error in creating new instrument"
 		end
+	end
+	
+	def update
+		@other = Other.find(params[:id])
+		if @other.product.user == current_user || current_user.admin?
+			@other.update(other_update_params)
+			compress_image
+			@other.save
+			redirect_to other_path(@other)
+			flash.keep[:notice] = "Item update successfully"
+		else
+			redirect_to activities_index_path()
+			flash.keep[:alert] = "You can't update this item"
+		end	
 	end
 
 	def destroy
@@ -54,7 +56,7 @@ class OthersController < ApplicationController
 			@other.product.destroy
 			@other.destroy
 			redirect_to products_path
-			flash.keep[:notice] = "Instrument removed from the list"
+			flash.keep[:notice] = "Item removed from the list"
 		else
 			flash.keep[:alert] = "You can't delete this item"
 		end

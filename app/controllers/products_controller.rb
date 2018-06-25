@@ -26,9 +26,6 @@ class ProductsController < ApplicationController
         end
     end
 
-    def grid
-    end
-
     def show
         @product = Product.find_by_id(params[:id])   
         if @product == nil then
@@ -59,6 +56,9 @@ class ProductsController < ApplicationController
         else
             flash.keep[:notice] = "You can't delete this item"
         end
+    end
+
+    def grid
     end
 
 =begin

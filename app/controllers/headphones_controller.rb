@@ -3,22 +3,23 @@ class HeadphonesController < ApplicationController
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
 
+	def index
+		@headphones = Headphone.all
+	end
+
+	def show 
+		@headphone = Headphone.find(params[:id])
+	end
+
 	def new
 		@headphone = Headphone.new
 		@headphone.build_product
-	end
-
-	def index
-		@headphones = Headphone.all
 	end
 
 	def edit
 		@headphone = Headphone.find(params[:id])
 	end
 
-	def show 
-		@headphone = Headphone.find(params[:id])
-	end
 
 	def create
 		@headphone = Headphone.new(headphone_params)
@@ -26,20 +27,10 @@ class HeadphonesController < ApplicationController
 		compress_image
 		if @headphone.save!
 			redirect_to headphone_path(@headphone)
+			flash.keep[:notice] = "Headphone created successfully"
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new headphone"
-		end
-	end
-
-	def destroy
-		@headphone = Headphone.find(params[:id])
-		if @headphone.product.user == current_user || current_user.admin?
-			@headphone.product.destroy
-			@headphone.destroy
-			redirect_to products_path
-		else
-			flash.keep[:notice] = "You can't delete this item"
+			flash.keep[:alert] = "Error in creating new headphone"
 		end
 	end
 
@@ -50,12 +41,22 @@ class HeadphonesController < ApplicationController
 			compress_image
 			@headphone.save
 			redirect_to headphone_path(@headphone)
-			flash.keep[:notice] = "headphone update successfully"
+			flash.keep[:notice] = "Headphone update successfully"
 		else
 			redirect_to activities_index_path()
-			flash.keep[:notice] = "You can't update this"
+			flash.keep[:alert] = "You can't update this headphone"
+		end	
+	end
+
+	def destroy
+		@headphone = Headphone.find(params[:id])
+		if @headphone.product.user == current_user || current_user.admin?
+			@headphone.product.destroy
+			@headphone.destroy
+			redirect_to products_path
+		else
+			flash.keep[:alert] = "You can't delete this headphone"
 		end
-		
 	end
 	
 	private 
