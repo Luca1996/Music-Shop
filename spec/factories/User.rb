@@ -4,12 +4,12 @@ FactoryBot.define do
         f.password "12345678"
         f.admin false
         f.encrypted_password "12345678"
-        f.created_at DateTime.now
-        f.updated_at DateTime.now
+        f.id "1"
     end
     actory :admin, parent: :user do |f|
         f.email "admin@user.com"
         f.admin true
+        f.id "1"
     end
     end
 end

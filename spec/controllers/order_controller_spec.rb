@@ -7,6 +7,9 @@ describe OrderController do
                 @user = FactoryBot.create(:user)
                 sign_in @user
             end
+            it "verifies user role" do
+                @user.admin.should eq("false")
+            end
             it "populates an array of orders" do
                 order = FactoryBot.create(:order)
                 get :index
@@ -21,6 +24,9 @@ describe OrderController do
             before do
                 @admin = FactoryBot.create(:admin)
                 sign_in @admin
+            end
+            it "verifies admin role" do
+                @admin.admin.should eq("true")
             end
             it "populates an array of all orders" do
                 order = FactoryBot.create(:order)
@@ -120,6 +126,10 @@ describe OrderController do
                 put :update, id: @order, order: FactoryBot.attributes_for(:order)
                 assigns(:order).should eq(@order)
             end
+            it "verifies user that creates the order" do
+                put :update, id: @order, order: FactoryBot.attributes_for(:order)
+                @order.user_id.should eq(@user.id)
+            end
             it "updates an order" do
                 put :update, id: @order, order: FactoryBot.attributes_for(:order, address: "Another_address")
                 @order.reload
@@ -132,13 +142,17 @@ describe OrderController do
         end
         context "with invalid attributes" do
             it "located the requested order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order)
+                put :update, id: @order, order: FactoryBot.attributes_for(:invalid_order)
                 assigns(:order).should eq(@order)
             end
+            it "verifies user that creates the order" do
+                put :update, id: @order, order: FactoryBot.attributes_for(:invalid_order)
+                @order.user_id.should eq(@user.id)
+            end
             it "does not update the order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order, address: nil)
+                put :update, id: @order, order: FactoryBot.attributes_for(:order, address: "Invalid_address")
                 @order.reload
-                @order.address.should_not eq(nil) 
+                @order.address.should_not eq("Invalid_address") 
             end
             it "renders the edit page" do
                 put :update, id: @order, order: FactoryBot.attributes_for(:order)
@@ -155,6 +169,10 @@ describe OrderController do
             @user = FactoryBot.create(:admin)
             sign_in @user
             end
+            it "verifies admin role" do
+                delete :destroy, id: @order
+                @user.admin.should eq("true")
+            end
             it "deletes the order" do
                 expect{
                     delete :destroy, id: @order
@@ -169,7 +187,15 @@ describe OrderController do
             before do
                 @user = FactoryBot.create(:user)
                 sign_in @user
-                @order = FactoryBot.create(:order)
+            end
+            it "verifies user that creates the order" do
+                delete :destroy, id: @order
+                @order.user_id.should eq(@user.id)
+            end
+            it "deletes the order" do
+                expect{
+                    delete :destroy, id: @order
+                }.to  change(Order,:count).by(-1)
             end
             it "redirects to orders index" do
                 delete :destroy, id: @order
