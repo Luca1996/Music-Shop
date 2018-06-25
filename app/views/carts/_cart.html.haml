@@ -1,0 +1,9 @@
+-# partial from cart, every time we render @cart this will be showed inline. So this can be rendered also in another view as a part of it 
+
+%h2
+	All items in cart 
+-cart.line_items.each do |l_item|
+	Item:
+	%br
+	= render l_item
+	%br

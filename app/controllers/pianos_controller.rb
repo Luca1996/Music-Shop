@@ -5,7 +5,7 @@ class PianosController < ApplicationController
 
 	def new
 		@piano = Piano.new
-		@piano.build_product
+		@piano.build_product	# create a Product object whose fields will be fillen by the form
 	end
 
 	def index
@@ -70,7 +70,7 @@ class PianosController < ApplicationController
 			flash.keep[:notice] = "Piano update successfully"
 		else
 			redirect_to activities_index_path()
-			flash.keep[:notice] = "You can't update this"
+			flash.keep[:alert] = "You can't update this"
 		end
 		
 	end

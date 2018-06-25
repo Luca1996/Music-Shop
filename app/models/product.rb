@@ -10,7 +10,18 @@ class Product < ApplicationRecord
 	validates :image, presence: true
 
 	# associations
+	has_many :line_items
 	belongs_to :user
 	belongs_to :instrum, polymorphic: true
 
+
+	private 
+		# we need to check that when deleting a produc, it isn't referenced by a line_item
+		# this is a hook method, automatically launched by rails when deletind a product
+		def ensure_not_referenced_by_any_line_item
+			unless line_items.empty?
+				errors.add(:base, 'Line items reference this product')
+				throw :abort
+			end
+		end
 end
