@@ -1,3 +1,4 @@
+    <div class="full-container">  
       <div class="row">
         <div class="input-field col s6">
             <%= f.label :title , :class => "active" %>
@@ -26,44 +27,58 @@
           <input class="file-path validate" type="text">
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :price , :class => "active" %>
-            <%= f.number_field :price , :step => "0.01" %>
+      <div class="block-container">
+        <div class="block-form-small">
+          <div class="row">
+            <div class="input-field col s6">
+                <%= f.label :price , :class => "active" %>
+                <%= f.number_field :price , :step => "0.01" %>
+            </div>
+          </div>
+        </div>
+        <div class="block-form-small">
+          <div class="row">
+            <div class="input-field col s6">
+                <%= f.label :quantity , :class => "active" %>
+                <%= f.number_field :quantity %>
+             </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :quantity , :class => "active" %>
-            <%= f.number_field :quantity %>
+      <div class="block-form-small">
+        <div class="row">
+          <div class="input-field col s6">
+              <%= f.label :weight , :class => "active" %>
+              <%= f.number_field :weight %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :weight , :class => "active" %>
-            <%= f.number_field :weight %>
+      <div class="block-form-small">
+        <div class="row">
+          <div class="input-field col s6">
+              <%= f.label :height , :class => "active" %>
+              <%= f.number_field :height %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :height , :class => "active" %>
-            <%= f.number_field :height %>
+      <div class="block-form-small">
+        <div class="row">
+          <div class="input-field col s6">
+              <%= f.label :length , :class => "active" %>
+              <%= f.number_field :length %>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :length , :class => "active" %>
-            <%= f.number_field :length %>
-        </div>
+      <div class="block-form-small">
+        <div class="row">
+          <div class="input-field col s6">
+              <%= f.label :depth , :class => "active" %>
+              <%= f.number_field :depth %>
+          </div>
+        </div> 
       </div>
-      <div class="row">
-        <div class="input-field col s6">
-            <%= f.label :depth , :class => "active" %>
-            <%= f.number_field :depth %>
-        </div>
-      </div> 
       <div class="input-field col s12">
             <%= f.label :description , :class => "active" %>
             <%= f.text_area :description, :class => "materialize-textarea" %>
       </div>
-
+    </div>

@@ -34,3 +34,39 @@ div.card-price{
 	display: inline-block;
 	margin-bottom: 80px;
 }
+
+
+.full-container{
+    max-width: 900px;
+}
+
+
+
+.block-container{
+    display: block;
+}
+
+.file-field.input-field.col.s12.m8{
+    width: 307px;
+    display: block;
+}
+
+/*.row{
+    border: 2px solid;
+}*/
+
+.block-form-small {
+    display: inline-block;
+    max-width: 150px;
+    max-height: 81px;
+}
+
+.block-form-medium {
+    display: inline-block;
+    max-width: 300px;
+    max-height: 81px;
+}
+
+.input-field.col.s6{
+    min-width: 130px;
+}
