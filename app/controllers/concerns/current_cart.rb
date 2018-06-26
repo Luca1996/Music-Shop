@@ -15,6 +15,15 @@ module CurrentCart
 			session[:cart_id] = @cart.id
 		end
 
+		# This method is used to ensure that the line_item we're trying to access
+		# belongs to the current session's cart
+		# It is used not to allow strangers modify our cart
+		def is_right_cart?(line_item)
+			if line_item.cart == @cart
+				return true
+			end
+			false
+		end
 
 # note : session stores datas as cookies in the browser web, so the value of the cart will be
 # the same for different browser windows

@@ -10,7 +10,7 @@ def index
 end
 
 def destroy
-	if @cart.id == session[:cart_id]
+	if is_my_cart?(@cart)
 		@cart.destroy 
 		session[:cart_id] = nil
 		redirect_to root_path, notice: "Cart emptied"
@@ -30,6 +30,13 @@ private
 		end
 		rescue ActiveRecord::RecordNotFound
 			invalid_cart
+	end
+
+	def is_my_cart?(cart)
+		if cart.id == session[:cart_id]
+			return true
+		end
+		false
 	end
 
 	def invalid_cart

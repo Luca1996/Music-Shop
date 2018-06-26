@@ -1,12 +1,17 @@
 -# partial from line_item, every time we render @line_item this will be showed inline. So this can be rendered also in another view as a part of it 
 
-Product ->
 
-= line_item.product.title
-%br
+.container-main
 
-Quantity ->
-
-= line_item.quantity
-%br
+	%table
+		%tr
+			%th
+				Product ->
+			%th 
+				Quantity ->
+		%tr
+			%td
+				= line_item.product.title
+			%td
+				= line_item.quantity
 

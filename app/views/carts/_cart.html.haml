@@ -6,4 +6,10 @@
 	Item:
 	%br
 	= render l_item
+	= link_to "Remove one", line_item_path(l_item.id), method: :delete 
+	%br
+	= link_to "Remove all", line_items_destroy_path(l_item.id), method: :delete
+	%br
+	= link_to "Empty cart", cart_path(cart.id), method: :delete
+	%br
 	%br
