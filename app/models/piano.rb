@@ -1,6 +1,6 @@
 class Piano < ApplicationRecord
 	# validations 
-	validates :tipo, presence: true;
+	validates :tipo, presence: true, format: { with: /\A(A coda)?(A muro)?/ }
 	validates :n_keys, presence: true;
 
 	# associations

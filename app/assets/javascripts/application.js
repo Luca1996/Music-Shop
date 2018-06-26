@@ -24,4 +24,7 @@ $(document).on('turbolinks:load', function() {
     $('.button-collapse').sideNav({
       closeOnClick: true
     });
+    $('select').material_select();
   });
+
+

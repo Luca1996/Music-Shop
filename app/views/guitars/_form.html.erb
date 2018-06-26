@@ -75,9 +75,12 @@
 
 
 		<div class="row">
-			<div class="input-field col s6">
-				<%=f.label :hand, :class => "active" %>
-				<%=f.text_field :hand %>
+		   <div class="input-field col s12">
+				<%= f.select(:hand) do %>
+					<% [['Right', "Right"], ['Left', "Left"]].each do |c| -%>
+						<%= content_tag(:option, c.first, value: c.last) %>
+					<% end %>
+				<% end %>
 			</div>
 		</div>
 
