@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root 'products#index'
-  delete 'line_items/destroy_all/:id', to:'line_items#destroy_all'
+  delete 'line_items/destroy_all/:id', to:'line_items#destroy_all', as: :line_items_destroy
   resources :line_items, only: [:index, :show, :create, :destroy]
   resources :carts, only: [:index, :show, :destroy]
   get 'products/grid'
