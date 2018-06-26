@@ -1,6 +1,6 @@
 <h3> Comment </h3>
   <div class="row">
-      <%= form_for [@product,Comment.new] ,:class => "col s12" do |f| %>
+      <%= form_for [@product,@comment] ,:class => "col s12" do |f| %>
         <div class="row">
           <div class="input-field col s6">
               <%= f.label :title , :class => "active" %>

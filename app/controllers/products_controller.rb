@@ -31,7 +31,7 @@ class ProductsController < ApplicationController
 
     def show
         @product = Product.find_by_id(params[:id])
-        
+        @comment = Comment.new
         if @product == nil then
             redirect_to products_path, notice: "The product selected doesn't belong to the list"
         end     
