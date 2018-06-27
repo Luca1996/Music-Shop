@@ -58,7 +58,7 @@ class ProductsController < ApplicationController
 
     def search 
         match_string = params[:search]
-        @products = Product.where(:title => match_string)
+        @products = Product.where('title LIKE?', "%#{match_string}%")
         render :index
     end
 
