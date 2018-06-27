@@ -13,7 +13,7 @@ describe OrdersController, :type => :controller do
             it "populates an array of orders" do
                 order = FactoryBot.create(:order)
                 get :index
-                assigns(:orders).should eq(order)
+                expect(assigns(:orders).should eq([order]))
             end
             it "renders index view" do
                 get :index
@@ -31,7 +31,7 @@ describe OrdersController, :type => :controller do
             it "populates an array of all orders" do
                 order = FactoryBot.create(:order)
                 get :index
-                assigns(:orders).should eq(order)
+                expect(assigns(:orders).should eq([order]))
             end
             it "renders index view" do
                 get :index
