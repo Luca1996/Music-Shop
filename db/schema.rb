@@ -10,13 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_160549) do
+ActiveRecord::Schema.define(version: 2018_06_27_163551) do
 
   create_table "drums", force: :cascade do |t|
     t.integer "pedals"
     t.string "color"
     t.integer "cymbals"
     t.integer "toms"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "guitars", force: :cascade do |t|
+    t.string "hand"
+    t.string "color"
+    t.string "material"
+    t.integer "chords"
+    t.boolean "digital"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,6 +39,29 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.string "h_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "address"
+    t.string "t_num"
+    t.integer "p_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  create_table "others", force: :cascade do |t|
+    t.string "tipo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "pianos", force: :cascade do |t|
+    t.string "tipo"
+    t.string "color"
+    t.string "material"
+    t.string "n_keys"
   end
 
   create_table "products", force: :cascade do |t|

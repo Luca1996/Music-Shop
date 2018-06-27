@@ -8,7 +8,7 @@ describe OrdersController, :type => :controller do
                 sign_in @user
             end
             it "verifies user role" do
-                @user.admin.should eq("false")
+                @user.admin.should eq(false)
             end
             it "populates an array of orders" do
                 order = FactoryBot.create(:order)
@@ -26,7 +26,7 @@ describe OrdersController, :type => :controller do
                 sign_in @admin
             end
             it "verifies admin role" do
-                @admin.admin.should eq("true")
+                @admin.admin.should eq(true)
             end
             it "populates an array of all orders" do
                 order = FactoryBot.create(:order)
@@ -51,14 +51,15 @@ describe OrdersController, :type => :controller do
             before do
                 @user = FactoryBot.create(:user)
                 sign_in @user
+                @order = FactoryBot.create(:order)
             end
             it "assigns the requested order to @order" do
-                order = FactoryBot.create(:order)
-                get :show, id: order
-                assigns(:order).should eq(order)
+                
+                get :show, params: { id: @order.id }
+                assigns(:order).should eq(@order)
             end
             it "renders show page" do
-                get :show, id: FactoryBot.create(order)
+                get :show, params: { id: @order.id }
                 response.should render_template :show
             end
         end
@@ -95,22 +96,22 @@ describe OrdersController, :type => :controller do
         context "with valid attributes" do
             it "creates a new order" do
                 expect {
-                    post :create, order: FactoryBot.attributes_for(:order)
+                    post :create, params: { order: @order_attributes }
                 }.to change(Order,:count).by(1)  
             end
             it "redirects to order page" do
-                post :create, order: FactoryBot.attributes_for(:order)
+                post :create, params: { order: @order_attributes }
                 response.should redirect_to Order.last
             end
         end
         context "with invalid attributes" do
             it "does not create a new order" do
                 expect {
-                    post :create, order: FactoryBot.attributes_for(:invalid_order)
+                    post :create, params: {order: @invalid_order_attridubes}
                 }.to_not change(Order,:count)
             end
             it "renders the new page" do
-                post :create, order: FactoryBot.attributes_for(:invalid_order)
+                post :create, params: {order: @invalid_order_attridubes}
                 response.should render_template :new
             end    
         end
@@ -123,63 +124,61 @@ describe OrdersController, :type => :controller do
         end
         context "with valid attributes" do
             it "located the requested order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order)
+                put :update, params: { id: @order.id }, params: { order: @order_attributes }
                 assigns(:order).should eq(@order)
             end
             it "verifies user that creates the order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order)
+                put :update, params:  { id: @order.id ,order: @order_attributes }
                 @order.user_id.should eq(@user.id)
             end
             it "updates an order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order, address: "Another_address")
+                put :update, params: { id: @order.id }, params: { order: @order_attributes, address: "Invalid Address" }
                 @order.reload
                 @order.address.should eq("Another_address") 
             end
             it "redirects to order page" do
-                put :create, id: @order, order: FactoryBot.attributes_for(:order)
+                put :update, params: { id: @order.id }, params: { order: @order_attributes }
                 response.should redirect_to @order
             end
         end
         context "with invalid attributes" do
             it "located the requested order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:invalid_order)
+                put :update, params: { id: @order.id }, params: {order: @invalid_order_attridubes}
                 assigns(:order).should eq(@order)
             end
             it "verifies user that creates the order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:invalid_order)
+                put :update, params: { id: @order.id }, params: {order: @invalid_order_attridubes}
                 @order.user_id.should eq(@user.id)
             end
             it "does not update the order" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order, address: "Invalid_address")
+                put :update, params: { id: @order.id }, params: { order: @order_attributes, address: "Invalid Address" } 
                 @order.reload
                 @order.address.should_not eq("Invalid_address") 
             end
             it "renders the edit page" do
-                put :update, id: @order, order: FactoryBot.attributes_for(:order)
+                put :update, params: { id: @order.id }, params: { order: @order_attributes }
                 response.should render_template :edit
             end    
         end
     end
     describe "DELETE destroy" do
-        before :each do
-            @order = FactoryBot.create(:order)
-        end
         context "admin" do
             before do
-            @user = FactoryBot.create(:admin)
-            sign_in @user
+                @user = FactoryBot.create(:admin)
+                sign_in @user
+                @order = FactoryBot.create(:order)
             end
             it "verifies admin role" do
-                delete :destroy, id: @order
+                delete :destroy, params: { id: @order.id }
                 @user.admin.should eq("true")
             end
             it "deletes the order" do
                 expect{
-                    delete :destroy, id: @order
+                    delete :destroy, params: { id: @order.id }
                 }.to  change(Order,:count).by(-1)
             end
             it "redirects to orders index" do
-                delete :destroy, id: @order
+                delete :destroy, params: { id: @order.id }
                 response.should redirect_to(orders_path)
             end
         end
@@ -187,24 +186,28 @@ describe OrdersController, :type => :controller do
             before do
                 @user = FactoryBot.create(:user)
                 sign_in @user
+                @order = FactoryBot.create(:order)
             end
             it "verifies user that creates the order" do
-                delete :destroy, id: @order
+                delete :destroy, params: { id: @order.id }
                 @order.user_id.should eq(@user.id)
             end
             it "deletes the order" do
                 expect{
-                    delete :destroy, id: @order
+                    delete :destroy, params:  { id: @order.id }
                 }.to  change(Order,:count).by(-1)
             end
             it "redirects to orders index" do
-                delete :destroy, id: @order
+                delete :destroy, params: { id: @order.id }
                 response.should redirect_to(orders_path)
             end
         end
         context "not logged user" do
+            before do
+                @order = FactoryBot.create(:order)
+            end
             it "redirect to orders index" do
-                delete :destroy, id: @orderd
+                delete :destroy, params: { id: @order.id }
                 response.should redirect_to(orders_path)
             end
         end
