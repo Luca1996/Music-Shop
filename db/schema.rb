@@ -21,37 +21,12 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "guitars", force: :cascade do |t|
-    t.string "hand"
-    t.string "color"
-    t.string "material"
-    t.integer "chords"
-    t.boolean "digital"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "headphones", force: :cascade do |t|
     t.boolean "wireless"
     t.boolean "bluetooth"
     t.float "cable_length"
     t.integer "impedence"
     t.string "h_type"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "others", force: :cascade do |t|
-    t.string "tipo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pianos", force: :cascade do |t|
-    t.string "tipo"
-    t.string "color"
-    t.string "material"
-    t.string "n_keys"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -91,9 +66,9 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
-    t.string "image"
     t.string "provider"
     t.string "uid"
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

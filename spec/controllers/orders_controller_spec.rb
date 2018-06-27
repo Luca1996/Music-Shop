@@ -1,6 +1,6 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe OrderController do 
+describe OrdersController, :type => :controller do 
     describe "GET index" do
         context "user request" do
             before do
