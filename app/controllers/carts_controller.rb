@@ -19,7 +19,7 @@ def destroy
 		session[:cart_id] = nil
 		redirect_to root_path, notice: "Cart emptied"
 	else
-		redirect_to root_path, notice: "Can't empty the selected cart"
+		redirect_to root_path, alert: "Can't empty the selected cart"
 	end
 end
 
@@ -44,6 +44,6 @@ private
 	end
 
 	def invalid_cart
-		redirect_to root_path, notice: 'Invalid cart'
+		redirect_to root_path, alert: 'Invalid cart'
 	end
 end

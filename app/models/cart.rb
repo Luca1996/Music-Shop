@@ -15,4 +15,12 @@ class Cart < ApplicationRecord
 		item_to_add
 	end
 
+
+	# total price of the cart
+	def total
+		prices = line_items.map {|li| li.price}
+		prices.reduce(0) {|it0, it1| it0+it1}
+	end
+
+
 end

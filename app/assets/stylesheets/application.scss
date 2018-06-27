@@ -5,6 +5,7 @@
 nav {
     height: 80px;
     line-height: 80px;
+    background: rgb(248, 63, 8)
 }
 
 nav .brand-logo {
@@ -22,17 +23,79 @@ nav form {
     margin-right: 10px;
 }
 .notice {
-	color: green;
-	font-weight: bold;
+    color: white;
+    background:rgba(3, 187, 0, 0.2);
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
 	font-size: 150%;
 }
 
 .alert {
-	color: red;
-	font-weight: bold;
+    color: white;
+    background:rgba(248, 63, 8, 0.2);
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
 	font-size: 150%;
 }
 
+.search-button{
+    margin-left: 80px;
+    
+    .waves-effect.waves-light.btn{
+        background: red; 
+        font-family: 'PT Sans', sans-serif;
+    }
+}
 
+.product-form-title{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 175%;
+    color: red;
+    text-align: center;
+    margin-top: 17px;
+
+    
+}
+
+
+.controller-carts{
+    // here all the css for the controller carts
+
+    font-family: 'PT Sans', sans-serif;
+
+    h2, h4{
+        color: rgb(248, 63, 8);
+        font-weight: 300;
+    }
+
+    h4{
+        display: inline-block;
+    }
+
+    table{
+        width: 50%;
+        display: inline-block;
+    }
+
+    th{
+        color: rgb(248, 63, 8);
+    }
+
+    .cart-total{
+        margin-left: 35px;
+        display: inline-block;
+    }
+
+    .empty-cart{
+        margin-left: 200px;
+        display: inline-block;
+    }
+
+    .cart-image{
+        display: inline-block;
+        margin-left: 10px;
+    }
+
+}
 
 @import 'products';

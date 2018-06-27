@@ -31,7 +31,7 @@ class PianosController < ApplicationController
 	def show 
 		@piano = Piano.find_by_id(params[:id])
 		if @piano == nil then
-			 redirect_to products_path, notice: "The piano selected doesn't bellong to the list"
+			 redirect_to products_path, notice: "The piano selected doesn't belong to the list"
 		end
 	end
 

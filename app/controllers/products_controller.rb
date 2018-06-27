@@ -18,6 +18,19 @@ class ProductsController < ApplicationController
 
     def index
         @products = Product.all
+        if params[:brand] && params[:brand][0] != ""
+            @products = Product.where('brand LIKE?', "%#{params[:brand][0]}%")
+        end
+        if params[:model] && params[:model][0] != ""
+            @products = @products.select {|p| p.model == params[:model][0] }
+        end
+        if params[:min_price] && params[:min_price] != ""
+            @products = @products.select {|p| p.price >= params[:min_price].to_f}
+        end
+        #raise @products.inspect
+        if params[:max_price] && params[:max_price] != ""
+            @products = @products.select {|p| p.price <= params[:max_price].to_f}
+        end
     end
 
     def grid

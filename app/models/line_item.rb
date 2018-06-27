@@ -5,4 +5,8 @@ class LineItem < ApplicationRecord
 
 
 
+  def price
+  	product.price*quantity
+  end
+
 end

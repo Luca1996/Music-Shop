@@ -2,14 +2,42 @@
 
 %h2
 	All items in cart 
--cart.line_items.each do |l_item|
-	Item:
-	%br
-	= render l_item
-	= link_to "Remove one", line_item_path(l_item.id), method: :delete 
-	%br
-	= link_to "Remove all", line_items_destroy_path(l_item.id), method: :delete
-	%br
-	%br
-	
-= link_to "Empty cart", cart_path(cart.id), method: :delete
+
+%table.highlight
+	%thead
+		%tr
+			%th
+				Title
+			%th
+				Brand
+			%th
+				Model
+			%th
+				Quantity
+			%th
+				Price
+			%th				
+				
+			%th
+				
+	%tbody
+		-cart.line_items.each do |l_item|
+			%tr
+				= render l_item
+				%td
+					= link_to "Remove one", line_item_path(l_item.id), method: :delete 
+				%td
+					= link_to "Remove all", line_items_destroy_path(l_item.id), method: :delete
+
+.cart-image
+	= image_tag("cart.png", :alt => "Cart image")
+
+%br
+%br
+
+%h4
+	Total:
+.cart-total
+	= cart.total.to_s+" €"
+.empty-cart
+	= link_to "Empty cart", cart_path(cart.id), method: :delete
