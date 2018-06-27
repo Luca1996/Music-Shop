@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :line_items, only: [:index, :show, :create, :destroy]
   resources :carts, only: [:index, :show, :destroy]
   get 'products/grid'
+  post 'products_search_path', to:'products#search', as: :products_search
   resources :products, only: [:index, :show, :destroy]
   resources :pianos
   resources :others

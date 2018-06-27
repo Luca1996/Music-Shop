@@ -24,4 +24,16 @@ $(document).on('turbolinks:load', function() {
     $('.button-collapse').sideNav({
       closeOnClick: true
     });
+
+    // Remove the notice/alert when clicked by the user 
+    $('.notice').click(function(){
+    	$(this).hide();
+    }); 
+    $('.alert').click(function(){
+    	$(this).hide();
+    });
+
+
+
   });
+

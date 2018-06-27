@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-    before_action :authenticate_user!, except: [:index,:show, :grid]
+    before_action :authenticate_user!, except: [:index,:show,:grid,:search]
     # to allow delete request
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
@@ -55,6 +55,13 @@ class ProductsController < ApplicationController
         end
     end
 
+
+    def search 
+        match_string = params[:search]
+        @products = Product.where(:title => match_string)
+        render :index
+    end
+
 =begin
     def update
         @product = Product.find(params[:id])        
@@ -68,6 +75,7 @@ class ProductsController < ApplicationController
             flash.keep[:notice] = "You can't modify the item"
         end
     end
+
     
     
     

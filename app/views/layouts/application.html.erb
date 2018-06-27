@@ -24,13 +24,13 @@
           <% end %>
           
         </ul>
-        <form>
+        <%= form_tag(products_search_path, method: :post ) do %>
             <div class="input-field">
-                <input id="search" type="search" required>
+                <%= search_field_tag :search, params[:search] %>
                     <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                     <i class="material-icons">close</i>
             </div>
-        </form>
+        <% end %>
       </div>
     </nav>
   </div>

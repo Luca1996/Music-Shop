@@ -1,12 +1,16 @@
 class CartsController < ApplicationController
  before_action :select_cart, only: [:show, :destroy]
-
+ skip_before_action :verify_authenticity_token, :only => [:destroy]
 
 def show 
 end
 
-def index 
-	@carts = Cart.all
+def index
+	if current_user != nil && current_user.admin
+		@carts = Cart.all
+	else
+		invalid_cart
+	end
 end
 
 def destroy
@@ -33,7 +37,7 @@ private
 	end
 
 	def is_my_cart?(cart)
-		if cart.id == session[:cart_id]
+		if cart.id == session[:cart_id] || (current_user != nil && current_user.admin)
 			return true
 		end
 		false
