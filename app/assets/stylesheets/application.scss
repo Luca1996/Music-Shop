@@ -95,6 +95,18 @@ nav form {
         display: inline-block;
         margin-left: 10px;
     }
+   
+    .cart-checkout{
+        .waves-effect.waves-light.btn{
+            background: rgb(248, 63, 8); 
+            font-family: 'PT Sans', sans-serif;
+            margin-top: 15px;
+            margin-left: 110px;
+                a{
+                    color:white;
+                }
+            }        
+    }
 
 }
 

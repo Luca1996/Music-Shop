@@ -41,3 +41,7 @@
 	= cart.total.to_s+" €"
 .empty-cart
 	= link_to "Empty cart", cart_path(cart.id), method: :delete
+%br
+.cart-checkout
+	.waves-effect.waves-light.btn
+		= link_to "Proceed to checkout", "#"
