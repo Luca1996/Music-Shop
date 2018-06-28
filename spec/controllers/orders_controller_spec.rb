@@ -14,6 +14,7 @@ describe OrdersController, :type => :controller do
                 order = FactoryBot.create(:order)
                 get :index
                 expect(assigns(:orders).should eq([order]))
+                expect(order.user_id).to eq(@user.id)  
             end
             it "renders index view" do
                 get :index
@@ -64,8 +65,12 @@ describe OrdersController, :type => :controller do
             end
         end
         context "not logged user" do
+            before do
+                @user = FactoryBot.create(:user)
+                @order = FactoryBot.create(:order)
+            end
             it "redirect to login page" do
-                get :show
+                get :show, params: { id: @order.id }
                 response.should redirect_to(new_user_session_path)
             end
         end
@@ -88,30 +93,59 @@ describe OrdersController, :type => :controller do
             end
         end
     end
+    describe "GET edit" do
+        context "logged user" do
+            before do
+                @user = FactoryBot.create(:user)
+                sign_in @user
+                @order = FactoryBot.create(:order)
+            end
+            it "assigns the requested order to @order" do
+                get :edit, params: { id: @order.id }
+                assigns(:order).should eq(@order)
+            end
+            it "renders edit page" do
+                get :edit, params: { id: @order.id }
+                response.should render_template :edit
+            end
+        end
+        context "not logged user" do
+            before do
+                @user = FactoryBot.create(:user)
+                @order = FactoryBot.create(:order)
+            end
+            it "redirect to login page" do
+                get :edit, params: { id: @order.id }
+                response.should redirect_to(new_user_session_path)
+            end
+        end
+    end
     describe "POST create" do
         before :each do
             @user = FactoryBot.create(:user)
             sign_in @user
         end
         context "with valid attributes" do
+            params = FactoryBot.attributes_for(:order)
             it "creates a new order" do
                 expect {
-                    post :create, params: { order: @order_attributes }
+                    post :create, params: {order: params }
                 }.to change(Order,:count).by(1)  
             end
             it "redirects to order page" do
-                post :create, params: { order: @order_attributes }
+                post :create, params: { order: params }
                 response.should redirect_to Order.last
             end
         end
         context "with invalid attributes" do
+            params = FactoryBot.attributes_for(:invalid_order)
             it "does not create a new order" do
                 expect {
-                    post :create, params: {order: @invalid_order_attridubes}
+                    post :create, params: {order: params}
                 }.to_not change(Order,:count)
             end
             it "renders the new page" do
-                post :create, params: {order: @invalid_order_attridubes}
+                post :create, params: {order: params}
                 response.should render_template :new
             end    
         end
@@ -124,7 +158,7 @@ describe OrdersController, :type => :controller do
         end
         context "with valid attributes" do
             it "located the requested order" do
-                put :update, params: { id: @order.id }, params: { order: @order_attributes }
+                put :update, params: { id: @order.id, order: @order_attributes }
                 assigns(:order).should eq(@order)
             end
             it "verifies user that creates the order" do
@@ -132,31 +166,31 @@ describe OrdersController, :type => :controller do
                 @order.user_id.should eq(@user.id)
             end
             it "updates an order" do
-                put :update, params: { id: @order.id }, params: { order: @order_attributes, address: "Invalid Address" }
+                put :update, params: { id: @order.id , order: @order_attributes, address: "Invalid Address" }
                 @order.reload
                 @order.address.should eq("Another_address") 
             end
             it "redirects to order page" do
-                put :update, params: { id: @order.id }, params: { order: @order_attributes }
+                put :update, params: { id: @order.id,  order: @order_attributes }
                 response.should redirect_to @order
             end
         end
         context "with invalid attributes" do
             it "located the requested order" do
-                put :update, params: { id: @order.id }, params: {order: @invalid_order_attridubes}
+                put :update, params: { id: @order.id , order: @invalid_order_attridubes}
                 assigns(:order).should eq(@order)
             end
             it "verifies user that creates the order" do
-                put :update, params: { id: @order.id }, params: {order: @invalid_order_attridubes}
+                put :update, params: { id: @order.id ,order: @invalid_order_attridubes}
                 @order.user_id.should eq(@user.id)
             end
             it "does not update the order" do
-                put :update, params: { id: @order.id }, params: { order: @order_attributes, address: "Invalid Address" } 
+                put :update, params: { id: @order.id , order: @order_attributes, address: "Invalid Address" } 
                 @order.reload
                 @order.address.should_not eq("Invalid_address") 
             end
             it "renders the edit page" do
-                put :update, params: { id: @order.id }, params: { order: @order_attributes }
+                put :update, params: { id: @order.id , order: @order_attributes }
                 response.should render_template :edit
             end    
         end

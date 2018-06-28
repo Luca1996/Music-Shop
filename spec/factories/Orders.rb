@@ -7,7 +7,6 @@ FactoryBot.define do
     end
     factory :invalid_order, parent: :order do |f|
         f.address nil
-        
         f.user_id nil
     end
 end
