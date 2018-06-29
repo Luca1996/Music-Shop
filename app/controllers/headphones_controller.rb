@@ -39,9 +39,13 @@ class HeadphonesController < ApplicationController
 		if @headphone.product.user == current_user || current_user.admin?
 			@headphone.update(headphone_update_params)
 			compress_image
-			@headphone.save
-			redirect_to headphone_path(@headphone)
-			flash.keep[:notice] = "Headphone update successfully"
+			if @headphone.save
+				redirect_to headphone_path(@headphone)
+				flash.keep[:notice] = "Headphone update successfully"
+			else
+				render 'edit'
+				flash.keep[:alert] = "Headphone not update"
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update this headphone"

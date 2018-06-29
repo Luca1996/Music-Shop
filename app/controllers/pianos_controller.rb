@@ -48,9 +48,13 @@ class PianosController < ApplicationController
 		if @piano.product.user == current_user || current_user.admin?
 			@piano.update(piano_update_params)
 			compress_image
-			@piano.save
-			redirect_to piano_path(@piano)
-			flash.keep[:notice] = "Piano update successfully"
+			if @piano.save
+				redirect_to piano_path(@piano)
+				flash.keep[:notice] = "Piano updated successfully"
+			else
+				render 'edit'
+				flash.keep[:alert] = "Piano not update"
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update this piano"

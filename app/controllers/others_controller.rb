@@ -41,9 +41,13 @@ class OthersController < ApplicationController
 		if @other.product.user == current_user || current_user.admin?
 			@other.update(other_update_params)
 			compress_image
-			@other.save
-			redirect_to other_path(@other)
-			flash.keep[:notice] = "Item update successfully"
+			if @other.save
+				redirect_to other_path(@other)
+				flash.keep[:notice] = "Other update successfully"
+			else
+				render 'edit'
+				flash.keep[:alert] = "Other not update"
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update this item"

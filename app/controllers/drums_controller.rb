@@ -44,9 +44,13 @@ class DrumsController < ApplicationController
 		if @drum.product.user == current_user || current_user.admin?
 			@drum.update(drum_update_params)
 			compress_image
-			@drum.save
-			redirect_to drum_path(@drum)
-			flash.keep[:notice] = "Drum update successfully"
+			if @drum.save
+				redirect_to drum_path(@drum)
+				flash.keep[:notice] = "Drum update successfully"
+			else
+				render 'edit'
+				flash.keep[:alert] = "Drum not update"
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update the drum"

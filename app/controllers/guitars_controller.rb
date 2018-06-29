@@ -38,9 +38,13 @@ class GuitarsController < ApplicationController
 		if @guitar.product.user == current_user || current_user.admin?
 			@guitar.update(guitar_update_params)
 			compress_image
-			@guitar.save
-			redirect_to guitar_path(@guitar)
-			flash.keep[:notice] = "Guitar update successfully"
+			if @guitar.save
+				redirect_to guitar_path(@guitar)
+				flash.keep[:notice] = "Guitar update successfully"
+			else
+				render 'edit'
+				flash.keep[:alert] = "Guitar not update"
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update the guitar"
