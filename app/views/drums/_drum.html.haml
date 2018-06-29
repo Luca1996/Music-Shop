@@ -1,0 +1,31 @@
+-# partial from drum, every time we render @drum this will be showed inline. So this can be rendered also in another view as a part of it 
+
+
+.show-card-height.col.s12.m7
+    .card.horizontal	
+        .card-stacked
+            .show-card.card-content
+                .field-title
+                    Details
+                %br
+                %table
+                    %thead
+                        %tr
+                            %th
+                                N.Pedals
+                            %th
+                                N.Cymbals
+                            %th
+                                N.Toms
+                            %th
+                                Color
+                    %tbody
+                        %tr
+                            %td.bigger
+                                = drum.pedals
+                            %td.bigger
+                                = drum.cymbals
+                            %td.bigger
+                                = drum.toms
+                            %td.bigger
+                                = drum.color

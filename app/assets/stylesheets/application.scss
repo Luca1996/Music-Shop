@@ -68,6 +68,7 @@ nav form {
         font-weight: 300;
     }
 
+
     h4{
         display: inline-block;
     }
@@ -75,6 +76,7 @@ nav form {
     table{
         width: 50%;
         display: inline-block;
+        
     }
 
     th{
@@ -94,6 +96,8 @@ nav form {
     .cart-image{
         display: inline-block;
         margin-left: 10px;
+        margin-top: 25px;
+        position: absolute;
     }
    
     .cart-checkout{
@@ -109,5 +113,293 @@ nav form {
     }
 
 }
+
+
+.controller-pianos{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+
+.controller-others{
+
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+
+
+}
+
+.controller-headphones{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+.controller-products{
+
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+}
+
+
+
+.controller-drums{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+.controller-guitars{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
 
 @import 'products';

@@ -1,8 +1,12 @@
 -# partial from other, every time we render @other this will be showed inline. So this can be rendered also in another view as a part of it 
 
 .show-card-height.col.s12.m7
-	%h2.header
-		Details
-	= other.tipo
-	%br
-
+	.card.horizontal	
+		.card-stacked
+			.show-card.card-content
+				.field-title
+					Details
+				.field-title
+					Type:
+				.field-content
+					= other.tipo
