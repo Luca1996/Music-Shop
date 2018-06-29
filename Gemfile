@@ -10,6 +10,8 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth-github'
 
+gem 'rspec'
+
 group :test, :development do
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'  # contains some pre-fabbed step definitions
