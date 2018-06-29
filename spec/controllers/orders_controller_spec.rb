@@ -8,17 +8,17 @@ describe OrdersController, :type => :controller do
                 sign_in @user
             end
             it "verifies user role" do
-                @user.admin.should eq(false)
+                expect(@user.admin).to eq(false)
             end
             it "populates an array of orders" do
                 order = FactoryBot.create(:order)
                 get :index
-                expect(assigns(:orders).should eq([order]))
+                expect(assigns(:orders)).to eq([order])
                 expect(order.user_id).to eq(@user.id)  
             end
             it "renders index view" do
                 get :index
-                response.should render_template :index
+                expect(response).to render_template :index
             end
         end
         context "admin request" do
@@ -27,22 +27,22 @@ describe OrdersController, :type => :controller do
                 sign_in @admin
             end
             it "verifies admin role" do
-                @admin.admin.should eq(true)
+                expect(@admin.admin).to eq(true)
             end
             it "populates an array of all orders" do
                 order = FactoryBot.create(:order)
                 get :index
-                expect(assigns(:orders).should eq([order]))
+                expect(assigns(:orders)).to eq([order])
             end
             it "renders index view" do
                 get :index
-                response.should render_template :index
+                expect(response).to render_template :index
             end
         end
         context "not logged user request" do
             it "redirect user to login page" do
                 get :index
-                response.should redirect_to(new_user_session_path)
+                expect(response).to redirect_to(new_user_session_path)
             end
         end
         
@@ -57,11 +57,11 @@ describe OrdersController, :type => :controller do
             it "assigns the requested order to @order" do
                 
                 get :show, params: { id: @order.id }
-                assigns(:order).should eq(@order)
+                expect(assigns(:order)).to eq(@order)
             end
             it "renders show page" do
                 get :show, params: { id: @order.id }
-                response.should render_template :show
+                expect(response).to render_template :show
             end
         end
         context "not logged user" do
@@ -71,7 +71,7 @@ describe OrdersController, :type => :controller do
             end
             it "redirect to login page" do
                 get :show, params: { id: @order.id }
-                response.should redirect_to(new_user_session_path)
+                expect(response).to redirect_to(new_user_session_path)
             end
         end
     end
@@ -83,13 +83,13 @@ describe OrdersController, :type => :controller do
             end
             it "renders new page" do
                 get :new
-                response.should render_template :new
+                expect(response).to render_template :new
             end
         end
         context "not logged user" do
             it "redirect to login page" do
                 get :new
-                response.should redirect_to(new_user_session_path)
+                expect(response).to redirect_to(new_user_session_path)
             end
         end
     end
@@ -102,11 +102,11 @@ describe OrdersController, :type => :controller do
             end
             it "assigns the requested order to @order" do
                 get :edit, params: { id: @order.id }
-                assigns(:order).should eq(@order)
+                expect(assigns(:order)).to eq(@order)
             end
             it "renders edit page" do
                 get :edit, params: { id: @order.id }
-                response.should render_template :edit
+                expect(response).to render_template :edit
             end
         end
         context "not logged user" do
@@ -116,7 +116,7 @@ describe OrdersController, :type => :controller do
             end
             it "redirect to login page" do
                 get :edit, params: { id: @order.id }
-                response.should redirect_to(new_user_session_path)
+                expect(response).to redirect_to(new_user_session_path)
             end
         end
     end
@@ -134,7 +134,7 @@ describe OrdersController, :type => :controller do
             end
             it "redirects to order page" do
                 post :create, params: { order: params }
-                response.should redirect_to Order.last
+                expect(response).to redirect_to Order.last
             end
         end
         context "with invalid attributes" do
@@ -146,7 +146,7 @@ describe OrdersController, :type => :controller do
             end
             it "renders the new page" do
                 post :create, params: {order: params}
-                response.should render_template :new
+                expect(response).to render_template :new
             end    
         end
     end
@@ -157,41 +157,44 @@ describe OrdersController, :type => :controller do
             @order = FactoryBot.create(:order)
         end
         context "with valid attributes" do
+            params = FactoryBot.attributes_for(:order)
             it "located the requested order" do
-                put :update, params: { id: @order.id, order: @order_attributes }
-                assigns(:order).should eq(@order)
+                put :update, params: { id: @order.id, order: params }
+                expect(assigns(:order)).to eq(@order)
             end
             it "verifies user that creates the order" do
-                put :update, params:  { id: @order.id ,order: @order_attributes }
-                @order.user_id.should eq(@user.id)
+                put :update, params:  { id: @order.id ,order: params }
+                expect(@order.user_id).to eq(@user.id)
             end
             it "updates an order" do
-                put :update, params: { id: @order.id , order: @order_attributes, address: "Invalid Address" }
+                params = FactoryBot.attributes_for(:order, address: "Another_address")
+                put :update, params: { id: @order.id , order: params }
                 @order.reload
-                @order.address.should eq("Another_address") 
+                expect(@order.address).to eq("Another_address") 
             end
             it "redirects to order page" do
-                put :update, params: { id: @order.id,  order: @order_attributes }
-                response.should redirect_to @order
+                put :update, params: { id: @order.id,  order: params }
+                expect(response).to redirect_to @order
             end
         end
         context "with invalid attributes" do
+            params = FactoryBot.attributes_for(:order)
             it "located the requested order" do
-                put :update, params: { id: @order.id , order: @invalid_order_attridubes}
-                assigns(:order).should eq(@order)
+                put :update, params: { id: @order.id , order: params}
+                expect(assigns(:order)).to eq(@order)
             end
             it "verifies user that creates the order" do
-                put :update, params: { id: @order.id ,order: @invalid_order_attridubes}
-                @order.user_id.should eq(@user.id)
+                put :update, params: { id: @order.id ,order: params}
+                expect(@order.user_id).to eq(@user.id)
             end
             it "does not update the order" do
-                put :update, params: { id: @order.id , order: @order_attributes, address: "Invalid Address" } 
+                put :update, params: { id: @order.id , order: params, address: nil } 
                 @order.reload
-                @order.address.should_not eq("Invalid_address") 
+                expect(@order.address).to_not eq(nil) 
             end
-            it "renders the edit page" do
-                put :update, params: { id: @order.id , order: @order_attributes }
-                response.should render_template :edit
+            it "renders the order page" do
+                put :update, params: { id: @order.id , order: params }
+                expect(response).to redirect_to(order_path(@order))
             end    
         end
     end
@@ -204,7 +207,7 @@ describe OrdersController, :type => :controller do
             end
             it "verifies admin role" do
                 delete :destroy, params: { id: @order.id }
-                @user.admin.should eq("true")
+                expect(@user.admin).to eq(true)
             end
             it "deletes the order" do
                 expect{
@@ -213,7 +216,7 @@ describe OrdersController, :type => :controller do
             end
             it "redirects to orders index" do
                 delete :destroy, params: { id: @order.id }
-                response.should redirect_to(orders_path)
+                expect(response).to redirect_to(orders_path)
             end
         end
         context "user" do
@@ -224,7 +227,7 @@ describe OrdersController, :type => :controller do
             end
             it "verifies user that creates the order" do
                 delete :destroy, params: { id: @order.id }
-                @order.user_id.should eq(@user.id)
+                expect(@order.user_id).to eq(@user.id)
             end
             it "deletes the order" do
                 expect{
@@ -233,16 +236,17 @@ describe OrdersController, :type => :controller do
             end
             it "redirects to orders index" do
                 delete :destroy, params: { id: @order.id }
-                response.should redirect_to(orders_path)
+                expect(response).to redirect_to(orders_path)
             end
         end
         context "not logged user" do
             before do
+                @user = FactoryBot.create(:user)
                 @order = FactoryBot.create(:order)
             end
             it "redirect to orders index" do
                 delete :destroy, params: { id: @order.id }
-                response.should redirect_to(orders_path)
+                expect(response).to redirect_to(new_user_session_path)
             end
         end
     end

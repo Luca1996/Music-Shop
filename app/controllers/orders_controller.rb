@@ -34,6 +34,32 @@ class OrdersController < ApplicationController
         end
     end
     
+    def update
+        @order = Order.find(params[:id])
+        if @order.user == current_user 
+            @order.update(order_params)
+            @order.save
+            redirect_to order_path(@order)
+            flash.keep[:notice] = "Order updated"
+        else
+            redirect_to edit_order_path(@order)
+            flash.keep[:alert] = "You can't update the order"
+        end
+    end
+
+    def destroy
+        @order = Order.find(params[:id])
+        if @order.user == current_user || current_user.try(:admin?)
+            @order.destroy
+            redirect_to orders_path
+            flash.keep[:notice] = "Orders cancelled"
+        else
+            redirect_to orders_path
+            flash.keep[:alert] = "You can't cancel the order"
+        end
+    end
+    
+    
     
     private
         def order_params
