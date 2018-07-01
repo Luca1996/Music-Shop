@@ -19,7 +19,11 @@ class OrdersController < ApplicationController
     end
     
     def edit
-        @order = Order.find(params[:id])
+        if Order.exists?(params[:id])
+            @order = Order.find(params[:id])
+        else
+            render file: "#{Rails.root}/public/404.html" , status: 404
+        end
     end
     
     def create
@@ -36,11 +40,15 @@ class OrdersController < ApplicationController
     
     def update
         @order = Order.find(params[:id])
-        if @order.user == current_user 
+        if @order.user == current_user && @order.updated_at + 3.day > Date.current 
             @order.update(order_params)
-            @order.save
-            redirect_to order_path(@order)
-            flash.keep[:notice] = "Order updated"
+            if @order.save
+                redirect_to order_path(@order)
+                flash.keep[:notice] = "Order updated"
+            else
+                render 'edit'
+                flash.keep[:alert] = "Problems in update"
+            end
         else
             redirect_to edit_order_path(@order)
             flash.keep[:alert] = "You can't update the order"

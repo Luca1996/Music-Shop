@@ -132,6 +132,11 @@ describe OrdersController, :type => :controller do
                     post :create, params: {order: params }
                 }.to change(Order,:count).by(1)  
             end
+            it "verifies payment method" do
+                post :create , params: { order: params }
+                expect(Order.last.p_method).to eq("Cash on delivery")
+            end
+            
             it "redirects to order page" do
                 post :create, params: { order: params }
                 expect(response).to redirect_to Order.last

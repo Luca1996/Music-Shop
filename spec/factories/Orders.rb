@@ -9,6 +9,7 @@ FactoryBot.define do
     factory :invalid_order, parent: :order do |f|
         f.address nil
         f.user_id nil
+        f.p_method nil
         # f.lineitem nil
     end
 end
