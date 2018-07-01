@@ -1,7 +1,7 @@
 FactoryBot.define do
     factory :order do |f|
         f.address "Order_address"
-        f.t_num "000"
+        f.t_num "06123456"
         f.p_method "Cash on delivery"
         f.user_id "1"
         # f.lineitem "Order_lineitem""
