@@ -9,10 +9,14 @@ gem 'devise'
 gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth-github'
+gem 'walmart_open'
 
-gem 'rspec'
 
 group :test, :development do
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'cucumber-rails'
   gem 'cucumber-rails-training-wheels'  # contains some pre-fabbed step definitions
   gem 'database_cleaner'  # to clean Cucumber's test database between runs

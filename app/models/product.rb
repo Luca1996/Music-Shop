@@ -14,6 +14,24 @@ class Product < ApplicationRecord
 	belongs_to :user
 	belongs_to :instrum, polymorphic: true
 
+	class InvalidKeyError < RuntimeError
+	end
+
+	def self.walmart_key
+		API_WALMART_KEY
+	end
+
+	def self.find_in_Walmart(brand, model)
+		api_key = walmart_key
+		raise InvalidKeyError if api_key.blank? 
+		url = 'http://api.walmartlabs.com/v1/search?query='+ brand +" "+ model + "&format=json&apiKey=#{api_key}"
+        uri = URI(url)
+		response = Net::HTTP.get(uri)
+		parsed_resp = JSON.parse(response)
+		raise InvalidKeyError if !parsed_resp["errors"].blank? && parsed_resp["errors"][0]["code"] == 403
+		parsed_resp
+	end
+
 
 	private 
 		# we need to check that when deleting a produc, it isn't referenced by a line_item

@@ -13,7 +13,13 @@ class DrumsController < ApplicationController
 	end
 
 	def edit
-		@drum = Drum.find(params[:id])
+		@drum = Drum.find_by_id(params[:id])
+		if instrum_owned_by_user?(@drum)
+			@wal_price = Product.find_in_Walmart(@drum.product.brand, @drum.product.model)
+		else
+			redirect_to root_path
+			flash.keep[:alert] = "You can't edit this instrument"
+		end
 	end
 
 	def show 
@@ -26,15 +32,16 @@ class DrumsController < ApplicationController
 		compress_image
 		if @drum.save!
 			redirect_to drum_path(@drum)
+			flash.keep[:notice] = "Drum create successfully"			
 		else
 			render "new"
-			flash.keep[:notice] = "Error in creating new drum"
+			flash.keep[:alert] = "Error in creating new drum"
 		end
 	end
 
 	def destroy
 		@drum = Drum.find(params[:id])
-		if @drum.product.user == current_user || current_user.admin?
+		if instrum_owned_by_user?(@drum)
 			@drum.product.destroy
 			@drum.destroy
 			redirect_to products_path
@@ -45,7 +52,7 @@ class DrumsController < ApplicationController
 
 	def update
 		@drum = Drum.find(params[:id])
-		if @drum.product.user == current_user || current_user.admin?
+		if instrum_owned_by_user?(@drum)
 			@drum.update(drum_update_params)
 			compress_image
 			@drum.save
@@ -72,5 +79,12 @@ class DrumsController < ApplicationController
                 b64 = Base64.encode64(params[:drum][:product_attributes][:image].read)
                 @drum.product.image = b64
             end
-        end
+		end
+		
+		def instrum_owned_by_user?(instrum)
+			if instrum.product.user == current_user || current_user.admin?
+				return true
+			end
+			false
+		end
 end
