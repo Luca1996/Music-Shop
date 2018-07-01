@@ -10,6 +10,7 @@ gem 'haml'
 gem 'jquery-rails'
 gem 'omniauth-github'
 gem 'walmart_open'
+gem 'paypal-sdk-rest'
 
 
 group :test, :development do
