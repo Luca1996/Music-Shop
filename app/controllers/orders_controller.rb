@@ -1,7 +1,14 @@
 class OrdersController < ApplicationController
+    ##
+    include CurrentCart
+    before_action :set_cart, only: [:new, :create, :show]
+    before_action :ensure_cart_isnt_empty, only: [:new, :create]
+    ##
+
     before_action :authenticate_user!
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
+    
     def index
         if current_user.try(:admin?)
             @orders = Order.all
@@ -29,6 +36,12 @@ class OrdersController < ApplicationController
     def create
         @order = Order.new(order_params)
         @order.user = current_user
+        @order.add_items_from_cart(@cart)
+        ## LAUNCH PAYOUT
+        if @order.p_method == 0
+            start_payout
+        end
+        ##
         if @order.save
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
@@ -73,4 +86,25 @@ class OrdersController < ApplicationController
         def order_params
             params.require(:order).permit(:address,:t_num,:p_method)
         end
+
+        def ensure_cart_isnt_empty
+            if @cart.line_items.empty?
+                redirect_to root_path, alert: "Cart is empty, can't proceed to checkout"
+            end
+        end
+        
+
+        
+        ## Call PayPalServices to start the payout
+        def start_payout
+            payout = PayPalService.new({order: @order})
+            
+            begin
+                @payout_batch =payout.create_payout   
+            rescue ResourceNotFound => exception
+                raise payout.inspect
+            end
+        end
+
+        
 end
