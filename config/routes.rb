@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   root 'products#index'
   get 'products/grid'
-  resources :products, only: [:index, :show, :destroy]
+  resources :products, only: [:index, :show, :destroy] do
+    resources :comments, except: [:index,:show]
+  end 
   resources :pianos
   resources :others
   resources :guitars

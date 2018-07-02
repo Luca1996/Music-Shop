@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_19_160549) do
+ActiveRecord::Schema.define(version: 2018_06_27_163551) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "title"
+    t.text "text"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "product_id"
+    t.index ["product_id"], name: "index_comments_on_product_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
 
   create_table "drums", force: :cascade do |t|
     t.integer "pedals"
@@ -41,6 +52,16 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "orders", force: :cascade do |t|
+    t.string "address"
+    t.string "t_num"
+    t.integer "p_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "others", force: :cascade do |t|
     t.string "tipo"
     t.datetime "created_at", null: false
@@ -52,8 +73,6 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.string "color"
     t.string "material"
     t.string "n_keys"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -91,9 +110,9 @@ ActiveRecord::Schema.define(version: 2018_06_19_160549) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
-    t.string "image"
     t.string "provider"
     t.string "uid"
+    t.string "image"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
