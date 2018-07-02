@@ -8,16 +8,23 @@ class SettingsController < ApplicationController
 
 	def change_avatar
 		@user = current_user
-		@user.update(pass_params)
-		compress_image
-		@user.save!
-		redirect_to settings_show_path
+		if !params.has_key?(:user)
+			redirect_to settings_show_path
+			flash.keep[:alert] = "Something wrong in changing avatar"
+		elsif @user.update(pass_params)
+			compress_image
+			@user.save
+			redirect_to settings_show_path
+		else
+			redirect_to settings_show_path
+			notice[:alert] = "Something wrong in changing avatar"
+		end
 	end
 
 	def change_password
 		user = current_user
 		redirect_to settings_show_path, notice: "New password doens't match with confirm" and return if params[:user][:password] != params[:user][:confirm]
-		redirect_to settings_show_path, notice: "Wrong current password" and return if ! user.valid_password? params[:user][:curr_pass]
+		redirect_to settings_show_path, alert: "Wrong current password" and return if ! user.valid_password? params[:user][:curr_pass]
 		new_pass = params[:user][:password]
 		redirect_to settings_show_path, notice: "Password must be at least 8 characters" and return if new_pass.length < 8
 		redirect_to settings_show_path, notice: "Password must be not longer than 128 characters" and return if new_pass.length > 128
