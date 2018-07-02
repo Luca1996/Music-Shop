@@ -18,11 +18,11 @@ class ProductsController < ApplicationController
 
     def index
         @products = Product.all
-        if params[:brand] && params[:brand][0] != ""
-            @products = Product.where('brand LIKE?', "%#{params[:brand][0]}%")
+        if params[:brand] && params[:brand] != ""
+            @products = Product.where('brand LIKE?', "%#{params[:brand]}%")
         end
-        if params[:model] && params[:model][0] != ""
-            @products = @products.select {|p| p.model == params[:model][0] }
+        if params[:model] && params[:model] != ""
+            @products = @products.select {|p| p.model == params[:model] }
         end
         if params[:min_price] && params[:min_price] != ""
             @products = @products.select {|p| p.price >= params[:min_price].to_f}
