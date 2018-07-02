@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :guitars
   resources :drums
   resources :headphones
+  resources :orders
   get 'application/logout'
   get 'settings/show'
   patch 'settings/change_avatar'

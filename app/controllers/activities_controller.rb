@@ -3,6 +3,7 @@ class ActivitiesController < ApplicationController
 
 	def index
 		@products = current_user.products
+		@orders = current_user.orders
 	end
 
 

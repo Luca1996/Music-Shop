@@ -10,11 +10,11 @@
 	%br
 
 %p#avatar
-	%h3
-		Avatar:
-	%br
-	%p#avatar
-		-if @user.image != nil
+	-if @user.image != nil
+		%h3
+			Avatar:
+		%br
+		%p#avatar
 			= image_tag "data:image/jpeg;base64,#{@user.image}"
 	%p
 		Change avatar:
@@ -42,4 +42,7 @@
 		.actions
 			= form.submit "Change password"
 
-
+	%p
+		
+		Delete User:
+		= button_to "Delete User", registration_path(@user), method: :delete

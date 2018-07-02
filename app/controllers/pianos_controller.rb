@@ -13,19 +13,14 @@ class PianosController < ApplicationController
 	end
 
 	def edit
+		require 'net/http'
+        require 'json'
+        
+        url = 'http://api.walmartlabs.com/v1/search?query='+ @piano.product.title + '&format=json&apiKey=qf2a4tqhq4qdncvqrrkpvzt8'
+        uri = URI(url)
+        response = Net::HTTP.get(uri)
+        @res = JSON.parse(response)
 		@piano = Piano.find(params[:id])
-	end
-
-	def update
-		@piano = Piano.find(params[:id])
-		compress_image
-		if @piano.update(piano_update_params)			
-			redirect_to piano_path(@piano)
-			flash.keep[:notice] = "Piano updated successfully"
-		else
-			redirect_to activities_index_path
-			flash.keep[:alert] = "Can't update the piano"
-		end
 	end
 
 	def show 

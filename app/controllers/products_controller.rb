@@ -104,5 +104,10 @@ class ProductsController < ApplicationController
             end
         end
 =end
+        private 
+        
+            def products_params
+                params.require(:product).permit(title,:brand,:model,:price,:quantity,:weight,:description,:image,:term,:s_price)
+            end
 
 end

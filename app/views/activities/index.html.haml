@@ -47,3 +47,10 @@
 				= prod.title
 				= link_to "Modify" , edit_headphone_path(prod.instrum)
 				= link_to "Delete", headphone_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
+%h4
+	Your Orders:
+%br
+	-@orders.each do |order|
+		= order.id
+		= link_to "Details", order_path(order)
+		= link_to "Edit", edit_order_path(order)

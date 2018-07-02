@@ -2,9 +2,9 @@ class User < ApplicationRecord
   
   # associations 
   has_many :products, dependent: :destroy	# if we delete an user, we delete all his products too
-
+  has_many :orders
   # profile pic associated to the user
-  has_one_attached :avatar
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

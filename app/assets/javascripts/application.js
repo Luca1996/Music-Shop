@@ -33,7 +33,6 @@ $(document).on('turbolinks:load', function() {
     	$(this).hide();
     });
 
-
-
+    $('select').material_select();
+  
   });
-
