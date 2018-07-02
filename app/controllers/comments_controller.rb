@@ -25,9 +25,13 @@ class CommentsController < ApplicationController
         @comment = @product.comments.find(params[:id])
         if @comment.user == current_user
             @comment.update(comment_params)
-            @comment.save
-            redirect_to product_path(@product)
-            flash.keep[:notice] = "Comment updated"
+            if @comment.save
+                redirect_to product_path(@product)
+                flash.keep[:notice] = "Comment updated"
+            else
+                render 'edit'
+                flash.keep[:alert] = "Comment not updated"
+            end
         else
             redirect_to product_path(@product)
             flash.keep[:alert] = "You can't update the Comment"
