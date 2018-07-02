@@ -4,7 +4,7 @@ class CreatePianos < ActiveRecord::Migration[5.2]
       t.string :tipo
       t.string :color
       t.string :material
-      t.string :n_key
+      t.string :n_keys
     end
   end
 end
