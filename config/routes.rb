@@ -18,5 +18,7 @@ Rails.application.routes.draw do
   patch 'settings/change_avatar'
   patch 'settings/change_password'
   get 'activities/index'
+  get 'admin_panel/show'
+  delete 'admin_panel/ban'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
