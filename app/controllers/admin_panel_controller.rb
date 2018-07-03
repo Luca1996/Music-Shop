@@ -4,7 +4,6 @@ class AdminPanelController < ApplicationController
     def show
         if current_user.try(:admin?)
             @orders = Order.all()
-            @users = User.all()
         else
             redirect_to root_path
             flash.keep[:alert] = "You cannot see this page"
@@ -13,7 +12,7 @@ class AdminPanelController < ApplicationController
     
     def ban
         if params[:email] && current_user.try(:admin?)
-            @user = User.where('email LIKE?', params[:email] ))
+            @user = User.where('email LIKE?', params[:email])
             if @user.destroy(@user.ids)
                 redirect_to root_path
                 flash.keep[:notice] = "User banned"
