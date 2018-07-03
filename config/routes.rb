@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :guitars
   resources :drums
   resources :headphones
+  get 'paypal/payment_success', to:'orders#payment_success', as: :orders_payment_success
   resources :orders
   get 'application/logout'
   get 'settings/show'

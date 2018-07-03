@@ -37,9 +37,26 @@ class OrdersController < ApplicationController
         @order = Order.new(order_params)
         @order.user = current_user
         @order.add_items_from_cart(@cart) 
+        ##temp shit
+        if @order.save
+            #raise @order.inspect
+            #@order.add_items_from_cart(@cart)
+            @order.line_items.each do |lineitem|
+                lineitem.product.quantity -= lineitem.quantity
+                if lineitem.product.quantity == 0
+                    lineitem.product.destroy
+                else
+                    lineitem.product.save
+                end
+            end
+        end
+        ##
+
         ## LAUNCH PAYOUT
         if @order.p_method == "PayPal"
+            start_payment
             start_payout
+            return
         end
         ##
         #raise @order.inspect
@@ -63,6 +80,22 @@ class OrdersController < ApplicationController
         end
     end
     
+    ## callback for payment
+
+    def payment_success
+        payment_id = params.fetch(:paymentId, nil)
+        if payment_id.present?
+            begin
+                @payment = PayPalService.execute_payment(payment_id, params[:PayerID])
+            rescue RuntimeError => exception
+                raise @payment.inspect
+            end
+        end
+    end
+
+    ####
+
+
     def update
         @order = Order.find(params[:id])
         if @order.user == current_user && @order.updated_at + 3.day > Date.current 
@@ -118,5 +151,17 @@ class OrdersController < ApplicationController
             end
         end
 
+        ## Call PayPalServices to start the payment
+        def start_payment
+            payment = PayPalService.new({order: @order}).create_payment
+            #begin
+                @payment = payment.create
+                #raise payment.links.inspect
+                @redirect_url = payment.links.find{|v| v.method == "REDIRECT"}.href
+                redirect_to @redirect_url
+            #rescue RuntimeError => exception
+            #    raise payment.inspect
+            #end
+        end
         
 end
