@@ -64,6 +64,7 @@
           </div>
         <% end %>
         </div>
+        <%= product.quantity %>
         <div class="header"><%= product.user.email %> </div>
         <div class="show-card-btn card-action">
           <%- if current_user != product.user then %>

@@ -48,11 +48,7 @@ class OrdersController < ApplicationController
             #@order.add_items_from_cart(@cart)
             @order.line_items.each do |lineitem|
                 lineitem.product.quantity -= lineitem.quantity
-                if lineitem.product.quantity == 0
-                    lineitem.product.destroy
-                else
-                    lineitem.product.save
-                end
+                lineitem.product.save
             end
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
@@ -83,6 +79,10 @@ class OrdersController < ApplicationController
     def destroy
         @order = Order.find(params[:id])
         if @order.user == current_user || current_user.try(:admin?)
+            @order.line_items.each do |lineitem|
+                lineitem.product.quantity += lineitem.quantity
+                lineitem.product.save
+            end
             @order.destroy
             redirect_to orders_path
             flash.keep[:notice] = "Orders cancelled"

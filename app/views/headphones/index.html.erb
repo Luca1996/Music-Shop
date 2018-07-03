@@ -1,19 +1,20 @@
 <h3>Headphones</h3>
 <div class="row">
   <% @headphones.each do |d| %>
-
-    <div class="col s6 m3 l2">
-      <div class="card">
-        <div class="card-image">
-          <%= image_tag "data:image/jpeg;base64,#{d.product.image}"%>
-        </div>
-        <div class="card-content">
-          <p><%= d.product.description %></p>
-        </div>
-        <div class="card-action">
-          <%= link_to "Details", headphone_path(d) %>
+    <% if d.product.quantity > 0 %>
+      <div class="col s6 m3 l2">
+        <div class="card">
+          <div class="card-image">
+            <%= image_tag "data:image/jpeg;base64,#{d.product.image}"%>
+          </div>
+          <div class="card-content">
+            <p><%= d.product.description %></p>
+          </div>
+          <div class="card-action">
+            <%= link_to "Details", headphone_path(d) %>
+          </div>
         </div>
       </div>
-    </div>
-  <% end %> 
+    <% end %> 
+  <% end %>
 </div>

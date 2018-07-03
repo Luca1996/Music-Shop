@@ -15,6 +15,10 @@ end
 
 def destroy
 	if is_my_cart?(@cart)
+		@cart.line_items.each do |li|
+			li.product.quantity += li.quantity
+			li.product.save
+		end
 		@cart.destroy 
 		session[:cart_id] = nil
 		redirect_to root_path, notice: "Cart emptied"
