@@ -46,6 +46,14 @@ class OrdersController < ApplicationController
         if @order.save
             #raise @order.inspect
             #@order.add_items_from_cart(@cart)
+            @order.line_items.each do |lineitem|
+                lineitem.product.quantity -= lineitem.quantity
+                if lineitem.product.quantity == 0
+                    lineitem.product.destroy
+                else
+                    lineitem.product.save
+                end
+            end
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
         else
