@@ -11,6 +11,7 @@ class Cart < ApplicationRecord
 		else
 			# in this case we create the line_item, the quantity default is 1
 			item_to_add = line_items.build(product_id: product.id)
+			item_to_add.order = nil
 		end
 		item_to_add
 	end

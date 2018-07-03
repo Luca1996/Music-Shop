@@ -41,6 +41,8 @@ routes
 secret
 spec
 spec:controllers
+spec:helpers
+spec:models
 stats
 test
 test:db

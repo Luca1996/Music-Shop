@@ -36,16 +36,20 @@ class OrdersController < ApplicationController
     def create
         @order = Order.new(order_params)
         @order.user = current_user
-        @order.add_items_from_cart(@cart)
+        @order.add_items_from_cart(@cart) 
         ## LAUNCH PAYOUT
-        if @order.p_method == 0
+        if @order.p_method == "PayPal"
             start_payout
         end
         ##
+        #raise @order.inspect
         if @order.save
+            #raise @order.inspect
+            #@order.add_items_from_cart(@cart)
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
         else
+            raise @order.inspect
             render 'new'
             flash.keep[:alert] = "Error in creating Order"
         end
@@ -97,11 +101,11 @@ class OrdersController < ApplicationController
         
         ## Call PayPalServices to start the payout
         def start_payout
-            payout = PayPalService.new({order: @order})
-            
+            payout = PayPalService.new({order: @order}).create_payout
+            #raise payout.inspect
             begin
-                @payout_batch =payout.create_payout   
-            rescue ResourceNotFound => exception
+                @payout_batch =payout.create 
+            rescue RuntimeError => exception
                 raise payout.inspect
             end
         end
