@@ -6,7 +6,7 @@ class PayPalService
     def create_payout
         payout = Payout.new(
             :sender_batch_header => {
-                :sender_batch_id => "#{@order.id}"    #SecureRandom.hex(8),
+                :sender_batch_id => SecureRandom.hex(8),#"#{@order.id}"
                 :email_subject => 'You have a Payout!',
             },
             :items => payout_items
