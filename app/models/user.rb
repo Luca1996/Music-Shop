@@ -3,6 +3,7 @@ class User < ApplicationRecord
   # associations 
   has_many :products, dependent: :destroy	# if we delete an user, we delete all his products too
   has_many :orders
+  has_many :comments
   # profile pic associated to the user
 
 

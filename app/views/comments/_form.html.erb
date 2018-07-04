@@ -1,0 +1,23 @@
+<h3> Comment </h3>
+  <div class="row">
+      <%= form_for [@product,@comment] ,:class => "col s12" do |f| %>
+        <div class="row">
+          <div class="input-field col s3">
+              <%= f.label :title , :class => "active" %>
+              <%= f.text_field :title %>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s6 ">
+              <%= f.label :text , :class => "active" %>
+              <%= f.text_area :text %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+              <%= f.submit "Add comment", :class => "btn waves-effect waves-light" %>
+          </div>
+        </div>
+      <% end %>
+  </div>

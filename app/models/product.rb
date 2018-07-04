@@ -11,6 +11,7 @@ class Product < ApplicationRecord
 
 	# associations
 	has_many :line_items
+	has_many :comments
 	belongs_to :user
 	belongs_to :instrum, polymorphic: true
 

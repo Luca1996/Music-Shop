@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   resources :carts, only: [:index, :show, :destroy]
   get 'products/grid'
   post 'products_search_path', to:'products#search', as: :products_search
-  resources :products, only: [:index, :show, :destroy]
+  resources :products, only: [:index, :show, :destroy] do
+    resources :comments, except: [:index,:show]
+  end 
   resources :pianos
   resources :others
   resources :guitars
