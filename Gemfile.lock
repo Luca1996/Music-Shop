@@ -97,8 +97,6 @@ GEM
       mime-types (>= 1.17, < 4)
       nokogiri (~> 1.8)
       railties (>= 4, < 6)
-    cucumber-rails-training-wheels (1.0.0)
-      cucumber-rails (>= 1.1.1)
     cucumber-tag_expressions (1.1.1)
     cucumber-wire (0.0.1)
     database_cleaner (1.7.0)
@@ -196,6 +194,9 @@ GEM
     rack (2.0.5)
     rack-test (1.0.0)
       rack (>= 1.0, < 3)
+    rack_session_access (0.2.0)
+      builder (>= 2.0.0)
+      rack (>= 1.0.0)
     rails (5.2.0)
       actioncable (= 5.2.0)
       actionmailer (= 5.2.0)
@@ -315,7 +316,6 @@ DEPENDENCIES
   chromedriver-helper
   coffee-rails (~> 4.2)
   cucumber-rails
-  cucumber-rails-training-wheels
   database_cleaner
   devise
   factory_bot_rails
@@ -328,6 +328,7 @@ DEPENDENCIES
   omniauth-github
   paypal-sdk-rest
   puma (~> 3.11)
+  rack_session_access
   rails (~> 5.2.0)
   rails-controller-testing
   rspec-rails

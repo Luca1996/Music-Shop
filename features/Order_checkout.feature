@@ -5,11 +5,11 @@ Feature: Order checkout
     so that i can VERIFY THE SUCCESS OF THE ORDER
 
     Scenario: Order checkout and notification
-      Given I am on the cart page
-        And I am logged in user
+      Given i am logged in as an User
+        And The user is on the cart page
         And there is at least a LineItem
-      When I press "Checkout"
-        And I fill the order form
-        And I press "Order"
-      Then I should be on the Homepage
-        And I should see "Order completed"
+      When The user press "Proceed to checkout"
+        And The user fill the order form
+        And The user press "Submit Order"
+      Then The user should be on the Homepage
+        And The user should see "Order completed"

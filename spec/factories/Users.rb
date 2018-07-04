@@ -9,6 +9,6 @@ FactoryBot.define do
     factory :admin, parent: :user do |f|
         f.email "admin@user.com"
         f.admin true
-        f.id "122"
+        f.id "121"
     end
 end

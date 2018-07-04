@@ -46,10 +46,6 @@ class OrdersController < ApplicationController
         if @order.save
             #raise @order.inspect
             #@order.add_items_from_cart(@cart)
-            @order.line_items.each do |lineitem|
-                lineitem.product.quantity -= lineitem.quantity
-                lineitem.product.save
-            end
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
         else
@@ -80,8 +76,7 @@ class OrdersController < ApplicationController
         @order = Order.find(params[:id])
         if @order.user == current_user || current_user.try(:admin?)
             @order.line_items.each do |lineitem|
-                lineitem.product.quantity += lineitem.quantity
-                lineitem.product.save
+                lineitem.delete_all_same_items
             end
             @order.destroy
             redirect_to orders_path

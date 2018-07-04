@@ -16,7 +16,7 @@ class LineItemsController < ApplicationController
 		if product.quantity != 0
 			@line_item = @cart.add_product(product)
 			if @line_item.save
-				create_items
+				@line_item.create_items
 				redirect_to cart_path(@cart)
 				flash.keep[:notice] = "Item was added to the cart"
 			else 
@@ -39,10 +39,10 @@ class LineItemsController < ApplicationController
 		end
 		if @line_item.quantity > 1
 			@line_item.quantity -=1
-			delete_items
+			@line_item.delete_items
 			@line_item.save
 		else
-			delete_items
+			@line_item.delete_items
 			@line_item.destroy
 		end
 		redirect_to cart_path(@cart), notice: "The item was removed from the cart"
@@ -55,8 +55,7 @@ class LineItemsController < ApplicationController
 		if @line_item == nil || !is_right_cart?(@line_item)
 			redirect_to cart_path(@cart), notice: "Can't find the item"
 		end
-		@line_item.product.quantity += @line_item.quantity
-		@line_item.product.save
+		@line_item.delete_all_same_items
 		@line_item.destroy
 		redirect_to cart_path(@cart), notice: "The item was removed from the cart"				
 	end
@@ -65,16 +64,5 @@ class LineItemsController < ApplicationController
 
 		def line_item_params
 			params.require(:line_item).permit(:product_id)
-		end
-
-		def delete_items
-			@line_item.product.quantity += 1
-			@line_item.product.save
-		end
-		
-		def create_items
-			@line_item.product.quantity -= 1
-			@line_item.product.save
-		end
-		
+		end		
 end

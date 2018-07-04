@@ -16,8 +16,7 @@ end
 def destroy
 	if is_my_cart?(@cart)
 		@cart.line_items.each do |li|
-			li.product.quantity += li.quantity
-			li.product.save
+			li.delete_all_same_items
 		end
 		@cart.destroy 
 		session[:cart_id] = nil
