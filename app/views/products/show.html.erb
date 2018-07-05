@@ -2,7 +2,7 @@
 	 and the partial _instrum associated -->
 <%= render(@product) %>
 <%= render(@product.instrum) %>
-<% if @product.user != current_user && @product.comments.where(:user => current_user).size == 0 %>
+<% if @product.user != current_user && @product.comments.where(:user => current_user).size == 0 && user_signed_in?%>
 	<%= render  "comments/form" %>
 <% end %>
 

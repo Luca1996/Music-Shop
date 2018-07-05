@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2018_07_02_154608) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-ActiveRecord::Schema.define(version: 2018_06_27_163551) do
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string "title"
@@ -89,9 +89,7 @@ ActiveRecord::Schema.define(version: 2018_06_27_163551) do
     t.string "tipo"
     t.string "color"
     t.string "material"
-    t.integer "n_keys"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "n_key"
   end
 
   create_table "products", force: :cascade do |t|
@@ -109,8 +107,6 @@ ActiveRecord::Schema.define(version: 2018_06_27_163551) do
     t.integer "depth"
     t.string "image"
     t.integer "user_id"
-    t.integer "type_id"
-    t.string "type_name"
     t.string "instrum_type"
     t.integer "instrum_id"
     t.index ["instrum_type", "instrum_id"], name: "index_products_on_instrum_type_and_instrum_id"
