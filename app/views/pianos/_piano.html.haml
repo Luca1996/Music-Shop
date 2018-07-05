@@ -24,8 +24,10 @@
 							%td.bigger
 								= piano.tipo.capitalize
 							%td.bigger
-								= piano.color.capitalize
+								- if piano.color.present?
+									= piano.color.capitalize
 							%td.bigger
-								= piano.material.capitalize
+								- if piano.material.present?
+									= piano.material.capitalize
 							%td.bigger
 								= piano.n_keys

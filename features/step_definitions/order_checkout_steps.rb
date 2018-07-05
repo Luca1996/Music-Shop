@@ -1,35 +1,45 @@
 require "rack_session_access/capybara"
-Given("The user is on the cart page") do
-    cart_id = 1
-    @cart = Cart.new(:id => cart_id)
-    @cart.save
+
+Given /^i have added an item in the cart$/ do
+    
+    ## Setup a product to buy from another user and set cart
+    user = User.new(:email => "seller@seller.com", :password => "sellerseller")
+    user.save!
+    piano = Piano.new(:id => "33",:tipo => "A muro", :n_keys => "66")
+    piano.save!
+    product = Product.new(:id => "1",:title => "Piano title",:price => "800",:quantity => "1",:image => "pianos.jpg",:instrum => piano)
+    product.user = user
+    product.save!
+    @product = product
+    @cart = Cart.create(:id => 1)
+    @cart_id = 1
     page.set_rack_session cart_id: 1
-    visit cart_path(page.get_rack_session_key('cart_id'))
+    #####
+
+    steps %Q{
+        And i go to the products page
+        And i click on Details of the product with id="#{product.id}"
+        Then i should see "Buy"
+        And i click on "Buy"
+    } 
 end
 
-Given("there is at least a LineItem")do
-    product = Product.new(:id => "1",:title => "Guitar",:price => "800",:quantity => "1",:image => "guitars.jpg")
-    product.save
-    lineitem = LineItem.new(:product => product,:quantity => "1")
-    lineitem.save
-    @cart.line_items = lineitem
-    expect(lineitem.product_id).to be(1) 
+Then /^i should be into the current cart page$/ do
+    current_path = URI.parse(current_url).path
+    expect(current_path).to eq cart_path(@cart_id)
+end 
+
+And /^i should see the item in the cart$/ do 
+    expect(page).to have_content(@product.title)
 end
 
-When("The user press {string}") do |string|
-    find('a', text: string).click
+Then /^i should be onto the order page$/ do
+    current_path = URI.parse(current_url).path[/.*\//]
+    expect(current_path).to eq "/orders/"
 end
 
-When("The user fill the order form") do
-    fill_in address,with: "via Roma"
-    fill_in t_num, with: "12345678"
-    select "Cash on delivery", :from => "p_method"
+And("i fill the order form") do
+    fill_in "order_address",with: "via Roma"
+    fill_in "order_t_num", with: "12345678"
+    select "Cash on delivery", :from => "order_p_method"
 end
-
-Then("The user should be on the Homepage") do
-    visit root_page
-end
-
-Then("The user should see {string}") do |string|
-    expect(page).to have_content(string)
-end  

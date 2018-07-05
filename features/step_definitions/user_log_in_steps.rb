@@ -8,7 +8,7 @@ And /^i am logged in .*$/ do
         And i go to the new user session page
         And i fill "email" with "#{email}" in "user" form
         And i fill "password" with "#{pass}" in "user" form
-        And i press "Log in"
+        And i click on "Log in"
     }
 end
 
@@ -22,8 +22,4 @@ end
 
 And /^i attach the image "(.+)" in "(.+)" form$/ do |img, form|
     page.attach_file(form+'_image', Rails.root + 'app/assets/images/'+img)
-end
-
-And /^i press "(.*)"$/ do |butn|
-    click_button(butn)
 end

@@ -12,7 +12,7 @@
             <p><%= prod.description %></p>
           </div>
           <div class="card-action">
-            <%= link_to  "Details", product_path(prod) %>
+            <%= link_to  "Details", product_path(prod), id: "link-#{prod.id}" %>
             <%= prod.price %>  €
           </div>
         </div>
