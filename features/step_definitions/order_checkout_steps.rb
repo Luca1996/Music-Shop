@@ -38,8 +38,31 @@ Then /^i should be onto the order page$/ do
     expect(current_path).to eq "/orders/"
 end
 
-And("i fill the order form") do
-    fill_in "order_address",with: "via Roma"
-    fill_in "order_t_num", with: "12345678"
-    select "Cash on delivery", :from => "order_p_method"
+And /^i fill the order form with valid values$/ do
+    steps %Q{
+        And i fill the order form with address "Via roma", num "3425647844" and p_method "Cash on delivery"
+    }
+end
+
+And /^i fill the order form with an invalid tel_number$/ do
+    ## Note: tel_num must be [8-12] digits
+    steps %Q{
+        And i fill the order form with address "Via roma", num "4354" and p_method "Cash on delivery"
+    }
+end
+
+And /^i fill the order form without field address$/ do
+    steps %Q{
+        And i fill the order form with address "", num "3456473899" and p_method "Cash on delivery"
+    }
+end
+
+And /^i fill the order form with address "(.*)", num "(.*)" and p_method "(.*)"$/ do |addr, num, met|
+    fill_in "order_address",with: "#{addr}"
+    fill_in "order_t_num", with: "#{num}"
+    select "#{met}", :from => "order_p_method"
+end
+
+And /^i press on "Submit Order" and raise an error$/ do
+   expect {click_on("Submit Order")} .to raise_error(RuntimeError)
 end
