@@ -1,0 +1,17 @@
+<h2>Ban a User</h2>
+<%= form_tag(admin_panel_ban_path, method: :delete) do %>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= label :email , "Email", :class => "active" %>
+            <%= text_field :email, params[:email] %>
+          
+        <div class="search-button">
+          <%= submit_tag 'Search', name: nil, :class => "waves-effect waves-light btn" %>
+        </div>
+<% end %>
+
+<h2>Orders</h2>
+<% @orders.each do |order| %>
+    <%= order.id %>
+    <%= link_to  "Delete", order_path(order), method: :delete %>
+<% end %>
