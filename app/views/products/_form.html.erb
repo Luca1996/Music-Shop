@@ -33,6 +33,11 @@
             <div class="input-field col s6">
                 <%= f.label :price , :class => "active" %>
                 <%= f.number_field :price , :step => "0.01" %>
+                <%- if @instrum.present? && @instrum.product.price.present? && @wal_price.present? && @wal_price < @instrum.product.price then%>
+                  <div class="wal-price">
+                    Lower price on Walmart: <%= @wal_price %>
+                  </div>
+                <% end %>
             </div>
           </div>
         </div>

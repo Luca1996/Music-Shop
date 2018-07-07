@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   end 
   resources :pianos
   resources :others
-  resources :guitars
+  resources :guitars 
   resources :drums
   resources :headphones
   resources :orders

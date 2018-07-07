@@ -35,6 +35,7 @@ end
 
 Then /^i should be onto the order page$/ do
     current_path = URI.parse(current_url).path[/.*\//]
+    puts current_path
     expect(current_path).to eq "/orders/"
 end
 

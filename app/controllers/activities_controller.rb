@@ -6,5 +6,4 @@ class ActivitiesController < ApplicationController
 		@orders = current_user.orders
 	end
 
-
 end
