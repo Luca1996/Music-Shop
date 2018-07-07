@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :headphones
   resources :orders
   get 'application/logout'
+  get 'application/cart'
   get 'settings/show'
   patch 'settings/change_avatar'
   patch 'settings/change_password'
