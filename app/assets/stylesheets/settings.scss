@@ -1,3 +1,43 @@
 // Place all the styles related to the settings controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h3{
+    color:  rgb(248, 63, 8);
+}
+div#avatar{
+    float: left;
+}
+
+div#image{
+    height: 300px;
+    width: 300px;
+}
+div.delete{
+    margin-top: 50px;
+}
+div#mail{
+    margin-left: 200px;
+    float: left;
+}
+p.text{
+    font-size: 25px;
+}
+.head{
+    color:  rgb(248, 63, 8);
+    font-size: 30px;
+    
+}
+.form{
+    size: 20px;
+}
+div#password{
+    margin-left: 200px;
+    float: left;
+}
+div#form{
+    color:  rgb(248, 63, 8);
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 30px;
+}
