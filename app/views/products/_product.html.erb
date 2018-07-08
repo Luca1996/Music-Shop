@@ -63,6 +63,14 @@
             <%= product.model%>
           </div>
         <% end %>
+        <%- if !product.quantity.blank? %>
+          <div class="field-title">
+            Quantity:
+          </div>
+          <div class="field-content">
+            <%= product.quantity%>
+          </div>
+        <% end %>
         </div>
         <div class="header"><%= product.user.email %> </div>
         <div class="show-card-btn card-action">

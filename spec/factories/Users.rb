@@ -11,4 +11,10 @@ FactoryBot.define do
         f.admin true
         f.id "122"
     end
+    factory :c_user, parent: :user do |u|
+        u.email 'c_user@user.com'
+        u.password '12345678'
+        u.admin false
+        u.id 120
+    end
 end

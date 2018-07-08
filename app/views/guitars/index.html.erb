@@ -1,19 +1,21 @@
 <h3>Guitars</h3>
 <div class="row">
   <% @guitars.each do |g| %>
-
-    <div class="col s6 m2 ">
-      <div class="card ">
-        <div class="card-image">
-          <%= image_tag "data:image/jpeg;base64,#{g.product.image}"%>
-        </div>
-        <div class="card-content">
-          <p><%= g.product.description %></p>
-        </div>
-        <div class="card-action">
-          <%= link_to "Details", guitar_path(g) %>
+    <% if g.product.quantity > 0 %>
+      <div class="col s6 m2 ">
+        <div class="card ">
+          <div class="card-image">
+            <%= image_tag "data:image/jpeg;base64,#{g.product.image}"%>
+          </div>
+          <div class="card-content">
+            <p><%= g.product.description %></p>
+          </div>
+          <div class="card-action">
+            <%= link_to "Details", guitar_path(g) %>
+            <%= g.prod.price %>  €
+          </div>
         </div>
       </div>
-    </div>
-  <% end %> 
+    <% end %> 
+  <% end %>
 </div>

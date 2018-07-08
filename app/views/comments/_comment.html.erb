@@ -1,2 +1,21 @@
-<h4> <%= comment.title %> </h4>
-<p> <%= comment.text %> </p>
+
+  <div class="post-container">
+    <h4 class="post-title"><%= comment.title %>
+    <div class="icons">
+        <% if comment.user == current_user %>
+            <%= link_to edit_product_comment_path(comment.product,comment), :class => "secondary-content" do %>
+                <i class="material-icons">edit</i>
+            <% end %>
+        <% end %>
+        <% if comment.user == current_user || current_user.try(:admin?)  %>
+            <%= link_to product_comment_path(comment.product,comment),method: :delete,data: {confirm: "Are you sure?"}, :class => "secondary-content" do %>
+                <i class="material-icons">delete</i>
+            <% end %>
+        <% end %>
+    </div>
+    </h4>
+    <%= image_tag "data:image/jpeg;base64,#{comment.user.image}", :class => "post-thumb" %>
+    <div class="post-content">
+        <p><%= comment.text %></p>
+    </div>
+</div>

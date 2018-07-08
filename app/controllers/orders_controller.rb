@@ -9,13 +9,13 @@ class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
     
-    def index
-        if current_user.try(:admin?)
-            @orders = Order.all
-        else
-            @orders = current_user.orders
-        end
-    end
+    # def index
+        # if current_user.try(:admin?)
+            # @orders = Order.all
+        # else
+            # @orders = current_user.orders
+        # end
+    # end
 
     def show
           @order = Order.find(params[:id])      
@@ -63,14 +63,6 @@ class OrdersController < ApplicationController
         if @order.save
             #raise @order.inspect
             #@order.add_items_from_cart(@cart)
-            @order.line_items.each do |lineitem|
-                lineitem.product.quantity -= lineitem.quantity
-                if lineitem.product.quantity == 0
-                    lineitem.product.destroy
-                else
-                    lineitem.product.save
-                end
-            end
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
         else
@@ -116,6 +108,9 @@ class OrdersController < ApplicationController
     def destroy
         @order = Order.find(params[:id])
         if @order.user == current_user || current_user.try(:admin?)
+            @order.line_items.each do |lineitem|
+                lineitem.delete_all_same_items
+            end
             @order.destroy
             redirect_to orders_path
             flash.keep[:notice] = "Orders cancelled"

@@ -16,7 +16,7 @@
       <div class="row">
 		   <div class="input-field col s6">
 				<%= f.select(:p_method) do %>
-					<% [['PayPal', "PayPal"], ['Cash on delivery', "Cash on delivery"]].each do |c| -%>
+					<% [['Cash on delivery', "Cash on delivery"],['PayPal', "PayPal"]].each do |c| -%>
 						<%= content_tag(:option, c.first, value: c.last) %>
 					<% end %>
 			    <% end %>

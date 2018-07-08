@@ -1,7 +1,10 @@
 <div class="row">
 	<%= form_for @drum, :class => "col s12" do |f| %>
 		<%=f.fields_for :product do |prod| %>
+<<<<<<< HEAD
 
+=======
+>>>>>>> Quantity
         <%= render :partial => '/products/form', :locals => {:f => prod} %>
     <% end %> 
 		

@@ -11,12 +11,17 @@ class CommentsController < ApplicationController
         @product = Product.find(params[:product_id])
         @comment = @product.comments.build(comment_params)
         @comment.user = current_user
-        if @comment.save
-            redirect_to product_path(@product)
-            flash.keep[:notice] = "Created new Comment"
+        if @comment.user != @product.user
+            if @comment.save
+                redirect_to product_path(@product)
+                flash.keep[:notice] = "Created new Comment"
+            else
+                flash.keep[:alert] = "Something wrong in creating a comment"
+                redirect_to product_path(@product)
+            end
         else
-            flash.keep[:alert] = "Something wrong in creating a comment"
             redirect_to product_path(@product)
+            flash.keep[:alert] = "You cant comment your own product"
         end
     end
 
