@@ -1,48 +1,59 @@
-%h2 
-	Profile Settings
+%div.container
+	%h2
+		Profile Settings
 
-
-%p#email
-	%h4
-		Email corrente:
-	%br
-	= @user.email
-	%br
-
-%p#avatar
-	-if @user.image != nil
+	%div#avatar
+		
 		%h3
 			Avatar:
-		%br
-		%p#avatar
-			= image_tag "data:image/jpeg;base64,#{@user.image}"
-	%p
-		Change avatar:
-	= form_for @user, url: settings_change_avatar_path do |form|
-		= form.file_field :image
-		= form.submit
-	%p
-		Change password:
-	=form_for @user, url:settings_change_password_path do |form|
-		.field
-			= form.label :curr_pass
 			%br
-			= form.password_field :curr_pass 
-			%br
-		.field
-			= form.label :password
-			%br
-			= form.password_field :password
-			%br
-		.field
-			= form.label :confirm
-			%br
-			= form.password_field :confirm
-			%br
-		.actions
-			= form.submit "Change password"
+		%div#image
+			-if @user.image != nil
+				
+				= image_tag "data:image/jpeg;base64,#{@user.image}"
+			-else 
+				= image_tag "Profile_photo.png"
+		%div#form
+			Change avatar:
+		= form_for @user, url: settings_change_avatar_path do |form|
+			= form.file_field :image
+			= form.submit
+		%div{:class => "delete"}
+			%p{:class => "head"}
+				Delete User:
+			= button_to "Delete User", registration_path(@user), method: :delete
 
-	%p
-		
-		Delete User:
-		= button_to "Delete User", registration_path(@user), method: :delete
+	%div#mail
+		%h3
+			Current email:
+		%p{:class => "text"}
+			= @user.email
+		%h4{:class => "head"}
+			Change mail:
+		= form_for @user, url: settings_change_mail_path do |form|
+			= form.label :email
+			= form.text_field :email
+			= form.submit "Change mail"
+
+	%div#password
+		%h3
+			Password change:
+		=form_for @user, url:settings_change_password_path do |form|
+			.field
+				= form.label :curr_pass
+				%br
+				= form.password_field :curr_pass 
+				%br
+			.field
+				= form.label :password
+				%br
+				= form.password_field :password
+				%br
+			.field
+				= form.label :confirm
+				%br
+				= form.password_field :confirm
+				%br
+			.actions
+				= form.submit "Change password"
+

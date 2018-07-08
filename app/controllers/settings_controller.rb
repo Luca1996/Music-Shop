@@ -21,13 +21,24 @@ class SettingsController < ApplicationController
 		end
 	end
 
+	def change_mail
+		user = current_user
+		new_mail = params[:user][:email]
+		user.email = new_mail
+		if user.save
+			redirect_to settings_show_path, notice: "Email changed"
+		else 
+			redirect_to settings_show_path, alert: "Not valid mail"
+		end
+	end
+
 	def change_password
 		user = current_user
-		redirect_to settings_show_path, notice: "New password doens't match with confirm" and return if params[:user][:password] != params[:user][:confirm]
+		redirect_to settings_show_path, alert: "New password doesn't match with confirm" and return if params[:user][:password] != params[:user][:confirm]
 		redirect_to settings_show_path, alert: "Wrong current password" and return if ! user.valid_password? params[:user][:curr_pass]
 		new_pass = params[:user][:password]
-		redirect_to settings_show_path, notice: "Password must be at least 8 characters" and return if new_pass.length < 8
-		redirect_to settings_show_path, notice: "Password must be not longer than 128 characters" and return if new_pass.length > 128
+		redirect_to settings_show_path, alert: "Password must be at least 8 characters" and return if new_pass.length < 8
+		redirect_to settings_show_path, alert: "Password must be not longer than 128 characters" and return if new_pass.length > 128
 		new_pass = BCrypt::Password.create(params[:user][:password])
 		user.encrypted_password = new_pass
 		user.save!

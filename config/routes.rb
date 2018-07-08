@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'settings/show'
   patch 'settings/change_avatar'
   patch 'settings/change_password'
+  patch 'settings/change_mail'
   get 'activities/index'
   get 'admin_panel/show'
   delete 'admin_panel/ban'
