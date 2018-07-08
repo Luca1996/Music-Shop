@@ -2,13 +2,16 @@
 	 and the partial _instrum associated -->
 <%= render(@product) %>
 <%= render(@product.instrum) %>
-<% if @product.user != current_user && @product.comments.where(:user => current_user).size == 0 && user_signed_in?%>
-	<%= render  "comments/form" %>
-<% end %>
-
-<h2 class="comments-head"> Comments </h2>
-<% if !@product.comments.nil? %>
-	<% @product.comments.each  do |comm| %>
-		<%= render(comm) %>
+<div class="comments">
+	<% if @product.user != current_user && @product.comments.where(:user => current_user).size == 0 && user_signed_in?%>
+		<%= render  "comments/form" %>
 	<% end %>
-<% end %>
+
+	<h2 class="comments-head"> Comments </h2>
+	<% if !@product.comments.nil? %>
+		<% @product.comments.each  do |comm| %>
+			<%= render(comm) %>
+		<% end %>
+	<% end %>
+
+</div>
