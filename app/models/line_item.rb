@@ -18,6 +18,15 @@ class LineItem < ApplicationRecord
     self.product.save
   end
 
+  # this function checks if the buyer is also the owner, in which case
+  # we destroy the line_item
+  def ensure_buyer_isnt_the_owner(buyer)
+    if buyer == product.user
+      destroy
+      raise RuntimeError
+    end
+  end
+
   def price
   	product.price*quantity
   end

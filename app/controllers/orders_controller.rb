@@ -36,7 +36,10 @@ class OrdersController < ApplicationController
     def create
         @order = Order.new(order_params)
         @order.user = current_user
-        @order.add_items_from_cart(@cart) 
+        @order.add_items_from_cart(@cart)
+        @order.line_items.each do |lineitem|
+            lineitem.ensure_buyer_isnt_the_owner(current_user)
+        end 
         ##temp shit
         if @order.save
             #raise @order.inspect

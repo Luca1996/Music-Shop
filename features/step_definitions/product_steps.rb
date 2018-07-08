@@ -28,12 +28,15 @@ And /^i have an item with title "(.+)" which is "(.+)" in Walmart database for s
         And i fill "model" with "#{model}" in "piano_product_attributes" form
         And i fill "quantity" with "#{quantity}" in "piano_product_attributes" form
         And i attach the image "#{image}" in "piano_product_attributes" form
-        And i fill "tipo" with "#{tipo}" in "piano" form
+        And i select "#{tipo}" in "tipo" in "piano" form
         And i fill "n_keys" with "#{n_keys}" in "piano" form
         And i click on "Sell piano"
     }
 end
 
+And /^i select "(.*)" in "(.*)" in "(.*)" form$/ do |value, field, f_name|
+    page.select value, from: f_name+"_"+field
+end 
 
 Then /^i should see "(.+)"(?:| list)?$/ do |elem|
     # checks if page has the text elem (ignoring HTML tags)

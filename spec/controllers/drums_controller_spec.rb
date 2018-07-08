@@ -166,7 +166,7 @@ describe DrumsController do
                 #Act
                 get :edit, params: { id: @drum.id }
                 #Assert
-                expect(Product).to have_received(:find_in_Walmart).with(@drum.product.brand, @drum.product.model).once
+                expect(Product).to have_received(:find_in_Walmart).with(@drum.product.model).once
             end
 
             it "should select the edit template for rendering" do 
