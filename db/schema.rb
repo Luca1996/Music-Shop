@@ -109,6 +109,8 @@ ActiveRecord::Schema.define(version: 2018_07_02_154608) do
     t.integer "depth"
     t.string "image"
     t.integer "user_id"
+    t.integer "type_id"
+    t.string "type_name"
     t.string "instrum_type"
     t.integer "instrum_id"
     t.index ["instrum_type", "instrum_id"], name: "index_products_on_instrum_type_and_instrum_id"

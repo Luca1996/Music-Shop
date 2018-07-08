@@ -22,15 +22,20 @@ class Product < ApplicationRecord
 		API_WALMART_KEY
 	end
 
-	def self.find_in_Walmart(brand, model)
+	#returns the price of the item found by model and brand
+	#if item not found or (brand or model) not specified, returns nil 
+	def self.find_in_Walmart(model)
+		return nil if model.blank?
 		api_key = walmart_key
 		raise InvalidKeyError if api_key.blank? 
-		url = 'http://api.walmartlabs.com/v1/search?query='+ brand +" "+ model + "&format=json&apiKey=#{api_key}"
-        uri = URI(url)
+		url = 'http://api.walmartlabs.com/v1/search?query='+ model + "&format=json&apiKey=#{api_key}"
+		uri = URI(url)
 		response = Net::HTTP.get(uri)
 		parsed_resp = JSON.parse(response)
 		raise InvalidKeyError if !parsed_resp["errors"].blank? && parsed_resp["errors"][0]["code"] == 403
-		parsed_resp
+		return nil if parsed_resp["items"].blank?
+		return nil if ! /^Musical Instruments.*$/ .match? parsed_resp["items"][0]["categoryPath"] 
+		parsed_resp["items"][0]["salePrice"]
 	end
 
 

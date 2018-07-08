@@ -19,7 +19,8 @@ class DrumsController < ApplicationController
 	def edit
 		@drum = Drum.find_by_id(params[:id])
 		if instrum_owned_by_user?(@drum)
-			@wal_price = Product.find_in_Walmart(@drum.product.brand, @drum.product.model)
+			@wal_price = Product.find_in_Walmart(@drum.product.model)
+			@instrum = @drum
 		else
 			redirect_to root_path
 			flash.keep[:alert] = "You can't edit this instrument"

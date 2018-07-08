@@ -20,14 +20,14 @@ class PianosController < ApplicationController
 	end
 
 	def edit
-		require 'net/http'
-        require 'json'
-        
-        url = 'http://api.walmartlabs.com/v1/search?query='+ @piano.product.title + '&format=json&apiKey=qf2a4tqhq4qdncvqrrkpvzt8'
-        uri = URI(url)
-        response = Net::HTTP.get(uri)
-        @res = JSON.parse(response)
-		@piano = Piano.find(params[:id])
+		@piano = Piano.find_by_id(params[:id])
+		if instrum_owned_by_user?(@piano)
+			@wal_price = Product.find_in_Walmart(@piano.product.model)
+			@instrum = @piano
+		else
+			redirect_to root_path
+			flash.keep[:alert] = "You can't edit this instrument"
+		end
 	end
 
 
@@ -86,7 +86,13 @@ class PianosController < ApplicationController
                 b64 = Base64.encode64(params[:piano][:product_attributes][:image].read)
                 @piano.product.image = b64
             end
-        end
+		end
+		def instrum_owned_by_user?(instrum)
+			if instrum.product.user == current_user || current_user.admin?
+				return true
+			end
+			false
+		end
 
 
 end

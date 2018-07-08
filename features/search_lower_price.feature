@@ -12,11 +12,20 @@ Background: Start from the home page as logged user
 
 Scenario: Try to see the price of an instrument that isn't in Walmart database
 
-    And i have an item with title "NewPiano1" not in Walmart database for sale
+    And i have an item with title "NewPiano1" which is "not present" in Walmart database for sale
     Then i should see "My Activities"
     When i click on "My Activities"
     Then i should be on the activities index page
-    Then i should see "Your products for sale" list
-    And i should see "Can't find a lower price" in corrispondence of the item with title 'NewPiano1' 
+    Then i search the item with title "NewPiano1" and click on "Modify" 
+    And i should be into the edit piano page
+    Then i should not see "Lower price on Walmart"
 
+Scenario: Try to see the price of an instrument in Walmart database
 
+    And i have an item with title "NewPiano2" which is "present" in Walmart database for sale
+    Then i should see "My Activities"
+    When i click on "My Activities"
+    Then i should be on the activities index page
+    Then i search the item with title "NewPiano2" and click on "Modify"
+    And i should be into the edit piano page
+    Then i should see "Lower price on Walmart"
