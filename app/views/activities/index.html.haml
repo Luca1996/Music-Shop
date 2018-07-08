@@ -1,56 +1,85 @@
+%div{ :class => "center"}
+	%h3
+		Sell another instrument:
+	%br
+	%div{ :class => "collection new-collection" }
+		= link_to "Sell Piano",new_piano_path, :class => "collection-item"
+		
+		= link_to "Sell generic item",new_other_path, :class => "collection-item"
+		
+		= link_to "Sell Guitar or Bass",new_guitar_path, :class => "collection-item"
+		
+		= link_to "Sell Drum",new_drum_path, :class => "collection-item"
+		
+		= link_to "Sell Headphone",new_headphone_path, :class => "collection-item"
 
-%h4
-	Sell another instrument:
-%br
-
-= link_to "Sell piano", new_piano_path
-%br 
-= link_to "Sell drum", new_drum_path
-%br
-= link_to "Sell guitar", new_guitar_path
-%br
-= link_to "Sell headphones", new_headphone_path
-%br
-= link_to "Sell generic instrument", new_other_path
-
-%h4
-	Your products for sale:
-%br
-	- @products.each do |prod|	
-
-		-if prod.instrum.instance_of?(Piano)
-			%div{ :id => prod.title }
-				= prod.title
-				= link_to "Modify" , edit_piano_path(prod.instrum)
-				= link_to "Delete", piano_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
-		-if prod.instrum.instance_of?(Other)
-			%div{ :id => prod.title }
-				= prod.title
-				= link_to "Modify" , edit_other_path(prod.instrum)
-				= link_to "Delete", other_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
-		-if prod.instrum.instance_of?(Guitar)
-			%div{ :id => prod.title }
-				= prod.title
-				= link_to "Modify" , edit_guitar_path(prod.instrum)
-				= link_to "Delete", guitar_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
-		-if prod.instrum.instance_of?(Drum)
-			%div{ :id => prod.title }
-				= prod.title
-				= link_to "Modify" , edit_drum_path(prod.instrum)
-				= link_to "Delete", drum_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-			%br
-		-if prod.instrum.instance_of?(Headphone)
-			%div{ :id => prod.title }
-				= prod.title
-				= link_to "Modify" , edit_headphone_path(prod.instrum)
-				= link_to "Delete", headphone_path(prod.instrum), method: :delete, data: {confirm: "Are you sure?"}
-%h4
-	Your Orders:
-%br
-	-@orders.each do |order|
-		= order.id
-		= link_to "Details", order_path(order)
-		= link_to "Edit", edit_order_path(order)
+	%h3
+		Your products for sale:
+	%br
+		%ul{ :class => "collection" }
+			- @products.each do |prod|	
+				-if prod.instrum.instance_of?(Piano)
+					%div{ :id => prod.title }
+						%li{ :class => "collection-item" }
+							%div{:class => "text-size"}
+								= prod.title
+								= link_to piano_path(prod.instrum),method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										delete
+								= link_to edit_piano_path(prod.instrum),:class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										edit
+					
+				-if prod.instrum.instance_of?(Other)
+					%div{ :id => prod.title }
+						%li{ :class => "collection-item" }
+							%div{:class => "text-size"}
+								= prod.title
+								= link_to other_path(prod.instrum),method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										delete
+								= link_to edit_other_path(prod.instrum),:class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										edit
+					
+				-if prod.instrum.instance_of?(Guitar)
+					%div{ :id => prod.title }
+						%li{ :class => "collection-item" }
+							%div{:class => "text-size"}
+								= prod.title
+								= link_to guitar_path(prod.instrum),method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										delete
+								= link_to edit_guitar_path(prod.instrum),:class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										edit
+		
+				-if prod.instrum.instance_of?(Drum)
+					%div{ :id => prod.title }
+						%li{ :class => "collection-item" }
+							%div{:class => "text-size"}
+								= prod.title
+								= link_to drum_path(prod.instrum),method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										delete
+								= link_to edit_drum_path(prod.instrum),:class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										edit
+					
+				-if prod.instrum.instance_of?(Headphone)
+					%div{ :id => prod.title }
+						%li{ :class => "collection-item" }
+							%div{:class => "text-size"}
+								= prod.title
+								= link_to headphone_path(prod.instrum),method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										delete
+								= link_to edit_headphone_path(prod.instrum),:class => "secondary-content" do
+									%i{ :class => "material-icons" }
+										edit
+	%h3
+		Your Orders:
+	%br
+		%div{ :class => "collection" }
+			-@orders.each do |order|
+				= link_to order.id , order_path(order), :class => "collection-item"

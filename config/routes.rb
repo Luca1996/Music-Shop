@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'paypal/payment_success', to:'orders#payment_success', as: :orders_payment_success
   resources :orders
   get 'application/logout'
+  get 'application/cart'
   get 'settings/show'
   patch 'settings/change_avatar'
   patch 'settings/change_password'
