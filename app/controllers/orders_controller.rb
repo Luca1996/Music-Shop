@@ -9,13 +9,13 @@ class OrdersController < ApplicationController
     skip_before_action :verify_authenticity_token, :only => [:destroy]
 
     
-    def index
-        if current_user.try(:admin?)
-            @orders = Order.all
-        else
-            @orders = current_user.orders
-        end
-    end
+    # def index
+        # if current_user.try(:admin?)
+            # @orders = Order.all
+        # else
+            # @orders = current_user.orders
+        # end
+    # end
 
     def show
           @order = Order.find(params[:id])      

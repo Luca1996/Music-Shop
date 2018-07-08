@@ -1,4 +1,32 @@
-<h2> Order </h2>
-<%= @order.address %><br>
-<%= @order.t_num %><br>
-<%= @order.p_method %><br>
+<div class="center">
+<h2> Order <%= @order.id %> </h2>
+</div>
+    <% @order.line_items.each do |li| %>
+    <div class="col s6 m7 order-card-size">
+        <div class="card horizontal">
+        <div class="card-image">
+            <%= image_tag "data:image/jpeg;base64,#{li.product.image}", :class => "order-image"%>
+        </div>
+        <div class="card-stacked">
+            <div class="card-content">
+            <h2 class="header"><%= li.product.title %></h2>
+            <div class="field-title">
+                Quantity:
+            </div>
+            <div class="field-content">
+                <%= li.quantity%>
+            </div>
+            <div class="field-title">
+                Price:
+            </div>
+            <div class="field-content">
+                <%= li.product.price%>
+            </div>
+            <div class="card-action button">
+            <%= link_to  "Product details", product_path(li.product) %>
+            </div>
+        </div>
+        </div>
+    </div>
+                
+    <% end %>

@@ -2,11 +2,13 @@
 	Other instruments
 .row
 	-@others.each do |oth| 
-		.col.s6.m3.l2
-			.card
-				.card-image
-					= image_tag "data:image/jpeg;base64,#{oth.product.image}"
-				.card-content
-					= oth.product.description
-				.card-action
-					= link_to "Details", other_path(oth)
+		-if oth.product.quantity > 0
+			.col.s6.m3.l2
+				.card
+					.card-image
+						= image_tag "data:image/jpeg;base64,#{oth.product.image}"
+					.card-content
+						= oth.product.description
+					.card-action
+						= link_to "Details", other_path(oth)
+						= oth.prod.price   €

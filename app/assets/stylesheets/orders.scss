@@ -1,3 +1,28 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.order-card-size{
+    padding-top: 30px;
+    margin: auto;
+    width: 50%;
+}
+.center{
+    margin: auto;
+}
+.order-image{
+    height: 300px;
+    width: 200px;
+}
+
+.field-title{
+    padding-top: 10px;
+    color: rgb(248, 63, 8);
+    font-size: 180%;
+}
+.field-content{
+    font-size: 120%;
+    margin-bottom: 10px;
+}
+.header{
+    margin-top: 5px;
+}

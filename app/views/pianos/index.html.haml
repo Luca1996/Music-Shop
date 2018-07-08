@@ -2,11 +2,13 @@
 	Pianos
 .row
 	-@pianos.each do |pi| 
-		.col.s6.m3.l2
-			.card
-				.card-image
-					= image_tag "data:image/jpeg;base64,#{pi.product.image}"
-				.card-content
-					= pi.product.description
-				.card-action
-					= link_to "Details", piano_path(pi)
+		-if pi.product.quantity > 0 
+			.col.s6.m3.l2
+				.card
+					.card-image
+						= image_tag "data:image/jpeg;base64,#{pi.product.image}"
+					.card-content
+						= pi.product.description
+					.card-action
+						= link_to "Details", piano_path(pi)
+						= pi.prod.price   €

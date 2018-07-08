@@ -1,7 +1,6 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-
 .show-card {
     font-size: 30px 
 }
@@ -73,5 +72,38 @@ div.card-price{
 
 h3.grid-head{
     margin-top: 70px;
+}
+.icons{
+    display: inline;
+}
+.post-container {
+    width: 50%;
+    margin: 20px 20px 20px 0;  
+    border: 1.5px solid #333;
+    overflow: auto
+}
+.post-thumb {
+    height: 100px;
+    width: 100px;
+    float: left
+}
+.post-thumb img {
+    display: block
+}
+.post-content {
+    font-size: 20px;
+    margin-left: 210px
+}
+.comments{
+    margin-left: 20px;
+}
+.comments-head{
+    color:  rgb(248, 63, 8);
+}
+.post-title {    
+    font-weight: bold;
+    font-size: 200%;
+    padding: 9px;
+    background: #ccc
 }
 
