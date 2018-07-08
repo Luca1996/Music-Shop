@@ -1,0 +1,37 @@
+-# partial from headphone, every time we render @headphone this will be showed inline. So this can be rendered also in another view as a part of it 
+
+
+.show-card-height.col.s12.m7
+    .card.horizontal	
+        .card-stacked
+            .show-card.card-content
+                .field-title
+                    Details
+                %br
+                %table
+                    %thead
+                        %tr
+                            %th
+                                Wireless
+                            %th
+                                Bluetooth
+                            %th
+                                Cable length
+                            %th
+                                Impedance
+                            %th
+                                Type
+                    %tbody
+                        %tr
+                            %td.bigger
+                                -if headphone.wireless
+                                    ✓
+                            %td.bigger
+                                -if headphone.bluetooth
+                                    ✓
+                            %td.bigger
+                                = headphone.cable_length
+                            %td.bigger
+                                = headphone.impedence.to_s+" Ω"
+                            %td.bigger
+                                = headphone.h_type.capitalize

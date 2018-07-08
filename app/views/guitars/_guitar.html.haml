@@ -1,0 +1,38 @@
+-# partial from guitar, every time we render @guitar this will be showed inline. So this can be rendered also in another view as a part of it 
+
+
+.show-card-height.col.s12.m7
+    .card.horizontal	
+        .card-stacked
+            .show-card.card-content
+                .field-title
+                    Details
+                %br
+                %table
+                    %thead
+                        %tr
+                            %th
+                                Hand
+                            %th
+                                Chords num
+                            %th
+                                Digital
+                            %th
+                                Material
+                            %th
+                                Color
+                    %tbody
+                        %tr
+                            %td.bigger
+                                = guitar.hand.capitalize
+                            %td.bigger
+                                = guitar.chords
+                            %td.bigger
+                                -if guitar.digital
+                                    Digital
+                                - else
+                                    Acoustic
+                            %td.bigger
+                                = guitar.material.capitalize
+                            %td.bigger
+                                = guitar.color.capitalize

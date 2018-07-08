@@ -17,13 +17,13 @@ class DrumsController < ApplicationController
 	end
 
 	def edit
-		@drum = Drum.find(params[:id])
-		
-        url = 'http://api.walmartlabs.com/v1/search?query='+ @drum.product.title + '&format=json&apiKey=qf2a4tqhq4qdncvqrrkpvzt8'
-        uri = URI(url)
-        response = Net::HTTP.get(uri)
-        @res = JSON.parse(response)
-		
+		@drum = Drum.find_by_id(params[:id])
+		if instrum_owned_by_user?(@drum)
+			@wal_price = Product.find_in_Walmart(@drum.product.brand, @drum.product.model)
+		else
+			redirect_to root_path
+			flash.keep[:alert] = "You can't edit this instrument"
+		end
 	end
 
 	def create
@@ -32,7 +32,7 @@ class DrumsController < ApplicationController
 		compress_image
 		if @drum.save!
 			redirect_to drum_path(@drum)
-			flash.keep[:notice] = "You successfully create a new Drum"
+			flash.keep[:notice] = "Drum create successfully"			
 		else
 			render "new"
 			flash.keep[:alert] = "Error in creating new drum"
@@ -41,16 +41,10 @@ class DrumsController < ApplicationController
 
 	def update
 		@drum = Drum.find(params[:id])
-		if @drum.product.user == current_user || current_user.admin?
-			@drum.update(drum_update_params)
-			compress_image
-			if @drum.save
-				redirect_to drum_path(@drum)
-				flash.keep[:notice] = "Drum update successfully"
-			else
-				render 'edit'
-				flash.keep[:alert] = "Drum not update"
-			end
+		if instrum_owned_by_user?(@drum)
+			@drum.product.destroy
+			@drum.destroy
+			redirect_to products_path
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update the drum"
@@ -59,11 +53,12 @@ class DrumsController < ApplicationController
 
 	def destroy
 		@drum = Drum.find(params[:id])
-		if @drum.product.user == current_user || current_user.admin?
-			@drum.product.destroy
-			@drum.destroy
-			redirect_to products_path
-			flash.keep[:notice] = "Drum deleted successfully"
+		if instrum_owned_by_user?(@drum)
+			@drum.update(drum_update_params)
+			compress_image
+			@drum.save
+			redirect_to drum_path(@drum)
+			flash.keep[:notice] = "drum update successfully"
 		else
 			flash.keep[:alert] = "You can't delete this item"
 		end
@@ -72,11 +67,11 @@ class DrumsController < ApplicationController
 
 	private 
 		def drum_params
-			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description,:image])
 		end
 
 		def drum_update_params
-			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
+			params.require(:drum).permit(:pedals,:color,:cymbals,:toms, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description])
 		end
 		
 	    def compress_image
@@ -84,5 +79,12 @@ class DrumsController < ApplicationController
                 b64 = Base64.encode64(params[:drum][:product_attributes][:image].read)
                 @drum.product.image = b64
             end
-        end
+		end
+		
+		def instrum_owned_by_user?(instrum)
+			if instrum.product.user == current_user || current_user.admin?
+				return true
+			end
+			false
+		end
 end

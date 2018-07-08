@@ -1,0 +1,16 @@
+-# partial from line_item, every time we render @line_item this will be showed inline. So this can be rendered also in another view as a part of it 
+
+
+-#.container-main
+%td
+	= line_item.product.title
+%td 
+	-if !line_item.product.brand.nil? then
+		= line_item.product.brand
+%td
+	-if !line_item.product.model.nil? then
+		= line_item.product.model	
+%td
+	= line_item.quantity
+%td
+	= line_item.price.to_s+" €"

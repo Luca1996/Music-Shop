@@ -2,7 +2,11 @@
 	Pianos
 .row
 	-@pianos.each do |pi| 
-
 		.col.s6.m3.l2
-			= render(pi.product)
-			= render(pi)
+			.card
+				.card-image
+					= image_tag "data:image/jpeg;base64,#{pi.product.image}"
+				.card-content
+					= pi.product.description
+				.card-action
+					= link_to "Details", piano_path(pi)

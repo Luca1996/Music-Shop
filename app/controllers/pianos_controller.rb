@@ -16,7 +16,7 @@ class PianosController < ApplicationController
 
 	def new
 		@piano = Piano.new
-		@piano.build_product
+		@piano.build_product	# create a Product object whose fields will be fillen by the form
 	end
 
 	def edit
@@ -29,6 +29,7 @@ class PianosController < ApplicationController
         @res = JSON.parse(response)
 		@piano = Piano.find(params[:id])
 	end
+
 
 	def create
 		@piano = Piano.new(piano_params)
@@ -43,23 +44,6 @@ class PianosController < ApplicationController
 		end
 	end
 	
-	def update
-		@piano = Piano.find(params[:id])
-		if @piano.product.user == current_user || current_user.admin?
-			@piano.update(piano_update_params)
-			compress_image
-			if @piano.save
-				redirect_to piano_path(@piano)
-				flash.keep[:notice] = "Piano updated successfully"
-			else
-				render 'edit'
-				flash.keep[:alert] = "Piano not update"
-			end
-		else
-			redirect_to activities_index_path()
-			flash.keep[:alert] = "You can't update this piano"
-		end
-	end
 
 	def destroy
 		@piano = Piano.find(params[:id])
@@ -73,15 +57,28 @@ class PianosController < ApplicationController
 		end
 	end
 
-	
+	def update
+		@piano = Piano.find(params[:id])
+		if @piano.product.user == current_user || current_user.admin?
+			@piano.update(piano_update_params)
+			compress_image
+			@piano.save
+			redirect_to piano_path(@piano)
+			flash.keep[:notice] = "Piano update successfully"
+		else
+			redirect_to activities_index_path()
+			flash.keep[:alert] = "You can't update this"
+		end
+		
+	end
 
 	private 
 		def piano_params
-			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:description,:image])
+			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description,:image])
 		end
 		
 		def piano_update_params
-			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
+			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description])
 		end
 
 	    def compress_image

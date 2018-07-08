@@ -1,16 +1,31 @@
 -# partial from piano, every time we render @piano this will be showed inline. So this can be rendered also in another view as a part of it 
 
+
 .show-card-height.col.s12.m7
-	%h2.header
-		Details
-	= piano.tipo
-	%br
-	= piano.color
-	%br
-	= piano.material
-	%br
-	= piano.n_keys
-	%br
-	= piano.product.model
-	%br
-	= piano.tipo
+	.card.horizontal	
+		.card-stacked
+			.show-card.card-content
+				.field-title
+					Details
+				%br
+				%table
+					%thead
+						%tr
+							%th
+								Tipo
+							%th
+								Color
+							%th
+								Meterial
+							%th
+								Keys number
+					%body
+						%tr
+							%td.bigger
+								= piano.tipo.capitalize
+							%td.bigger
+								= piano.color.capitalize
+							%td.bigger
+								= piano.material.capitalize
+							%td.bigger
+								= piano.n_keys

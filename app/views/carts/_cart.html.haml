@@ -1,0 +1,47 @@
+-# partial from cart, every time we render @cart this will be showed inline. So this can be rendered also in another view as a part of it 
+
+%h2
+	All items in cart 
+
+%table.highlight
+	%thead
+		%tr
+			%th
+				Title
+			%th
+				Brand
+			%th
+				Model
+			%th
+				Quantity
+			%th
+				Price
+			%th				
+				
+			%th
+				
+	%tbody
+		-cart.line_items.each do |l_item|
+			%tr
+				= render l_item
+				%td
+					= link_to "Remove one", line_item_path(l_item.id), method: :delete 
+				%td
+					= link_to "Remove all", line_items_destroy_path(l_item.id), method: :delete
+
+.cart-image
+	= image_tag("cart.png", :alt => "Cart image")
+
+%br
+%br
+
+%h4
+	Total:
+.cart-total
+	= cart.total.to_s+" €"
+.empty-cart
+	= link_to "Empty cart", cart_path(cart.id), method: :delete
+%br
+.cart-checkout
+	.waves-effect.waves-light.btn
+		= link_to "Proceed to checkout", new_order_path

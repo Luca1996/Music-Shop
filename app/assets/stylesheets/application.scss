@@ -5,6 +5,7 @@
 nav {
     height: 80px;
     line-height: 80px;
+    background: rgb(248, 63, 8)
 }
 
 nav .brand-logo {
@@ -22,15 +23,381 @@ nav form {
     margin-right: 10px;
 }
 .notice {
-	color: green;
-	font-weight: bold;
+    color: white;
+    background:rgba(3, 187, 0, 0.2);
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
 	font-size: 150%;
 }
 
 .alert {
-	color: red;
-	font-weight: bold;
+    color: white;
+    background:rgba(248, 63, 8, 0.2);
+    font-family: 'PT Sans', sans-serif;
+    font-style: italic;
 	font-size: 150%;
+}
+
+.search-button{
+    margin-left: 80px;
+    
+    .waves-effect.waves-light.btn{
+        background: red; 
+        font-family: 'PT Sans', sans-serif;
+    }
+}
+
+.product-form-title{
+    font-family: 'PT Sans', sans-serif;
+    font-size: 175%;
+    color: red;
+    text-align: center;
+    margin-top: 17px;
+
+    
+}
+
+
+.controller-carts{
+    // here all the css for the controller carts
+
+    font-family: 'PT Sans', sans-serif;
+
+    h2, h4{
+        color: rgb(248, 63, 8);
+        font-weight: 300;
+    }
+
+
+    h4{
+        display: inline-block;
+    }
+
+    table{
+        width: 50%;
+        display: inline-block;
+        
+    }
+
+    th{
+        color: rgb(248, 63, 8);
+    }
+
+    .cart-total{
+        margin-left: 35px;
+        display: inline-block;
+    }
+
+    .empty-cart{
+        margin-left: 200px;
+        display: inline-block;
+    }
+
+    .cart-image{
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: 25px;
+        position: absolute;
+    }
+   
+    .cart-checkout{
+        .waves-effect.waves-light.btn{
+            background: rgb(248, 63, 8); 
+            font-family: 'PT Sans', sans-serif;
+            margin-top: 15px;
+            margin-left: 110px;
+                a{
+                    color:white;
+                }
+            }        
+    }
+
+}
+
+
+.controller-pianos{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+
+.controller-others{
+
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+
+
+}
+
+.controller-headphones{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+.controller-products{
+
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+}
+
+
+
+.controller-drums{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
+}
+
+
+.controller-guitars{
+
+    font-family: 'PT Sans', sans-serif;
+    
+    .details{
+        color: rgb(248, 63, 8);
+    }
+
+    .header-title{
+        color: rgb(248, 63, 8);
+        margin: 20px;
+        display: inline-block;
+    }
+
+    .field-title{
+        color: rgb(248, 63, 8);
+        size: 110%;
+    }
+
+    table{
+        margin-top: 5px;
+    }
+
+    th{
+        color:  rgb(248, 63, 8);
+        font-size: 60%;
+    }
+
+    td{
+        font-size: 40%;
+
+        .bigger{
+            font-size: 100%;
+        }
+    }
+
+    .bigger{
+        font-size: 60%;
+    }
+
+    .field-content{
+        font-size: 60%;
+    }
+
 }
 
 

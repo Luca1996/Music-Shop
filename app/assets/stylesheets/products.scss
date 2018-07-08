@@ -26,11 +26,52 @@ div.card-price{
 }
 
 .grid-element {
-	width: 400px; height: 450px;
+	width: 350px; height: 400px;
 }
 
 .row#grid-head {
 	display: inline-block;
-	margin-bottom: 80px;
+    margin-bottom: 80px;
+    margin-top: 100px;
+}
+
+
+.full-container{
+    max-width: 900px;
+}
+
+
+
+.block-container{
+    display: block;
+}
+
+.file-field.input-field.col.s12.m8{
+    width: 307px;
+    display: block;
+}
+
+/*.row{
+    border: 2px solid;
+}*/
+
+.block-form-small {
+    display: inline-block;
+    max-width: 150px;
+    max-height: 81px;
+}
+
+/*.block-form-medium {
+    display: inline-block;
+    max-width: 300px;
+    max-height: 81px;
+}*/
+
+.input-field.col.s6{
+    min-width: 130px;
+}
+
+h3.grid-head{
+    margin-top: 70px;
 }
 

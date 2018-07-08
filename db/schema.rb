@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_06_29_100355) do
 
   create_table "comments", force: :cascade do |t|
@@ -21,6 +22,13 @@ ActiveRecord::Schema.define(version: 2018_06_29_100355) do
     t.integer "product_id"
     t.index ["product_id"], name: "index_comments_on_product_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+=======
+ActiveRecord::Schema.define(version: 2018_07_02_154608) do
+
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> Pypal
   end
 
   create_table "drums", force: :cascade do |t|
@@ -52,6 +60,28 @@ ActiveRecord::Schema.define(version: 2018_06_29_100355) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "line_items", force: :cascade do |t|
+    t.integer "cart_id"
+    t.integer "product_id"
+    t.integer "quantity", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "order_id"
+    t.index ["cart_id"], name: "index_line_items_on_cart_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "address"
+    t.string "t_num"
+    t.integer "p_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "others", force: :cascade do |t|
     t.string "tipo"
     t.datetime "created_at", null: false
@@ -62,7 +92,9 @@ ActiveRecord::Schema.define(version: 2018_06_29_100355) do
     t.string "tipo"
     t.string "color"
     t.string "material"
-    t.string "n_key"
+    t.integer "n_keys"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
@@ -80,6 +112,8 @@ ActiveRecord::Schema.define(version: 2018_06_29_100355) do
     t.integer "depth"
     t.string "image"
     t.integer "user_id"
+    t.integer "type_id"
+    t.string "type_name"
     t.string "instrum_type"
     t.integer "instrum_id"
     t.index ["instrum_type", "instrum_id"], name: "index_products_on_instrum_type_and_instrum_id"

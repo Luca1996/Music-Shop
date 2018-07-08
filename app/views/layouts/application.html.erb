@@ -4,9 +4,10 @@
     <title>MusicShop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body>  
+  <body class ="controller-<%= controller.controller_name %>">  
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
@@ -23,23 +24,55 @@
           <% end %>
           
         </ul>
-          <%= form_tag(products_path, method: :get) do %>
-            <%= text_field_tag :term, params[:term] %>
-          <% end %>
+        <%= form_tag(products_search_path, method: :post ) do %>
+            <div class="input-field">
+                <%= search_field_tag :search, params[:search] %>
+                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                    <i class="material-icons">close</i>
+            </div>
+        <% end %>
       </div>
-    </nav>
+    </nav>   
   </div>
   <ul class="side-nav" id="mobile-demo">
+   <div class="product-form-title">
+     Categories
+   </div>  
    <li><%= link_to  "Guitars", guitars_path %></li>
    <li><%= link_to  "Pianos", pianos_path %></li>
    <li><%= link_to  "Drums", drums_path %></li>
    <li><%= link_to  "Headphones", headphones_path %></li>
    <li><%= link_to  "Others", others_path %></li>
    <li>
+   <div class="row">
+      <div class="product-form-title">
+        Search Product
+      </div>      
       <%= form_tag(products_path, method: :get) do %>
-        <%= text_field_tag :s_price, params[:s_price] %>
-        <%= submit_tag 'Search', name: nil %>
+        <div class="row">
+          <div class="input-field col s6">
+            <%= label :brand , "Brand", :class => "active" %>
+            <%= text_field_tag :brand, params[:brand] %>
+          </div>
+          <div class="input-field col s6">
+            <%= label :model , "Model", :class => "active" %>
+            <%= text_field_tag :model, params[:model] %>
+          </div>          
+        </div>
+        <div class="input-field col s6">
+            <%= label :min_price, "Min price", :class => "active"%>
+            <%= number_field_tag :min_price, params[:min_price] %>
+        </div>
+        <div class="input-field col s6">
+            <%= label :max_price, "Max price", :class => "active"%>
+            <%= number_field_tag :max_price, params[:max_price] %>
+        </div>
+        <div class="search-button">
+          <%= submit_tag 'Search', name: nil, :class => "waves-effect waves-light btn" %>
+        </div>
     <% end %>
+    </div>
+  </div>
   </ul>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
