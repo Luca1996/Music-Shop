@@ -1,47 +1,50 @@
-<div class="row">
-	<%= form_for @guitar, :class => "col s12" do |f| %>
-		<%=f.fields_for :product do |prod| %>
-		    <%= render :partial => 'products/form', :locals => {:f => prod} %>
-    <% end %> 
-		
-		<div class="row">
-		   <div class="input-field col s12">
-				<%= f.select(:hand) do %>
-					<% [['Right', "Right"], ['Left', "Left"]].each do |c| -%>
-						<%= content_tag(:option, c.first, value: c.last) %>
+<div class="full-container">
+	<%= render "layouts/error", :resource => @guitar %>
+	<div class="row">
+		<%= form_for @guitar, :class => "col s12" do |f| %>
+			<%=f.fields_for :product do |prod| %>
+				<%= render :partial => 'products/form', :locals => {:f => prod} %>
+		<% end %> 
+			
+			<div class="row">
+			<div class="input-field col s6">
+					<%= f.select(:hand) do %>
+						<% [['Right', "Right"], ['Left', "Left"]].each do |c| -%>
+							<%= content_tag(:option, c.first, value: c.last) %>
+						<% end %>
 					<% end %>
-				<% end %>
+				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :color, :class => "active" %>
-				<%= f.text_field :color %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :color, :class => "active" %>
+					<%= f.text_field :color %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :material, :class => "active" %>
-				<%= f.text_field :material %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :material, :class => "active" %>
+					<%= f.text_field :material %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :chords, :class => "active" %>
-				<%= f.number_field :chords %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :chords, :class => "active" %>
+					<%= f.number_field :chords %>
+				</div>
 			</div>
-		</div>
-        <div class="row">
-			<div class="col s6">
-				<%= f.check_box :digital %>
-				<%= f.label :digital, :class => "active" %>
+			<div class="row">
+				<div class="col s6">
+					<%= f.check_box :digital %>
+					<%= f.label :digital, :class => "active" %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<%= f.submit "Sell guitar", :class => "btn waves-effect waves-light" %>
+			<div class="row">
+				<div class="input-field col s12">
+					<%= f.submit "Sell guitar", :class => "btn waves-effect waves-light" %>
+				</div>
 			</div>
+			<% end %>
 		</div>
-		<% end %>
-	</div>
+</div>

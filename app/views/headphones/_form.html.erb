@@ -1,44 +1,44 @@
-<div class="row">
-	<%= form_for @headphone, :class => "col s12" do |f| %>
-		<%=f.fields_for :product do |prod| %>
-        <%= render :partial => '/products/form', :locals => {:f => prod} %>
-    <% end %>
-
-		<div class="row">
-			<div class="col s6">
-				<%=f.check_box :wireless %>
-				<%=f.label :wireless, :class => "active" %>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col s6">
-				<%= f.check_box :bluetooth %>
-				<%= f.label :bluetooth, :class => "active" %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :cable_length, :class => "active" %>
-				<%= f.number_field :cable_length %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :impedence, :class => "active" %>
-				<%= f.number_field :impedence %>
-			</div>
-		</div>
-        <div class="row">
-			<div class="input-field col s6">
-				<%= f.label :type, :class => "active" %>
-				<%= f.text_field :h_type %>
-			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<%= f.submit "Sell headphone", :class => "btn waves-effect waves-light" %>
-			</div>
-		</div>
+<div class="full-container">
+	<%= render "layouts/error", :resource => @headphone %>
+	<div class="row">
+		<%= form_for @headphone, :class => "col s12" do |f| %>
+			<%=f.fields_for :product do |prod| %>
+			<%= render :partial => '/products/form', :locals => {:f => prod} %>
 		<% end %>
-	</div>
+
+			<div class="row">
+				<div class="col s6">
+					<%=f.check_box :wireless %>
+					<%=f.label :wireless, :class => "active" %>
+				</div>
+				<div class="col s6">
+					<%= f.check_box :bluetooth %>
+					<%= f.label :bluetooth, :class => "active" %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :cable_length, :class => "active" %>
+					<%= f.number_field :cable_length %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :impedence, :class => "active" %>
+					<%= f.number_field :impedence %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :type, :class => "active" %>
+					<%= f.text_field :h_type %>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<%= f.submit "Sell headphone", :class => "btn waves-effect waves-light" %>
+				</div>
+			</div>
+			<% end %>
+		</div>
+</div>

@@ -27,7 +27,7 @@ class OthersController < ApplicationController
 		@other = Other.new(other_params)
 		@other.product.user = current_user
 		compress_image
-		if @other.save!
+		if @other.save
 			redirect_to other_path(@other)
 			flash.keep[:notice] = "Instrument added successfully"
 		else

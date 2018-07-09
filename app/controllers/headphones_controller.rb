@@ -25,7 +25,7 @@ class HeadphonesController < ApplicationController
 		@headphone = Headphone.new(headphone_params)
 		@headphone.product.user = current_user
 		compress_image
-		if @headphone.save!
+		if @headphone.save
 			redirect_to headphone_path(@headphone)
 			flash.keep[:notice] = "Headphone created successfully"
 		else

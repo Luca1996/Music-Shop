@@ -24,7 +24,7 @@ class GuitarsController < ApplicationController
 		@guitar = Guitar.new(guitar_params)
 		@guitar.product.user = current_user
 		compress_image
-		if @guitar.save!
+		if @guitar.save
 			redirect_to guitar_path(@guitar)
 			flash.keep[:notice] = "Guitar created successfully"
 		else

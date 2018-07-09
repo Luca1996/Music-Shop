@@ -1,42 +1,40 @@
-<div class="row">
-	<%= form_for @drum, :class => "col s12" do |f| %>
-		<%=f.fields_for :product do |prod| %>
-<<<<<<< HEAD
+<div class="full-container">
+	<%= render "layouts/error", :resource => @drum %>
+	<div class="row">
+		<%= form_for @drum, :class => "col s12" do |f| %>
+			<%=f.fields_for :product do |prod| %>
+			<%= render :partial => '/products/form', :locals => {:f => prod} %>
+		<% end %> 
+			<div class="row">
+				<div class="input-field col s6">
+					<%=f.label :pedals, :class => "active" %>
+					<%=f.number_field :pedals %>
+				</div>
+			</div>
 
-=======
->>>>>>> Quantity
-        <%= render :partial => '/products/form', :locals => {:f => prod} %>
-    <% end %> 
-		
-		<div class="row">
-			<div class="input-field col s6">
-				<%=f.label :pedals, :class => "active" %>
-				<%=f.number_field :pedals %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :color, :class => "active" %>
+					<%= f.text_field :color %>
+				</div>
 			</div>
-		</div>
-
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :color, :class => "active" %>
-				<%= f.text_field :color %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :cymbals, :class => "active" %>
+					<%= f.number_field :cymbals %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :cymbals, :class => "active" %>
-				<%= f.number_field :cymbals %>
+			<div class="row">
+				<div class="input-field col s6">
+					<%= f.label :toms, :class => "active" %>
+					<%= f.number_field :toms %>
+				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="input-field col s6">
-				<%= f.label :toms, :class => "active" %>
-				<%= f.number_field :toms %>
+			<div class="row">
+				<div class="input-field col s12">
+					<%= f.submit "Sell drum", :class => "btn waves-effect waves-light" %>
+				</div>
 			</div>
+			<% end %>
 		</div>
-		<div class="row">
-			<div class="input-field col s12">
-				<%= f.submit "Sell drum", :class => "btn waves-effect waves-light" %>
-			</div>
-		</div>
-		<% end %>
-	</div>
+</div>

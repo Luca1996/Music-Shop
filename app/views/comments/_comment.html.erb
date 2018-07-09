@@ -14,7 +14,11 @@
         <% end %>
     </div>
     </h4>
-    <%= image_tag "data:image/jpeg;base64,#{comment.user.image}", :class => "post-thumb" %>
+    <% if comment.user.image != nil %>
+        <%= image_tag "data:image/jpeg;base64,#{comment.user.image}", :class => "post-thumb" %>
+    <% else %>
+        <%= image_tag  "Profile_photo.png",:class => "post-thumb" %>
+    <% end %>
     <div class="post-content">
         <p><%= comment.text %></p>
     </div>

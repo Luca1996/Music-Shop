@@ -7,7 +7,7 @@ describe Product do
                 #Arrange
                 allow(Product).to receive(:walmart_key) { "" }
                 #Act - Assert
-                expect{ Product.find_in_Walmart("brand", "model")}.to raise_error(Product::InvalidKeyError)
+                expect{ Product.find_in_Walmart("model")}.to raise_error(Product::InvalidKeyError)
             end
         end
 
@@ -16,7 +16,7 @@ describe Product do
                 #Arrange
                 allow(Product).to receive(:walmart_key) {"invalid-key"}
                 #Act - Assert
-                expect{ Product.find_in_Walmart("brand", "model")}.to raise_error(Product::InvalidKeyError) 
+                expect{ Product.find_in_Walmart("model")}.to raise_error(Product::InvalidKeyError) 
             end
         end
         
@@ -26,7 +26,7 @@ describe Product do
                 allow(Net::HTTP).to receive(:get) { "server-response" }
                 allow(JSON).to receive(:parse) {{"message"=>"msg"}}
                 #Act
-                Product.find_in_Walmart("brand", "model")
+                Product.find_in_Walmart("model")
                 #Assert
                 expect(Net::HTTP).to have_received(:get).once
             end
@@ -36,7 +36,7 @@ describe Product do
                 allow(Net::HTTP).to receive(:get) { "server-response" } 
                 allow(JSON).to receive(:parse) {{"message"=>"msg"}}
                 #Act
-                Product.find_in_Walmart("brand", "model")
+                Product.find_in_Walmart("model")
                 #Assert
                 expect(JSON).to have_received(:parse).once
             end

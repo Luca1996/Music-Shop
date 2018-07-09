@@ -31,7 +31,7 @@ class DrumsController < ApplicationController
 		@drum = Drum.new(drum_params)
 		@drum.product.user = current_user
 		compress_image
-		if @drum.save!
+		if @drum.save
 			redirect_to drum_path(@drum)
 			flash.keep[:notice] = "Drum create successfully"			
 		else

@@ -35,7 +35,7 @@ class PianosController < ApplicationController
 		@piano = Piano.new(piano_params)
 		@piano.product.user = current_user
 		compress_image
-		if @piano.save!
+		if @piano.save
 			redirect_to piano_path(@piano)
 			flash.keep[:notice] = "Piano added successfully"
 		else
