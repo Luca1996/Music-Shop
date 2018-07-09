@@ -22,8 +22,8 @@ class Product < ApplicationRecord
 		API_WALMART_KEY
 	end
 
-	#returns the price of the item found by model and brand
-	#if item not found or (brand or model) not specified, returns nil 
+	#returns the price of the item found by model 
+	#if item not found or model not specified, returns nil 
 	def self.find_in_Walmart(model)
 		return nil if model.blank?
 		api_key = walmart_key

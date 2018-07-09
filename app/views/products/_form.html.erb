@@ -1,7 +1,12 @@
+      <div class="note">
+        All required fields are signed with bold font and red color.
+      </div>
       <div class="row">
         <div class="input-field col s6">
-            <%= f.label :title , :class => "active" %>
-            <%= f.text_field :title %>
+            <div class="required">
+              <%= f.label :title , :class => "active" %>
+              <%= f.text_field :title %>
+            </div>
         </div>
       </div>
 
@@ -30,8 +35,10 @@
         <div class="block-form-small">
           <div class="row">
             <div class="input-field col s6">
-                <%= f.label :price , :class => "active" %>
-                <%= f.number_field :price , :step => "0.01" %>
+                <div class="required">
+                  <%= f.label :price , :class => "active" %>
+                  <%= f.number_field :price , :step => "0.01" %>
+                </div>
                 <%- if @instrum.present? && @instrum.product.price.present? && @wal_price.present? && @wal_price < @instrum.product.price then%>
                   <div class="wal-price">
                     Lower price on Walmart: <%= @wal_price %>
@@ -43,8 +50,10 @@
         <div class="block-form-small">
           <div class="row">
             <div class="input-field col s6">
-                <%= f.label :quantity , :class => "active" %>
-                <%= f.number_field :quantity %>
+                <div class="required">
+                  <%= f.label :quantity , :class => "active" %>
+                  <%= f.number_field :quantity %>
+                </div>
              </div>
           </div>
         </div>

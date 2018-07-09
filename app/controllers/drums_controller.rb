@@ -36,11 +36,10 @@ class DrumsController < ApplicationController
 			flash.keep[:notice] = "Drum create successfully"			
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new drum"
 		end
 	end
 
-	def update
+	def destroy
 		@drum = Drum.find(params[:id])
 		if instrum_owned_by_user?(@drum)
 			@drum.product.destroy
@@ -48,20 +47,24 @@ class DrumsController < ApplicationController
 			redirect_to products_path
 		else
 			redirect_to activities_index_path()
-			flash.keep[:alert] = "You can't update the drum"
+			flash.keep[:alert] = "You can't destroy the drum"
 		end
 	end
 
-	def destroy
+	def update
 		@drum = Drum.find(params[:id])
 		if instrum_owned_by_user?(@drum)
 			@drum.update(drum_update_params)
 			compress_image
-			@drum.save
-			redirect_to drum_path(@drum)
-			flash.keep[:notice] = "drum update successfully"
+			if @drum.save
+				redirect_to drum_path(@drum)
+				flash.keep[:notice] = "drum updated successfully"
+			else
+				render 'edit'
+			end
 		else
-			flash.keep[:alert] = "You can't delete this item"
+			redirect_to activities_index_path()
+			flash.keep[:alert] = "You can't update this item"
 		end
 	end
 
