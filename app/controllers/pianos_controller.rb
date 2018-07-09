@@ -40,7 +40,6 @@ class PianosController < ApplicationController
 			flash.keep[:notice] = "Piano added successfully"
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new piano"
 		end
 	end
 	
@@ -53,6 +52,7 @@ class PianosController < ApplicationController
 			redirect_to products_path
 			flash.keep[:notice] = "Piano removed from the list"
 		else
+			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't delete this piano"
 		end
 	end
@@ -62,9 +62,12 @@ class PianosController < ApplicationController
 		if @piano.product.user == current_user || current_user.admin?
 			@piano.update(piano_update_params)
 			compress_image
-			@piano.save
-			redirect_to piano_path(@piano)
-			flash.keep[:notice] = "Piano update successfully"
+			if @piano.save
+				redirect_to piano_path(@piano)
+				flash.keep[:notice] = "Piano update successfully"
+			else
+				render 'edit'
+			end
 		else
 			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't update this"

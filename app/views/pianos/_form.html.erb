@@ -7,9 +7,9 @@
 			<% end %>
 
 			<div class="row">
-			<div class="input-field col s6">
+				<div class="input-field col s6">
 					<%= f.select(:tipo) do %>
-						<% [['A coda', "A coda"], ['A muro', "A muro"]].each do |c| -%>
+						<% [['A coda', "A coda"], ['A muro', "A muro"], ['Digitale', "Digitale"]].each do |c| -%>
 							<%= content_tag(:option, c.first, value: c.last) %>
 						<% end %>
 					<% end %>
@@ -30,8 +30,10 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
-					<%= f.label :n_keys, :class => "active" %>
-					<%= f.number_field :n_keys %>
+					<div class="required">
+						<%= f.label :n_keys, :class => "active" %>
+						<%= f.number_field :n_keys %>
+					</div>
 				</div>
 			</div>
 			<div class="row">

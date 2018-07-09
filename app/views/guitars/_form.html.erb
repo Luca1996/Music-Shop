@@ -30,8 +30,10 @@
 			</div>
 			<div class="row">
 				<div class="input-field col s6">
-					<%= f.label :chords, :class => "active" %>
-					<%= f.number_field :chords %>
+					<div class="required">
+						<%= f.label :chords, :class => "active" %>
+						<%= f.number_field :chords %>
+					</div>
 				</div>
 			</div>
 			<div class="row">

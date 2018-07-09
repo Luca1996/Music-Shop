@@ -32,7 +32,6 @@ class OthersController < ApplicationController
 			flash.keep[:notice] = "Instrument added successfully"
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new instrument"
 		end
 	end
 	
@@ -46,7 +45,6 @@ class OthersController < ApplicationController
 				flash.keep[:notice] = "Other update successfully"
 			else
 				render 'edit'
-				flash.keep[:alert] = "Other not update"
 			end
 		else
 			redirect_to activities_index_path()
@@ -62,6 +60,7 @@ class OthersController < ApplicationController
 			redirect_to products_path
 			flash.keep[:notice] = "Item removed from the list"
 		else
+			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't delete this item"
 		end
 	end

@@ -30,7 +30,6 @@ class HeadphonesController < ApplicationController
 			flash.keep[:notice] = "Headphone created successfully"
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new headphone"
 		end
 	end
 
@@ -44,7 +43,6 @@ class HeadphonesController < ApplicationController
 				flash.keep[:notice] = "Headphone update successfully"
 			else
 				render 'edit'
-				flash.keep[:alert] = "Headphone not update"
 			end
 		else
 			redirect_to activities_index_path()
@@ -59,6 +57,7 @@ class HeadphonesController < ApplicationController
 			@headphone.destroy
 			redirect_to products_path
 		else
+			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't delete this headphone"
 		end
 	end

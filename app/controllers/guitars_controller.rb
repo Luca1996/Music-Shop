@@ -29,7 +29,6 @@ class GuitarsController < ApplicationController
 			flash.keep[:notice] = "Guitar created successfully"
 		else
 			render "new"
-			flash.keep[:alert] = "Error in creating new guitar"
 		end
 	end
 
@@ -40,10 +39,9 @@ class GuitarsController < ApplicationController
 			compress_image
 			if @guitar.save
 				redirect_to guitar_path(@guitar)
-				flash.keep[:notice] = "Guitar update successfully"
+				flash.keep[:notice] = "Guitar updated successfully"
 			else
 				render 'edit'
-				flash.keep[:alert] = "Guitar not update"
 			end
 		else
 			redirect_to activities_index_path()
@@ -59,6 +57,7 @@ class GuitarsController < ApplicationController
 			redirect_to products_path
 			flash.keep[:notice] = "Guitar deleted successfully"
 		else
+			redirect_to activities_index_path()
 			flash.keep[:alert] = "You can't delete this guitar"
 		end
 	end
