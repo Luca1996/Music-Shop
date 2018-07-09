@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 2018_07_02_154608) do
     t.string "color"
     t.string "material"
     t.string "n_keys"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
