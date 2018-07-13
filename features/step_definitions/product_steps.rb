@@ -14,6 +14,7 @@ And /^i have an item with title "(.+)" which is "(.+)" in Walmart database for s
     title = t
     price = 1200
     quantity = 1
+    weight = 5
     # We set the model as to be recognized as present or not in Walmart db
     model = "not present" if cond == "not present"
     model = "present" if cond == "present"
@@ -27,6 +28,7 @@ And /^i have an item with title "(.+)" which is "(.+)" in Walmart database for s
         And i fill "price" with "#{price}" in "piano_product_attributes" form
         And i fill "model" with "#{model}" in "piano_product_attributes" form
         And i fill "quantity" with "#{quantity}" in "piano_product_attributes" form
+        And i fill "weight" with "#{weight}" in "piano_product_attributes" form
         And i attach the image "#{image}" in "piano_product_attributes" form
         And i select "#{tipo}" in "tipo" in "piano" form
         And i fill "n_keys" with "#{n_keys}" in "piano" form

@@ -6,6 +6,7 @@ FactoryBot.define do
         f.title "product1"
         f.id 123
         f.image nil
+        f.weight 5
     end
     factory :c_prod,parent: :product do |p|
         p.user_id 121

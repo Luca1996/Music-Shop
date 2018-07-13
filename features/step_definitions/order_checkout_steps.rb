@@ -7,7 +7,7 @@ Given /^i have added an item in the cart$/ do
     user.save!
     piano = Piano.new(:id => "33",:tipo => "A muro", :n_keys => "66")
     piano.save!
-    product = Product.new(:id => "1",:title => "Piano title",:price => "800",:quantity => "1",:image => "pianos.jpg",:instrum => piano)
+    product = Product.new(:id => "1",:title => "Piano title",:price => "800",:quantity => "1",:image => "pianos.jpg",:instrum => piano,:weight => 5)
     product.user = user
     product.save!
     @product = product
