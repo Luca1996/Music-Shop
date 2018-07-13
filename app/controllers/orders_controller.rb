@@ -40,55 +40,48 @@ class OrdersController < ApplicationController
         @order.line_items.each do |lineitem|
             lineitem.ensure_buyer_isnt_the_owner(current_user)
         end 
-        ##temp shit
-        if @order.save
-            #raise @order.inspect
-            #@order.add_items_from_cart(@cart)
-            @order.line_items.each do |lineitem|
-                lineitem.product.quantity -= lineitem.quantity
-                if lineitem.product.quantity == 0
-                    lineitem.product.destroy
-                else
-                    lineitem.product.save
-                end
-            end
-        end
-        ##
+
+        temp = @order.save
 
         ## LAUNCH PAYOUT
         if @order.p_method == "PayPal"
             start_payment
-            start_payout
+            #start_payout
             return
         end
         ##
-        #raise @order.inspect
-        if @order.save
-            #raise @order.inspect
-            #@order.add_items_from_cart(@cart)
+
+        if temp
             redirect_to order_path(@order)
             flash.keep[:notice] = "Created a new Order"
         else
             raise @order.inspect
             render 'new'
-            flash.keep[:alert] = "Error in creating Order"
         end
     end
     
-    ## callback for payment
+    ## callbacks for payment
 
     def payment_success
         payment_id = params.fetch(:paymentId, nil)
+        # we retrieve the order by the id saved in notes
+        @order = Order.find_by_id(PayPal::SDK::REST::Payment.find(payment_id).note_to_payer.to_i)
         if payment_id.present?
             begin
                 @payment = PayPalService.execute_payment(payment_id, params[:PayerID])
             rescue RuntimeError => exception
                 raise @payment.inspect
             end
+            start_payout
         end
     end
 
+    def payment_cancel
+        redirect_to root_path    
+    end
+
     ####
+
 
 
     def update
