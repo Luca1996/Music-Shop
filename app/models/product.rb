@@ -10,7 +10,7 @@ class Product < ApplicationRecord
 	validates :image, presence: true
 
 	# associations
-	has_many :comments
+	has_many :comments , dependent: :destroy
 	has_many :line_items
 	belongs_to :user
 	belongs_to :instrum, polymorphic: true
