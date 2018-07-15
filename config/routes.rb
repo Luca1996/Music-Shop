@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   resources :guitars 
   resources :drums
   resources :headphones
-  get 'paypal/payment_success', to:'orders#payment_success', as: :orders_payment_success
-  get 'paypal/payment_cancel', to:'orders#payment_cancel', as: :orders_payment_cancel
+  get 'paypal/payment_success/:orderid', to:'orders#payment_success', as: :orders_payment_success
+  get 'paypal/payment_cancel/:id', to:'orders#payment_cancel', as: :orders_payment_cancel
   resources :orders
   get 'application/logout'
   get 'application/cart'

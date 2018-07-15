@@ -2,6 +2,7 @@
 @import 'materialize';
 @import "https://fonts.googleapis.com/icon?family=Material+Icons"; 
 
+
 nav {
     height: 80px;
     line-height: 80px;
@@ -12,6 +13,31 @@ nav .brand-logo {
     margin-left: 20px;
     font-size: 40px;
 }
+
+
+//////////////////////////////////
+
+
+nav .brand-logo{
+    display: inline-block;
+}
+
+.search-container{
+    display: inline-block;
+    width: 100%;
+    margin-left: 0px;
+}
+
+.search-topbar{
+    margin-left: 300px;
+    display: inline-block;
+    overflow: hidden;
+}
+
+
+
+//////////////////////////
+
 
 nav form {
     margin-left: 350px;
@@ -407,6 +433,81 @@ nav form {
 
     .field-content{
         font-size: 60%;
+    }
+
+}
+
+
+.controller-sessions, .controller-registrations, .controller-passwords{
+
+    background-image: url("piano_back1.jpg");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-position-y: 10%;
+
+    .session-container-content{
+        padding: 30px;
+    }
+
+
+    .session-container{
+        background-color: white;
+        position: relative;
+        width: 400px;
+        margin-top: 50px;
+        margin-left: 50px;
+        border-radius: 20px;
+        overflow: hidden;
+        -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-title{
+        font-family: 'Righteous', cursive;
+        //font-weight: bold;
+        color: white;
+        background-color: rgb(248, 63, 8);
+        text-align: center;
+        padding: 25px;
+        margin: 0;
+    }
+
+
+    .submit-button{
+        font-family: 'Righteous', cursive;
+        border-radius: 30px;
+        color: rgb(248, 63, 8);
+        background-color: white;
+        border: 2px solid red;
+        position: relative;
+        display: block;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 10px;
+        padding: 10px;
+        min-width: 150px;
+        transition: 0.4s;
+    }
+
+    .submit-button:hover{
+        background-color:  rgb(248, 63, 8);
+        color: white;
+        border: 2px solid red;
+    }
+
+
+    .field > label{
+        color: rgb(248, 63, 8);
+    }
+
+    .github-button{
+        margin-top: 6px;
+        color: black;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .sess-links:hover{
+        color: red;
     }
 
 }

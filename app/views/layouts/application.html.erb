@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class ="controller-<%= controller.controller_name %>">  
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
+        <%= link_to  image_tag("logo6.png"), root_path, :class => "brand-logo" %>
         <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <% if current_user.try(:admin?) %>
@@ -31,13 +32,15 @@
           <% end %>
           
         </ul>
-        <%= form_tag(products_search_path, method: :post ) do %>
-            <div class="input-field">
-                <%= search_field_tag :search, params[:search] %>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-            </div>
-        <% end %>
+        <div class="search-topbar">
+          <%= form_tag(products_search_path, method: :post, class: "search-container" ) do %>
+              <div class="input-field">
+                    <%= search_field_tag :search, params[:search] %>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+              </div>
+          <% end %>
+        </div>
       </div>
     </nav>   
   </div>

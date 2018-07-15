@@ -64,8 +64,7 @@ class OrdersController < ApplicationController
 
     def payment_success
         payment_id = params.fetch(:paymentId, nil)
-        # we retrieve the order by the id saved in notes
-        @order = Order.find_by_id(PayPal::SDK::REST::Payment.find(payment_id).note_to_payer.to_i)
+        @order = Order.find_by_id(params[:orderid])
         if payment_id.present?
             begin
                 @payment = PayPalService.execute_payment(payment_id, params[:PayerID])
@@ -77,7 +76,12 @@ class OrdersController < ApplicationController
     end
 
     def payment_cancel
-        redirect_to root_path    
+        @order = Order.find_by_id(params[:id])
+        @order.line_items.each do |li|
+            li.delete_all_same_items
+        end
+        @order.destroy
+        redirect_to root_path
     end
 
     ####
