@@ -7,6 +7,7 @@ h3{
 }
 div#avatar{
     float: left;
+    max-width: 45%;
 }
 
 div#image{
@@ -40,4 +41,9 @@ div#form{
     margin-top: 30px;
     margin-bottom: 10px;
     font-size: 30px;
+}
+
+div#rightside{
+    max-width: 45%;
+    display: inline-block;
 }

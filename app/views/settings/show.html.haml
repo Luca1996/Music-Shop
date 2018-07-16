@@ -23,37 +23,39 @@
 				Delete User:
 			= button_to "Delete User", registration_path(@user), method: :delete
 
-	%div#mail
-		%h3
-			Current email:
-		%p{:class => "text"}
-			= @user.email
-		%h4{:class => "head"}
-			Change mail:
-		= form_for @user, url: settings_change_mail_path do |form|
-			= form.label :email
-			= form.text_field :email
-			= form.submit "Change mail"
+	%div#rightside
+		
+		%div#mail
+			%h3
+				Current email:
+			%p{:class => "text"}
+				= @user.email
+			%h4{:class => "head"}
+				Change mail:
+			= form_for @user, url: settings_change_mail_path do |form|
+				= form.label :email
+				= form.text_field :email
+				= form.submit "Change mail"
 
-	%div#password
-		%h3
-			Password change:
-		=form_for @user, url:settings_change_password_path do |form|
-			.field
-				= form.label :curr_pass
-				%br
-				= form.password_field :curr_pass 
-				%br
-			.field
-				= form.label :password
-				%br
-				= form.password_field :password
-				%br
-			.field
-				= form.label :confirm
-				%br
-				= form.password_field :confirm
-				%br
-			.actions
-				= form.submit "Change password"
+		%div#password
+			%h3
+				Password change:
+			=form_for @user, url:settings_change_password_path do |form|
+				.field
+					= form.label :curr_pass
+					%br
+					= form.password_field :curr_pass 
+					%br
+				.field
+					= form.label :password
+					%br
+					= form.password_field :password
+					%br
+				.field
+					= form.label :confirm
+					%br
+					= form.password_field :confirm
+					%br
+				.actions
+					= form.submit "Change password"
 
