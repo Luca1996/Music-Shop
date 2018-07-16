@@ -1,26 +1,30 @@
-<div class="full-container">
+<div class="form-outer-container">
 	<%= render "layouts/error", :resource => @other %>
-	<div class="row">
-		<%= form_for @other, :class => "col s12" do 
-			|f| %>
-			<%=f.fields_for :product do |prod| %>
-					<%= render :partial => '/products/form', :locals => {:f => prod} %>
-			<% end %> 
-
+	<div class="full-container">
+		<div class="sell-form">
+			<span class="form-title"> Compile the form </span>
 			<div class="row">
-				<div class="input-field col s6">
-					<div class="required">
-						<%=f.label :tipo, :class => "active" %>
-						<%=f.text_field :tipo %>
+				<%= form_for @other, :class => "col s12" do 
+					|f| %>
+					<%=f.fields_for :product do |prod| %>
+							<%= render :partial => '/products/form', :locals => {:f => prod} %>
+					<% end %> 
+
+					<div class="row">
+						<div class="input-field col s6">
+							<div class="required">
+								<%=f.label :tipo, :class => "active" %>
+								<%=f.text_field :tipo %>
+							</div>
+						</div>
 					</div>
-				</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<%= f.submit "Sell instrument", :class => "submit-button" %>
+						</div>
+					</div>
+				<% end %>
 			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<%= f.submit "Sell instrument", :class => "btn waves-effect waves-light" %>
-				</div>
-			</div>
-
-			<% end %>
 		</div>
+	</div>
 </div>

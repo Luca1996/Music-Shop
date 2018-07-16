@@ -62,7 +62,12 @@ nav form {
     background:rgba(248, 63, 8, 0.2);
     font-family: 'PT Sans', sans-serif;
     font-style: italic;
-	font-size: 150%;
+    font-size: 125%;
+    
+    .errors-title{
+        color: rgb(248, 63, 8);
+        font-size: 150%;
+    }
 }
 
 .search-button{
@@ -152,6 +157,73 @@ nav form {
 }
 
 
+//////////////////////////////////////////////////////
+// FORMS
+
+.form-outer-container{
+        
+    .full-container{
+        width: 63%;
+    }
+    
+
+    .form-title{
+        color: rgb(248, 63, 8);
+        font-size: 50px;
+    }
+
+    .sell-form{
+        background: white;
+        border: 2px solid black;
+        margin: 40px;
+        padding: 20px;
+        display: inline-block;
+    }
+
+    .alert.alert-danger{
+        border: 2px solid black;
+        background: white;
+        //display: inline-block;
+        padding: 25px;
+        margin: 40px;
+        margin-left: 0px;
+        float: right;
+        width: 30%;
+        transition: 1s;
+    }
+
+
+}
+
+//////////////////////////////////////////
+
+// BUTTON
+.submit-button{
+    font-family: 'PT Sans', sans-serif;
+    border-radius: 30px;
+    color: rgb(248, 63, 8);
+    background-color: white;
+    border: 2px solid red;
+    position: relative;
+    display: block;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    min-width: 150px;
+    transition: 0.4s;
+}
+
+.submit-button:hover{
+    background-color:  rgb(248, 63, 8);
+    color: white;
+    border: 2px solid red;
+}
+
+//////////////////////////////////////////////
+
+
+
 .controller-pianos{
 
     font-family: 'PT Sans', sans-serif;
@@ -197,8 +269,19 @@ nav form {
     }
 
 
-}
 
+
+    /// sell form
+    .form-outer-container{
+        
+        margin: 0px;
+        margin-top: -10px;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("pianos.jpg") no-repeat;
+        background-size: cover;
+
+    }
+
+}
 
 
 .controller-others{
@@ -247,6 +330,16 @@ nav form {
     }
 
 
+    /// sell form
+    .form-outer-container{
+        
+        margin: 0px;
+        margin-top: -10px;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("others.jpg") no-repeat;
+        background-size: cover;
+    
+    }
+
 
 }
 
@@ -292,6 +385,16 @@ nav form {
 
     .field-content{
         font-size: 60%;
+    }
+
+    /// sell form
+    .form-outer-container{
+    
+        margin: 0px;
+        margin-top: -10px;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("headphones.jpg") no-repeat;
+        background-size: cover;
+
     }
 
 }
@@ -389,6 +492,16 @@ nav form {
         font-size: 60%;
     }
 
+    /// sell form
+    .form-outer-container{
+    
+        margin: 0px;
+        margin-top: -10px;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("drums.jpg") no-repeat;
+        background-size: cover;
+
+    }
+
 }
 
 
@@ -434,6 +547,16 @@ nav form {
 
     .field-content{
         font-size: 60%;
+    }
+
+    /// sell form
+    .form-outer-container{
+    
+        margin: 0px;
+        margin-top: -10px;
+        background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("guitars.jpg") no-repeat;
+        background-size: cover;
+
     }
 
 }

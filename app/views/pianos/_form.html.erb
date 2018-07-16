@@ -1,46 +1,49 @@
-<div class="full-container">
+<div class="form-outer-container">
 	<%= render "layouts/error", :resource => @piano %>
-	<div class="row">
-		<%= form_for @piano, :class => "col s12" do |f| %>
-			<%=f.fields_for :product do |prod| %>
-				<%= render :partial => '/products/form', :locals => {:f => prod} %>
-			<% end %>
-
+	<div class="full-container">
+		<div class="sell-form">
+			<span class="form-title"> Compile the form </span>
 			<div class="row">
-				<div class="input-field col s6">
-					<%= f.select(:tipo) do %>
-						<% [['A coda', "A coda"], ['A muro', "A muro"], ['Digitale', "Digitale"]].each do |c| -%>
-							<%= content_tag(:option, c.first, value: c.last) %>
-						<% end %>
+				<%= form_for @piano, :class => "col s12" do |f| %>
+					<%=f.fields_for :product do |prod| %>
+						<%= render :partial => '/products/form', :locals => {:f => prod} %>
 					<% end %>
-				</div>
-			</div>
-
-			<div class="row">
-				<div class="input-field col s6">
-					<%= f.label :color, :class => "active" %>
-					<%= f.text_field :color %>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<%= f.label :material, :class => "active" %>
-					<%= f.text_field :material %>
-				</div>
-			</div>
-			<div class="row">
-				<div class="input-field col s6">
-					<div class="required">
-						<%= f.label :n_keys, :class => "active" %>
-						<%= f.number_field :n_keys %>
+					<div class="row">
+						<div class="input-field col s6">
+							<%= f.select(:tipo) do %>
+								<% [['A coda', "A coda"], ['A muro', "A muro"], ['Digitale', "Digitale"]].each do |c| -%>
+									<%= content_tag(:option, c.first, value: c.last) %>
+								<% end %>
+							<% end %>
+						</div>
 					</div>
-				</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<%= f.label :color, :class => "active" %>
+							<%= f.text_field :color %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<%= f.label :material, :class => "active" %>
+							<%= f.text_field :material %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s6">
+							<div class="required">
+								<%= f.label :n_keys, :class => "active" %>
+								<%= f.number_field :n_keys %>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							<%= f.submit "Sell piano", :class => "submit-button" %>
+						</div>
+					</div>
+				<% end %>
 			</div>
-			<div class="row">
-				<div class="input-field col s12">
-					<%= f.submit "Sell piano", :class => "btn waves-effect waves-light" %>
-				</div>
-			</div>
-			<% end %>
 		</div>
+	</div>
 </div>

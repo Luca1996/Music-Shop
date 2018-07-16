@@ -34,5 +34,17 @@ $(document).on('turbolinks:load', function() {
     });
 
     $('select').material_select();
+
+    $('.alert.alert-danger').show(function(){
+      console.log(this);
+      $(this).animate({
+        backgroundColor: 'red',
+        fontSize: "125%"
+        }, 2000, function(){
+          $(this).animate({
+            backgroundColor: 'white',
+          }, 1000);
+      });
+    });
   
   });
