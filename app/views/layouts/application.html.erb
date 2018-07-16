@@ -5,24 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet"> 
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body class ="controller-<%= controller.controller_name %>">  
   <div class="navbar-fixed">
     <nav>
       <div class="nav-wrapper">
-        <%= link_to  "Music Shop", root_path, :class => "brand-logo" %>
+        <%= link_to  image_tag("logo6.png"), root_path, :class => "brand-logo" %>
         <a href="#" data-activates="mobile-demo" class="button-collapse show-on-large"><i class="material-icons">menu</i></a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li> <%= link_to  application_cart_path() do %>
+            <i class="material-icons">shopping_cart</i>
+              <% end %>
+          </li>
           <% if current_user.try(:admin?) %>
             <li><%= link_to  "Admin Panel", admin_panel_show_path() %></li>
           <% end %>
           <li> <%= link_to "Categories", products_grid_path %> </li>
           <% if user_signed_in? %>
-            <li> <%= link_to  application_cart_path() do %>
-                    <i class="material-icons">shopping_cart</i>
-                  <% end %>
-            </li>
             <li> <%= link_to  "Settings", settings_show_path() %>
             <li> <%= link_to "My Activities", activities_index_path() %></li>
             <li><%= link_to "Logout", application_logout_path() %></li>
@@ -31,13 +32,15 @@
           <% end %>
           
         </ul>
-        <%= form_tag(products_search_path, method: :post ) do %>
-            <div class="input-field">
-                <%= search_field_tag :search, params[:search] %>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
-            </div>
-        <% end %>
+        <div class="search-topbar">
+          <%= form_tag(products_search_path, method: :post, class: "search-container" ) do %>
+              <div class="input-field">
+                    <%= search_field_tag :search, params[:search] %>
+                        <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                        <i class="material-icons">close</i>
+              </div>
+          <% end %>
+        </div>
       </div>
     </nav>   
   </div>

@@ -1,5 +1,6 @@
-<h2>Log in </h2>
-
+<div class="session-container">
+<h2 class="login-title">Log in </h2>
+<div class="session-container-content">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div class="field">
     <%= f.label :email %><br />
@@ -17,10 +18,13 @@
       <%= f.label :remember_me %>
     </div>
   <% end -%>
-
+  <div class="button-space">
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in", class: "submit-button" %>
+  </div>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+</div>
+</div>

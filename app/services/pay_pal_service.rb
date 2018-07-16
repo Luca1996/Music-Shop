@@ -46,9 +46,9 @@ class PayPalService
         payment = PayPal::SDK::REST::Payment.new({
             intent: "sale",
             payer: { payment_method: "paypal" },
-            #order id saved in notes
-            note_to_payer: "#{@order.id}",
-            redirect_urls: { return_url: "http://localhost:3000/paypal/payment_success", cancel_url: "http://localhost:3000/paypal/payment_cancel" },
+            #notes
+            note_to_payer: "Thank you for your order in Music-Shop",
+            redirect_urls: { return_url: "http://localhost:3000/paypal/payment_success/#{@order.id}", cancel_url: "http://localhost:3000/paypal/payment_cancel/#{@order.id}" },
             transactions: [{ item_list: { items: payment_items },
                              amount: { total: "#{total.round(2)}",
                                        currency: "EUR"
