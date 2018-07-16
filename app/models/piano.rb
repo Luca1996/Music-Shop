@@ -1,6 +1,6 @@
 class Piano < ApplicationRecord
 	# validations 
-	validates :tipo, presence: true, format: { with: /\A(A coda)|(A muro)|(Digitale)\Z/, message: "A coda o a muro" }
+	validates :tipo, presence: true, format: { with: /\A(A coda)|(A muro)|(Digitale)\Z/, message: "A coda, A muro o Digitale" }
 	
 	validates :n_keys, :numericality => {:greater_than => 0}
 
