@@ -17,6 +17,9 @@
     <%= link_to order_path(order), method: :delete, data: {confirm: "Are you sure?"}, :class => "secondary-content" do%>
       <i class="material-icons">delete</i>
     <% end %>
+    <%= link_to order_path(order), :class => "secondary-content" do%>
+      <i class="material-icons">launch</i>
+    <% end %>
     </li>
 <% end %>
   
