@@ -72,14 +72,25 @@
           </div>
         <% end %>
         </div>
-        <div class="header"><%= product.user.email %> </div>
+        <div class="header">
+          <span class="field-title">
+            Seller:
+          </span>
+          <%= product.user.email %>
+        </div>
         <div class="show-card-btn card-action">
-          <%- if current_user != product.user then %>
-          <%= link_to "Buy", line_items_path(product_id: product), method: :post %>
-          <%- end %>
-          <%- if current_user == product.user || (current_user != nil && current_user.admin? ) then %>
-            <%= link_to "Remove", product_path(product), method: :delete %>
-          <%-end %>
+          <span class="field-title">
+            Price:
+          </span>
+          <span class="show-price"><%= product.price %>  € </span>
+          <span class= "buttons">
+            <%- if current_user != product.user then %>
+            <%= link_to "Buy", line_items_path(product_id: product), method: :post %>
+            <%- end %>
+            <%- if current_user == product.user || (current_user != nil && current_user.admin? ) then %>
+              <%= link_to "Remove", product_path(product), method: :delete %>
+            <%-end %>
+          </span>
         </div>
       </div>
     </div>

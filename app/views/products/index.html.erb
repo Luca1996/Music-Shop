@@ -4,16 +4,16 @@
     <% if prod.quantity > 0 %>
       <div class="col s6 m3 l2" id="prod-<%= prod.title %>">
         <div class="card medium">
+          <div class="card-content">
+            <div class="card-title"><%= prod.title %></div>
+          </div>
           <div class="index-card-image card-image">
             <%= image_tag "data:image/jpeg;base64,#{prod.image}"%>
           </div>
-          <div class="card-content">
-            <p><%= prod.title %></p>
-            <p><%= prod.description %></p>
-          </div>
-          <div class="card-action">
+          
+          <div class="card-action card-price">
             <%= link_to  "Details", product_path(prod), id: "link-#{prod.id}" %>
-            <%= prod.price %>  €
+            <%= prod.price %>  € 
           </div>
         </div>
       </div>
