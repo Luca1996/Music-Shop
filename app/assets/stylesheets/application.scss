@@ -9,6 +9,10 @@ nav {
     background: rgb(248, 63, 8)
 }
 
+.navbar-fixed{
+    height: 80px;
+}
+
 nav .brand-logo {
     margin-left: 20px;
     font-size: 40px;
@@ -54,7 +58,10 @@ nav form {
     background:rgba(3, 187, 0, 0.2);
     font-family: 'PT Sans', sans-serif;
     font-style: italic;
-	font-size: 150%;
+    font-weight: bolder;
+    font-size: 150%;
+    margin: 0px;
+    margin-bottom: 7px;
 }
 
 .alert {
@@ -63,6 +70,8 @@ nav form {
     font-family: 'PT Sans', sans-serif;
     font-style: italic;
     font-size: 125%;
+    margin: 0px;
+    margin-bottom: 7px;
     
     .errors-title{
         color: rgb(248, 63, 8);
@@ -191,9 +200,9 @@ nav form {
         width: 30%;
         transition: 1s;
     }
-
-
 }
+
+
 
 //////////////////////////////////////////
 
@@ -499,7 +508,6 @@ nav form {
         margin-top: -10px;
         background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url("drums.jpg") no-repeat;
         background-size: cover;
-
     }
 
 }
