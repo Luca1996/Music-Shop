@@ -2,6 +2,7 @@ class PianosController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :show]
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
+	include InstrumOwned
 
 	def index
 		@pianos = Piano.all
@@ -84,18 +85,11 @@ class PianosController < ApplicationController
 			params.require(:piano).permit(:tipo, :color, :material, :n_keys, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:height,:length,:depth,:description])
 		end
 
-	    def compress_image
-            if !params[:piano][:product_attributes][:image].nil?
-                b64 = Base64.encode64(params[:piano][:product_attributes][:image].read)
-                @piano.product.image = b64
-            end
-		end
-		def instrum_owned_by_user?(instrum)
-			if instrum.product.user == current_user || current_user.admin?
-				return true
+		def compress_image
+			if !params[:piano][:product_attributes][:image].nil?
+				b64 = Base64.encode64(params[:piano][:product_attributes][:image].read)
+				@piano.product.image = b64
 			end
-			false
 		end
-
 
 end

@@ -2,6 +2,7 @@ class HeadphonesController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
+	include InstrumOwned
 
 	def index
 		@headphones = Headphone.all
@@ -18,6 +19,13 @@ class HeadphonesController < ApplicationController
 
 	def edit
 		@headphone = Headphone.find(params[:id])
+		if instrum_owned_by_user?(@headphone)
+			@wal_price = Product.find_in_Walmart(@headphone.product.model)
+			@instrum = @headphone
+		else
+			redirect_to root_path
+			flash.keep[:alert] = "You can't edit this instrument"
+		end
 	end
 
 
@@ -71,11 +79,11 @@ class HeadphonesController < ApplicationController
 			params.require(:headphone).permit(:wireless,:bluetooth,:cacle_length,:impedence,:h_type, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
-	    def compress_image
-            if !params[:headphone][:product_attributes][:image].nil?
-                b64 = Base64.encode64(params[:headphone][:product_attributes][:image].read)
-                @headphone.product.image = b64
-            end
-        end
+		def compress_image
+			if !params[:headphone][:product_attributes][:image].nil?
+				b64 = Base64.encode64(params[:headphone][:product_attributes][:image].read)
+				@headphone.product.image = b64
+			end
+		end
 
 end

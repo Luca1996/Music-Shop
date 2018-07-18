@@ -2,7 +2,8 @@ class GuitarsController < ApplicationController
     before_action :authenticate_user!, except: [:index, :show]
 	# to allow delete request
 	skip_before_action :verify_authenticity_token, :only => [:destroy]
-	
+	include InstrumOwned
+
 	def index
 		@guitars = Guitar.all
 	end
@@ -18,6 +19,13 @@ class GuitarsController < ApplicationController
 
 	def edit
 		@guitar = Guitar.find(params[:id])
+		if instrum_owned_by_user?(@guitar)
+			@wal_price = Product.find_in_Walmart(@guitar.product.model)
+			@instrum = @guitar
+		else
+			redirect_to root_path
+			flash.keep[:alert] = "You can't edit this instrument"
+		end
 	end
 
 	def create
@@ -71,11 +79,11 @@ class GuitarsController < ApplicationController
 			params.require(:guitar).permit(:hand, :color, :material, :chords,:digital, product_attributes: [:id,:title,:brand,:model,:price,:quantity,:weight,:description])
 		end
 
+		def compress_image
+			if !params[:guitar][:product_attributes][:image].nil?
+				b64 = Base64.encode64(params[:guitar][:product_attributes][:image].read)
+				@guitar.product.image = b64
+			end
+		end
 
-	    def compress_image
-            if !params[:guitar][:product_attributes][:image].nil?
-                b64 = Base64.encode64(params[:guitar][:product_attributes][:image].read)
-                @guitar.product.image = b64
-            end
-        end
 end
